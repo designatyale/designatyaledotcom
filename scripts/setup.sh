@@ -86,9 +86,9 @@ echo
 echo "${BLUE}[7] Almost done! Let's get your site deploying before we move on."$NC
 echo "I'll make and push a commit to your repository for you to redeploy on Vercel."
 read -p "$(echo $DIM"Press enter to continue."$NC)"
-echo 'git add -A'
-echo 'git commit -m "Daylight setup."'
-echo 'git push origin main'
+git add -A
+git commit -m "Daylight setup."
+git push origin main
 echo
 
 # 8. Create the webhook on Sanity
