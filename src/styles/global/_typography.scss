@@ -1,0 +1,59 @@
+/*
+ * _typography.scss
+ * Author: evan kirkiles
+ * Created On Sun Aug 27 2023
+ * 2023 Design at Yale 
+ *
+ * Typography resets and font scaling, as defined by your settings.
+ */
+@use 'sass:math';
+@import '@/styles/settings/type';
+@import '@/styles/settings/responsive';
+
+// Converts a px value to rem at compile time.
+@function pxToRem($pixel-value) {
+  $rem-value: math.div($pixel-value, 16) + rem;
+  @return $rem-value;
+}
+
+body,
+input,
+label,
+select,
+button,
+textarea,
+.body-copy {
+  font-style: normal;
+  font-weight: 400;
+  font-weight: normal;
+  font-size: inherit;
+  line-height: 1;
+  font-family: $body-font;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $header-font;
+}
+
+// apply the font scaling throughout the site
+body {
+  @each $breakpoint, $fontSize in $body-type-sizes {
+    @if $breakpoint == 'default' {
+      font-size: pxToRem($fontSize);
+    } @else {
+      @include media($breakpoint) {
+        font-size: pxToRem($fontSize);
+      }
+    }
+  }
+}
+
+strong,
+em {
+  font-weight: 700;
+}

@@ -1,0 +1,44 @@
+/*
+ * _theming.scss
+ * Author: evan kirkiles
+ * Created On Sun Aug 27 2023
+ * 2023 Design at Yale 
+ *
+ * Implements dark- and light-mode themes using CSS variables. User's 
+ * color preferences are read from localStorage on page load and a class
+ * is added to the <html /> element to update color variables across the
+ * site based on the found preference.
+ */
+
+@import '@/styles/settings/colors';
+
+:root {
+  // By default, read light mode color variables from SCSS settings
+  color-scheme: light;
+  @each $color, $hexCode in $colors-light {
+    --daylight-color-#{$color}: #{$hexCode};
+  }
+}
+
+.light-mode {
+  color-scheme: light;
+  @each $color, $hexCode in $colors-light {
+    --daylight-color-#{$color}: #{$hexCode};
+  }
+}
+
+.dark-mode {
+  color-scheme: dark;
+  @each $color, $hexCode in $colors-dark {
+    --daylight-color-#{$color}: #{$hexCode};
+  }
+}
+
+.auto-mode {
+  @media (prefers-color-scheme: dark) {
+    color-scheme: dark;
+    @each $color, $hexCode in $colors-dark {
+      --daylight-color-#{$color}: #{$hexCode};
+    }
+  }
+}

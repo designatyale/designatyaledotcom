@@ -1,0 +1,18 @@
+{
+  "editor.formatOnSave": true,
+  "fileHeaderComment.parameter": {
+    "*": {
+      "company": "Design at Yale"
+    }
+  },
+  "fileHeaderComment.template": {
+    "*": [
+      "${commentbegin}",
+      "${commentprefix} ${filename}",
+      "${commentprefix} Author: ${name}",
+      "${commentprefix} Created On ${date}",
+      "${commentprefix} ${year} ${company} ",
+      "${commentend}"
+    ]
+  }
+}

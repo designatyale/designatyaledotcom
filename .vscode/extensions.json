@@ -1,0 +1,15 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "sanity-io.vscode-sanity",
+    "meganrogge.template-string-converter",
+    "doi.fileheadercomment",
+    "ecmel.vscode-html-css",
+    "stackbreak.comment-divider",
+    "clinyong.vscode-css-modules",
+    "phoenisx.cssvar",
+    "cschlosser.doxdocgen",
+    "irongeek.vscode-env",
+    "dbaeumer.vscode-eslint"
+  ]
+}

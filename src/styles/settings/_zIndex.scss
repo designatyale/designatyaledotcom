@@ -1,0 +1,23 @@
+/*
+ * _zIndex.scss
+ * Author: evan kirkiles
+ * Created On Sun Aug 27 2023
+ * 2023 Design at Yale
+ *
+ * 3 different z-index panes. Typically, use:
+ *  - zIndex("low") + n for within-element zIndexing
+ *  - zIndex("medium") + n for popover page content (modals)
+ *  - zIndex("high") + n for top-level layout overlays (nav menus)
+ * Read up on stacking contexts for more information regarding z-indexing.
+ */
+
+$zIndex: (
+  'low': 1,
+  'medium': 101,
+  'high': 1001,
+);
+
+// Returns a z-index from the above z-index map
+@function zIndex($level) {
+  @return map-get($zIndex, $level);
+}

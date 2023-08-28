@@ -1,0 +1,32 @@
+/*
+ * SkipLink.module.scss
+ * Author: evan kirkiles
+ * Created On Mon Aug 28 2023
+ * 2023 Design at Yale 
+ */
+
+@import '@/styles/utils';
+
+.content_skip {
+  display: flex;
+  z-index: zIndex('high') + 10;
+  position: fixed;
+  top: 0.5rem;
+  right: 50vw;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  transform: translateY(-50%);
+  border: 2px solid theme-color('border');
+  border-radius: 10px;
+  background-color: theme-color('background');
+  font-weight: 700;
+  text-transform: uppercase;
+  opacity: 0;
+  pointer-events: none;
+
+  &:focus {
+    opacity: 1;
+    pointer-events: all;
+  }
+}

@@ -1,0 +1,77 @@
+/*
+ * _responsive.scss
+ * Author: evan kirkiles
+ * Created On Sun Aug 27 2023
+ * 2023 Design at Yale 
+ *
+ * A definitive list of all breakpoints. Typically, use the main four:
+ *  - xxs for larger than iPhone SE and half-window mode on iPads, etc.
+ *  - xs for larger than mobile devices
+ *  - md for larger than tablets
+ *  - xl for larger than laptops
+ * Additional breakpoints are here if necessary.
+ * 
+ * Example usage:
+ * ```
+ * @import("@/styles/utils");
+ * ...
+ * .some_element {
+ *   padding: 1rem;
+ *
+ *   // On devices wider than "xs", padding will be 2rem
+ *   @include media("xs") {
+ *     padding: 2rem;
+ *   }
+ * }
+ * ```
+ */
+
+$breakpoints: (
+  'xxs': 360px,
+  'xs': 450px,
+  'sm': 640px,
+  'md': 768px,
+  'lg': 1024px,
+  'xl': 1440px,
+  'xxl': 1920px,
+  'xxxl': 2440px,
+);
+
+// Returns a media-query closure.
+$media-queries: ();
+@each $name, $size in $breakpoints {
+  $media-queries: map-merge(
+    $media-queries,
+    (
+      '#{$name}': 'min-width: #{$size}',
+      '#{$name}-up': 'min-width: #{$size}',
+    )
+  );
+
+  // If there is a breakpoint above the current breakpoint, create a
+  // <breakpoint>-down class.
+  $breakpoint-sizes: map-values($breakpoints);
+  $next-breakpoint-index: index($breakpoint-sizes, $size) + 1;
+
+  @if $next-breakpoint-index <= length($breakpoint-sizes) {
+    $next-breakpoint-size: nth($breakpoint-sizes, $next-breakpoint-index);
+    $media-queries: map-merge(
+      $media-queries,
+      (
+        '#{$name}-down': 'max-width: #{$next-breakpoint-size - 1px}',
+      )
+    );
+  }
+}
+
+// Returns a media query for the given breakpoint
+@function query($query-name) {
+  @return '#{map-get($media-queries, $query-name)}';
+}
+
+// Wraps styling with the given media query for the breakpoint.
+@mixin media($query) {
+  @media (query($query)) {
+    @content;
+  }
+}

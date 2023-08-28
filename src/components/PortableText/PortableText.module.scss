@@ -1,0 +1,39 @@
+/*
+ * PText.module.scss
+ * Author: evan kirkiles
+ * Created On Sun Aug 27 2023
+ * 2023 Design at Yale 
+ * 
+ * Some basic portable text overrides, which undo the resets as these elements
+ * _are_ actually text.
+ */
+
+@import '@/styles/utils';
+
+.p {
+  margin: 0.5rem 0;
+}
+
+.ol {
+  list-style-type: decimal;
+}
+
+.ul {
+  list-style-type: circle;
+}
+
+.li {
+  display: list-item;
+  margin-bottom: 0.5rem;
+  margin-left: 2rem;
+}
+
+.link {
+  color: theme-color('content2');
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+
+  &:hover {
+    color: theme-color('content3');
+  }
+}

@@ -1,0 +1,24 @@
+/*
+ * _type.scss
+ * Author: evan kirkiles
+ * Created On Sun Aug 27 2023
+ * 2023 Design at Yale 
+ *
+ * Type-scaling settings applied by global/_typography.scss. Default refers to 
+ * the base type size, with larger breakpoints overriding previous ones.
+ * To opt out of type scaling, only add a "default" entry in $body-type-sizes.
+ *
+ * $body-font and $header-font are self-explanatory. If using local fonts from
+ * Next, add the .variable class of the font to your document and specify the
+ * variable name.
+ */
+
+$body-type-sizes: (
+  'default': 14px,
+  'xs': 16px,
+  'md': 18px,
+  'xl': 20px,
+);
+
+$body-font: sans-serif, Helvetica, Geneva;
+$header-font: sans-serif, Helvetica, Geneva;

@@ -1,0 +1,62 @@
+/*
+ * _colors.scss
+ * Author: evan kirkiles
+ * Created On Sun Aug 27 2023
+ * 2023 Design at Yale 
+ *
+ * Color maps to use across the site. These allow centralized management of
+ * the colors on your site, and should give enough variation for your use case.
+ * Use a color with the theme-color whenever possible!
+ *
+ * Example usage:
+ * ```
+ * @import("@/styles/utils");
+ * ...
+ * .some_element {
+ *   background-color: theme-color("background");
+ * }
+ * ```
+ */
+
+$colors-light: (
+  'background': #ffffff,
+  'background2': #f0f0f0,
+  'background3': #b0b0b0,
+  'content': #000000,
+  'content2': #707070,
+  'border': #101010,
+  'border2': #c0c0c0,
+  // these are some niceties
+  'red': #ff7777,
+  'lightred': #fba8a8,
+  'blue': #6aa6ff,
+  'green': #5bec95,
+  'purple': #9c71df,
+  'lightblue': #acfff7,
+  'yellow': #ffe44d,
+  'orange': #ff8f26,
+);
+
+$colors-dark: (
+  'background3': #050505,
+  'background': #070707,
+  'background2': #242424,
+  'border': #ffffff,
+  'border2': #4b4b4b,
+  'content': #ffffff,
+  'content2': #a0a0a0,
+  // these are some niceties
+  'red': #ff7777,
+  'lightred': #fba8a8,
+  'blue': #6aa6ff,
+  'green': #5bec95,
+  'purple': #9c71df,
+  'lightblue': #acfff7,
+  'yellow': #ffe44d,
+  'orange': #ff8f26,
+);
+
+// Returns a color from the above color map
+@function theme-color($color-name) {
+  @return var(--daylight-color-#{$color-name});
+}
