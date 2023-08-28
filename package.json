@@ -39,6 +39,7 @@
     "code-tag": "^1.1.0",
     "eslint": "^8.48.0",
     "eslint-config-next": "13.4.12",
+    "next-sitemap": "^4.1.8",
     "postcss": "^8.4.27",
     "prettier": "^3.0.1",
     "prettier-plugin-css-order": "^2.0.0",
