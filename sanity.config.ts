@@ -20,7 +20,7 @@ const devOnlyPlugins: any[] = [];
 
 export default defineConfig({
   name: 'default',
-  title: 'UNNAMED_DAY_WEBSITE',
+  title: 'Design at Yale',
   projectId: SANITY_PROJECT_ID,
   dataset: SANITY_DATASET,
   basePath: '/studio',
