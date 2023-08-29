@@ -18,12 +18,12 @@
   padding: 0 calc(var(--page-padding) * 1.5);
   gap: 1em;
 
-  @include media('xxs') {
-    grid-template:
-      'cta' 1fr
-      't1' auto
-      't2' auto / 1fr;
-  }
+  // @include media('xxs') {
+  //   grid-template:
+  //     'cta' 1fr
+  //     't1' auto
+  //     't2' auto / 1fr;
+  // }
 
   @include media('xs') {
     grid-template:

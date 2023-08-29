@@ -13,6 +13,14 @@ import s from './Nav.module.scss';
 import DAY from '@/assets/svg/DAY';
 import Link from 'next/link';
 
+const NAV_LINKS = [
+  ['Work', '/work'],
+  ['Community', '/community'],
+  [<DAY key="/" className={s.buttons_day} />, '/'],
+  ['About', '/about'],
+  ['Alumni', '/alumni'],
+] as const;
+
 export default function Nav({ children }: PropsWithChildren) {
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -39,17 +47,15 @@ export default function Nav({ children }: PropsWithChildren) {
         ref={menuRef}
         onKeyDown={open ? onKeyDown : undefined}
       >
+        <div className={s.light_gradient} role="presentation" />
         <ul className={s.buttons}>
-          <li>Studio</li>
-          <li>Community</li>
-          <li>
-            <Link href="/">
-              <DAY className={s.buttons_day} />
-            </Link>
-          </li>
-          <li>About</li>
-          <li>Alumni</li>
+          {NAV_LINKS.map(([contents, href]) => (
+            <li key={href}>
+              <Link href={href}>{contents}</Link>
+            </li>
+          ))}
         </ul>
+        <div className={s.color_gradient} role="presentation" />
       </nav>
     </>
   );

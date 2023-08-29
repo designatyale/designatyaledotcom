@@ -19,8 +19,9 @@ export default function HomeHero() {
           Design at Yale is a<br /> Studio and Community.
         </h1>
         <p>
-          We run a design studio, host events exploring practice and industry
-          across design disciplines, and have fun and make things together.
+          We are Yale&apos;s undergraduate design club. We run a small studio,
+          host events exploring practice and industry across design disciplines,
+          and have fun making things together.
         </p>
       </div>
       <div className={s.t1}>

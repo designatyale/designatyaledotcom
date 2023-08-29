@@ -4,6 +4,8 @@
  * Created On Tue Aug 29 2023
  * 2023 Design at Yale 
  */
+@use 'sass:list';
+@use 'sass:math';
 @import '@/styles/utils';
 
 .container {
@@ -14,12 +16,13 @@
   left: 0;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: stretch;
   height: var(--header-height);
   margin: 0 auto;
   padding: 0 var(--page-padding);
 
   &::before {
+    flex-grow: 0;
     width: 1.25em;
     height: 1.25em;
     background-color: theme-color('border');
@@ -29,6 +32,7 @@
   }
 
   &::after {
+    flex-grow: 0;
     width: 1.25em;
     height: 1.25em;
     transform: scaleX(-1);
@@ -44,9 +48,13 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 100%;
   max-width: 40em;
   height: 100%;
+
+  @include media('md') {
+    flex: 1;
+    margin: 0 auto;
+  }
 
   & li {
     display: none;
@@ -62,17 +70,30 @@
 
     & a {
       display: flex;
+      padding: 0.25em;
+      text-underline-offset: 0.3em;
+
+      &:hover {
+        // font-weight: 700;
+        text-decoration: underline;
+      }
     }
 
-    @include media('sm') {
+    @include media('md') {
       display: grid;
     }
   }
 
   &_day {
     width: auto;
-    height: 1.2em;
-    margin-top: 0.2em;
+    height: 1.4em;
+    margin-top: 0.4em;
+    padding-bottom: 0.2rem;
+    border-bottom: 2px solid theme-color('background');
+
+    &:hover {
+      border-color: currentColor;
+    }
   }
 }
 
@@ -95,5 +116,52 @@
   &_open {
     opacity: 1;
     pointer-events: all;
+  }
+}
+
+$lightcolors: #000, #222, #444, #666, #999, #aaa, #ccc, #eee, #fff;
+$truecolors: rgb(0, 255, 255), rgb(255, 0, 255), rgb(255, 255, 0), rgb(255, 0, 0),
+  rgb(0, 255, 0), rgb(0, 0, 255), theme-color('content2'), theme-color('content');
+
+@function gradFromColors($colors) {
+  $light-gradient: ();
+  $n: length($colors);
+  @for $i from 1 through $n - 1 {
+    $c: nth($colors, $i);
+    $c1: nth($colors, $i + 1);
+    $p: math.round(1 / $n * $i * 100%);
+    $light-gradient: list.append($light-gradient, $c $p - 1, comma);
+    $light-gradient: list.append(
+      $light-gradient,
+      theme-color('border2') $p,
+      comma
+    );
+    $light-gradient: list.append($light-gradient, $c1 $p + 1, comma);
+  }
+  @return $light-gradient;
+}
+
+.light_gradient {
+  flex: 1;
+  height: 1em;
+  margin: 0 1em;
+  border: 1px solid theme-color('border2');
+  background: linear-gradient(to right, gradFromColors($lightcolors));
+  opacity: 0.3;
+
+  @include media('md') {
+    max-width: 140px;
+    margin-right: 2em;
+  }
+}
+
+.color_gradient {
+  @extend .light_gradient;
+  margin-right: 1em;
+  background: linear-gradient(to left, gradFromColors($lightcolors));
+
+  @include media('md') {
+    max-width: 140px;
+    margin-left: 2em;
   }
 }

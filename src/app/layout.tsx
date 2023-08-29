@@ -16,7 +16,6 @@ import './globals.scss';
 export const metadata: Metadata = {
   title: 'A DAY App',
   description: 'Welcome to my new DAY app!',
-  themeColor: '#ffffff',
   metadataBase: new URL(SITE_URL),
 };
 

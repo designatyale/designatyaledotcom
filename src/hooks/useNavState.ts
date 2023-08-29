@@ -123,7 +123,7 @@ export default function useNavState({ menuRef, buttonRef }: UseNavStateOptions) 
     } else {
       document
         .querySelectorAll('header,main,footer')
-        ?.forEach((el) => el.setAttribute('aria-hidden', 'true'));
+        ?.forEach((el) => el.removeAttribute('aria-hidden'));
     }
   }, [open]);
 

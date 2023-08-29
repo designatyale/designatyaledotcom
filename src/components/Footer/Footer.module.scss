@@ -6,14 +6,13 @@
  */
 @import '@/styles/utils';
 
-.container {
-  display: flex;
-  flex-direction: column;
-}
+// .container {
+//   display: flex;
+//   flex-direction: column;
+// }
 
 .crop_lines {
   display: flex;
-  position: relative;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
