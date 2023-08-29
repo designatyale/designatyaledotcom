@@ -1,0 +1,25 @@
+/*
+ * Layout.module.scss
+ * Author: evan kirkiles
+ * Created On Tue Aug 29 2023
+ * 2023 Design at Yale 
+ */
+@import '@/styles/utils';
+
+@keyframes scale-y {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes scale-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}

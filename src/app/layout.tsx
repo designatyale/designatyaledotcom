@@ -6,6 +6,7 @@
  */
 
 import type { Metadata } from 'next';
+import { ABCDiatype } from '@/fonts';
 import { ColorSchemeScript } from '@/util/earlyScripts';
 import { SITE_URL } from '@/env';
 import s from './Layout.module.scss';
@@ -28,7 +29,11 @@ export const metadata: Metadata = {
  */
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={`${ABCDiatype.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <link
           rel="apple-touch-icon"

@@ -1,0 +1,99 @@
+/*
+ * Nav.module.scss
+ * Author: evan kirkiles
+ * Created On Tue Aug 29 2023
+ * 2023 Design at Yale 
+ */
+@import '@/styles/utils';
+
+.container {
+  display: flex;
+  z-index: zIndex('high') + 1;
+  position: sticky;
+  top: 0;
+  left: 0;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+  margin: 0 auto;
+  padding: 0 var(--page-padding);
+
+  &::before {
+    width: 1.25em;
+    height: 1.25em;
+    background-color: theme-color('border');
+    content: '';
+    mask: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjYiIGhlaWdodD0iMjUiIHZpZXdCb3g9IjAgMCAyNiAyNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGxpbmUgeDE9IjI0Ljk0NDMiIHkxPSIyLjE4NTU3ZS0wOCIgeDI9IjI0Ljk0NDMiIHkyPSIxNi42NjY3IiBzdHJva2U9IiM0NzQ3NDciLz4KPGxpbmUgeTE9IjI0LjUiIHgyPSIxNi42NjY3IiB5Mj0iMjQuNSIgc3Ryb2tlPSIjNDc0NzQ3Ii8+Cjwvc3ZnPgo=');
+    mask-size: 100% 100%;
+  }
+
+  &::after {
+    width: 1.25em;
+    height: 1.25em;
+    transform: scaleX(-1);
+    background-color: theme-color('border');
+    content: '';
+    mask: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjYiIGhlaWdodD0iMjUiIHZpZXdCb3g9IjAgMCAyNiAyNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGxpbmUgeDE9IjI0Ljk0NDMiIHkxPSIyLjE4NTU3ZS0wOCIgeDI9IjI0Ljk0NDMiIHkyPSIxNi42NjY3IiBzdHJva2U9IiM0NzQ3NDciLz4KPGxpbmUgeTE9IjI0LjUiIHgyPSIxNi42NjY3IiB5Mj0iMjQuNSIgc3Ryb2tlPSIjNDc0NzQ3Ii8+Cjwvc3ZnPgo=');
+    mask-size: 100% 100%;
+  }
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 40em;
+  height: 100%;
+
+  & li {
+    display: none;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin: 0;
+
+    &:nth-of-type(3) {
+      display: grid;
+    }
+
+    & a {
+      display: flex;
+    }
+
+    @include media('sm') {
+      display: grid;
+    }
+  }
+
+  &_day {
+    width: auto;
+    height: 1.2em;
+    margin-top: 0.2em;
+  }
+}
+
+.underlay {
+  z-index: zIndex('high');
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.9);
+  background-color: color-mix(
+    in lch,
+    theme-color('background') 90%,
+    transparent
+  );
+  mask: linear-gradient(#000 50%, transparent);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+
+  &_open {
+    opacity: 1;
+    pointer-events: all;
+  }
+}

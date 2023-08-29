@@ -6,6 +6,7 @@
  */
 
 import PageBuilder from '@/components/PageBuilder';
+import HomeHero from '@/components/PageBuilder/HomeHero';
 import PreviewPageBuilder from '@/components/PageBuilder/preview';
 import PreviewProvider from '@/components/PreviewProvider';
 import getClient from '@/sanity/client';
@@ -28,7 +29,8 @@ export default async function Page() {
 
   return (
     <article>
-      {preview && preview.token ? (
+      <HomeHero />
+      {/* {preview && preview.token ? (
         <PreviewProvider token={preview.token}>
           <PreviewPageBuilder
             initialValue={page ?? { pageBuilder: undefined }}
@@ -38,7 +40,7 @@ export default async function Page() {
         </PreviewProvider>
       ) : (
         <PageBuilder content={page?.pageBuilder} />
-      )}
+      )} */}
     </article>
   );
 }

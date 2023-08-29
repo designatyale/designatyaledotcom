@@ -16,25 +16,16 @@
   --highlight-color: #{theme-color('red')};
 
   // header-height for calculating sticky offsets
-  --header-height: 4rem;
-  @include media('xxs') {
-    --header-height: 5rem;
-  }
-  @include media('sm') {
-    --header-height: 6rem;
-  }
-  @include media('md') {
-    --header-height: 0rem;
-  }
+  --header-height: 3em;
 
   // a standard padding to use across the page
-  --page-padding: 0.75rem;
+  --page-padding: 1rem;
   @include media('md') {
-    --page-padding: 1rem;
+    --page-padding: 2rem;
   }
 
   // a maximum width to use for main page content
-  --max-main-width: 850px;
+  --max-main-width: 1770px;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -47,11 +38,26 @@ body {
   background-color: theme-color('background');
   color: theme-color('content');
   line-height: 1.2;
+
+  // "debug" mode
+  // & *:not(g, path) {
+  //   outline: 1px solid theme-color('red');
+  // }
 }
 
 p,
 li {
+  margin: 0.5em 0;
   line-height: 1.3;
+}
+
+h1 {
+  margin: 0.5rem 0;
+  font-size: 1.5em;
+
+  @include media('xxs') {
+    font-size: 2em;
+  }
 }
 
 ::selection {

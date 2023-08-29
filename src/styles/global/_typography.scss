@@ -44,10 +44,10 @@ h6 {
 body {
   @each $breakpoint, $fontSize in $body-type-sizes {
     @if $breakpoint == 'default' {
-      font-size: pxToRem($fontSize);
+      font-size: pxToRem($fontSize/1px);
     } @else {
       @include media($breakpoint) {
-        font-size: pxToRem($fontSize);
+        font-size: pxToRem($fontSize/1px);
       }
     }
   }

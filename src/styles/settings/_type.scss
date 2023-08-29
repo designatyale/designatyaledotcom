@@ -16,9 +16,9 @@
 $body-type-sizes: (
   'default': 14px,
   'xs': 16px,
-  'md': 18px,
-  'xl': 20px,
+  'lg': 18px,
+  'xxl': 20px,
 );
 
-$body-font: sans-serif, Helvetica, Geneva;
-$header-font: sans-serif, Helvetica, Geneva;
+$body-font: var(--font-abcdiatype), sans-serif, Helvetica, Geneva;
+$header-font: var(--font-abcdiatype), sans-serif, Helvetica, Geneva;
