@@ -111,7 +111,6 @@
     theme-color('background') 90%,
     transparent
   );
-  cursor: context-menu;
   // mask: linear-gradient(#000 80%, transparent);
   opacity: 0;
   pointer-events: none;
@@ -182,21 +181,23 @@ $truecolors: rgb(0, 255, 255), rgb(255, 0, 255), rgb(255, 255, 0), rgb(255, 0, 0
   padding: var(--header-height) calc(var(--page-padding) * 1);
   padding-bottom: var(--page-padding);
   gap: 0.5em;
-  transform: translateY(-100%);
-  border-bottom: 1px solid theme-color('border2');
+  transform: translateY(calc(-100% + var(--header-height)));
+  border-bottom: 1px solid transparent;
   background-color: theme-color('background');
-  transition: transform 0.3s ease;
-  transition-delay: 0.15s;
+  transition:
+    transform 0.3s ease,
+    border-color 0.1s ease;
 
   & > * {
-    opacity: 0.1;
+    opacity: 0;
     transition: opacity 0.3s ease-in-out;
   }
 
   &_open {
     display: grid;
     transform: translateY(0);
-    transition-delay: 0s;
+    border-color: theme-color('border2');
+    transition-delay: 0s, 0.15s;
 
     & > * {
       opacity: 1;
@@ -221,6 +222,7 @@ $truecolors: rgb(0, 255, 255), rgb(255, 0, 255), rgb(255, 255, 0), rgb(255, 0, 0
     padding-top: var(--header-height);
     transform: translate(-50%, -100%);
     border: unset;
+    transition: transform 0.3s ease 0s;
 
     &_open {
       transform: translate(-50%, 0);
@@ -250,12 +252,13 @@ $truecolors: rgb(0, 255, 255), rgb(255, 0, 255), rgb(255, 255, 0), rgb(255, 0, 0
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  width: calc(100% - 4em);
   inset: 0 2em;
   padding: 0 var(--page-padding);
   color: theme-color('border');
 
   & svg {
-    transition: transform 0.2s ease-in-out;
+    transition: transform 0.1s ease-in-out;
   }
 
   &:hover {
@@ -293,6 +296,8 @@ $truecolors: rgb(0, 255, 255), rgb(255, 0, 255), rgb(255, 255, 0), rgb(255, 0, 0
     font-size: 1.5em;
 
     & a {
+      display: block;
+
       &::before {
         z-index: 0;
         position: absolute;

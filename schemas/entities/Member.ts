@@ -1,30 +1,26 @@
 /*
- * SitePage.ts
+ * Member.ts
  * Author: evan kirkiles
- * Created On Sun Aug 27 2023
+ * Created On Thu Aug 31 2023
  * 2023 Design at Yale
  */
 
 import { defineArrayMember, defineField, defineType } from 'sanity';
-import pageElements from './page';
+import pageElements from '../page';
 
-const SitePage = defineType({
-  name: 'site_page',
+const Member = defineType({
+  name: 'member',
   type: 'document' as const,
-  title: 'Site Page',
-  groups: [
-    { name: 'content', title: 'Content', default: true },
-    { name: 'seo', title: 'SEO' },
-  ],
+  title: 'Member',
+  groups: [{ name: 'page', title: 'Page' }],
   fields: [
     defineField({
-      name: 'title',
+      name: 'name',
       type: 'string' as const,
-      title: 'Title',
+      title: 'Name',
       validation: (Rule) => Rule.required(),
       codegen: { required: true },
-      description: 'The title of the page.',
-      group: 'content',
+      description: 'The name of the member',
     }),
     defineField({
       name: 'slug',
@@ -33,14 +29,37 @@ const SitePage = defineType({
       validation: (Rule) => Rule.required(),
       codegen: { required: true },
       description: 'The path to the page on the site',
-      group: 'content',
     }),
+    defineField({
+      name: 'start_date',
+      type: 'date' as const,
+      title: 'Start Date',
+      description: 'When this member joined DAY.',
+      readOnly: true,
+      options: {
+        dateFormat: 'dddd, MMMM Do YYYY,',
+      },
+    }),
+
+    defineField({
+      name: 'about',
+      type: 'array' as const,
+      description: 'A short tag line for the team member.',
+      title: 'About',
+      of: [{ type: 'block' }],
+    }),
+    defineField({
+      name: 'socials',
+      type: 'array' as const,
+      of: [{ type: 'social' }],
+    }),
+
     defineField({
       name: 'pageBuilder',
       type: 'array' as const,
       title: 'Page Builder',
+      group: 'page',
       description: 'Assemble your page using configurable modules.',
-      group: 'content',
       validation: (Rule) => Rule.required(),
       // map all of our page elements to pageBuilder sub-types
       of: pageElements.map(({ title, name }) =>
@@ -50,34 +69,6 @@ const SitePage = defineType({
         })
       ),
     }),
-
-    /* -------------------------------- SEO Types ------------------------------- */
-
-    defineField({
-      name: 'seo_title',
-      type: 'string' as const,
-      title: 'SEO Title',
-      group: 'seo',
-      description:
-        "An SEO title (appears in the tab bar). If unset, uses the page's title.",
-    }),
-    defineField({
-      name: 'seo_description',
-      type: 'string' as const,
-      title: 'SEO Description',
-      group: 'seo',
-      description:
-        "An SEO description. If unset, uses text from the page's content.",
-    }),
-    defineField({
-      name: 'seo_keywords',
-      type: 'string' as const,
-      title: 'SEO Keywords',
-      group: 'seo',
-      description: 'SEO keywords.',
-    }),
-
-    /* ------------------------------ Revalidation ------------------------------ */
 
     defineField({
       name: 'last_revalidated',
@@ -92,11 +83,6 @@ const SitePage = defineType({
       },
     }),
   ],
-  preview: {
-    select: {
-      title: 'slug.current',
-    },
-  },
 });
 
-export default SitePage;
+export default Member;

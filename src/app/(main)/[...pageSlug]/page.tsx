@@ -16,6 +16,7 @@ import { toPlainText } from '@portabletext/react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import METADATA from '@/app/metadata';
+import s from './Page.module.scss';
 
 /* ---------------------------- Param generation ---------------------------- */
 
@@ -49,7 +50,7 @@ export default async function SubPage({ params: { pageSlug } }: PageProps) {
   if (!page) notFound();
 
   return (
-    <article>
+    <article className={s.container}>
       {preview && preview.token ? (
         <PreviewProvider token={preview.token}>
           <PreviewPageBuilder

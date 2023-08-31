@@ -101,6 +101,7 @@ export default function Nav({ children }: PropsWithChildren) {
                 href="https://instagram.com/designatyale"
                 target="_blank"
                 rel="noopener noreferrer"
+                tabIndex={!open ? -1 : undefined}
               >
                 <FaInstagramSquare />
               </a>
@@ -110,6 +111,7 @@ export default function Nav({ children }: PropsWithChildren) {
                 href="https://instagram.com/designatyale"
                 target="_blank"
                 rel="noopener noreferrer"
+                tabIndex={!open ? -1 : undefined}
               >
                 <FaLinkedin />
               </a>
@@ -119,6 +121,7 @@ export default function Nav({ children }: PropsWithChildren) {
                 href="https://instagram.com/designatyale"
                 target="_blank"
                 rel="noopener noreferrer"
+                tabIndex={!open ? -1 : undefined}
               >
                 <FaTwitterSquare />
               </a>
@@ -128,13 +131,14 @@ export default function Nav({ children }: PropsWithChildren) {
                 href="https://instagram.com/designatyale"
                 target="_blank"
                 rel="noopener noreferrer"
+                tabIndex={!open ? -1 : undefined}
               >
                 <FaFacebookSquare />
               </a>
             </li>
           </ul>
           <form className={s.nl}>
-            <p>Sign up for our newsletter: </p>
+            <p>Sign up for our newsletter</p>
           </form>
         </section>
       </nav>

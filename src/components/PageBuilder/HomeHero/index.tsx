@@ -11,7 +11,7 @@ import Link from 'next/link';
 export default function HomeHero() {
   return (
     <div className={s.container}>
-      <div className={s.cta}>
+      <section className={s.cta}>
         <div className={s.cta_logo}>
           <DAY />
         </div>
@@ -23,8 +23,8 @@ export default function HomeHero() {
           host events exploring practice and industry across design disciplines,
           and have fun making things together.
         </p>
-      </div>
-      <div className={s.t1}>
+      </section>
+      <section className={s.t1}>
         <h2>
           <Link href="/work">Work with the Studio&nbsp;→</Link>
         </h2>
@@ -32,13 +32,13 @@ export default function HomeHero() {
           Available for Fall 2023. <br />
           Or work with our Alumni year-round.
         </p>
-      </div>
-      <div className={s.t2}>
+      </section>
+      <section className={s.t2}>
         <h2>
           <Link href="/work">Join the Community&nbsp;→</Link>
         </h2>
         <p>Yale students, fill out the form and join our GroupMe!</p>
-      </div>
+      </section>
     </div>
   );
 }
