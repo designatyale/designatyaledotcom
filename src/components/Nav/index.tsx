@@ -19,6 +19,7 @@ import {
   FaTwitterSquare,
 } from 'react-icons/fa';
 import { PiCaretRight, PiCaretLeft } from 'react-icons/pi';
+import { usePathname } from 'next/navigation';
 
 const NAV_LINKS = [
   ['Work', '/work'],
@@ -29,6 +30,7 @@ const NAV_LINKS = [
 ] as const;
 
 export default function Nav({ children }: PropsWithChildren) {
+  const pathname = usePathname();
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const { open, setOpen, scrolled, onKeyDown } = useNavState({
@@ -70,7 +72,12 @@ export default function Nav({ children }: PropsWithChildren) {
         <ul className={s.buttons}>
           {NAV_LINKS.map(([contents, href]) => (
             <li key={href}>
-              <Link href={href}>{contents}</Link>
+              <Link
+                href={href}
+                aria-current={pathname.startsWith(href) ? 'page' : undefined}
+              >
+                {contents}
+              </Link>
             </li>
           ))}
         </ul>
@@ -88,7 +95,12 @@ export default function Nav({ children }: PropsWithChildren) {
               ([contents, href]) =>
                 href !== '/' && (
                   <li key={href}>
-                    <Link href={href}>
+                    <Link
+                      href={href}
+                      aria-current={
+                        pathname.startsWith(href) ? 'page' : undefined
+                      }
+                    >
                       <span>{contents}</span>
                     </Link>
                   </li>

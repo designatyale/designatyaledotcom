@@ -76,6 +76,7 @@
       padding: 0.5em 1em;
       text-underline-offset: 0.3em;
 
+      &[aria-current='page'],
       &:hover {
         // font-weight: 700;
         text-decoration: underline;
@@ -182,7 +183,7 @@ $truecolors: rgb(0, 255, 255), rgb(255, 0, 255), rgb(255, 255, 0), rgb(255, 0, 0
   padding-bottom: var(--page-padding);
   gap: 0.5em;
   transform: translateY(calc(-100% + var(--header-height)));
-  border-bottom: 1px solid transparent;
+  // border-bottom: 1px solid transparent;
   background-color: theme-color('background');
   transition:
     transform 0.3s ease,
@@ -197,7 +198,6 @@ $truecolors: rgb(0, 255, 255), rgb(255, 0, 255), rgb(255, 255, 0), rgb(255, 0, 0
     display: grid;
     transform: translateY(0);
     border-color: theme-color('border2');
-    transition-delay: 0s, 0.15s;
 
     & > * {
       opacity: 1;
@@ -208,8 +208,6 @@ $truecolors: rgb(0, 255, 255), rgb(255, 0, 255), rgb(255, 255, 0), rgb(255, 0, 0
   & p {
     grid-area: text;
     margin: 0 calc(var(--page-padding) * 0.5);
-    // font-size: 1.5em;
-    // text-align: center;
     opacity: 0.5;
   }
 
@@ -230,17 +228,6 @@ $truecolors: rgb(0, 255, 255), rgb(255, 0, 255), rgb(255, 255, 0), rgb(255, 0, 0
 
     & p {
       margin: 0;
-    }
-
-    &::before {
-      position: absolute;
-      inset: 0;
-      top: var(--header-height);
-      border: 1px solid theme-color('border2');
-      border-top: none;
-      // border-radius: 50%;
-      content: '';
-      // clip-path: polygon(0% 70%, 100% 70%, 100% 100%, 0% 100%);
     }
   }
 }
@@ -292,7 +279,6 @@ $truecolors: rgb(0, 255, 255), rgb(255, 0, 255), rgb(255, 255, 0), rgb(255, 0, 0
     margin: 0;
     padding: calc(var(--page-padding) * 0.5);
     border-bottom: 1px solid theme-color('border2');
-    font-weight: 700;
     font-size: 1.5em;
 
     & a {
@@ -313,6 +299,14 @@ $truecolors: rgb(0, 255, 255), rgb(255, 0, 255), rgb(255, 255, 0), rgb(255, 0, 0
       }
 
       &:hover {
+        font-weight: 700;
+        &::before {
+          background-color: theme-color('background2');
+        }
+      }
+
+      &[aria-current='page'] {
+        font-weight: 700;
         &::before {
           background-color: theme-color('background2');
         }
