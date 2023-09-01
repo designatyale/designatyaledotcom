@@ -1,0 +1,30 @@
+/*
+ * Page.module.scss
+ * Author: evan kirkiles
+ * Created On Thu Aug 31 2023
+ * 2023 Design at Yale 
+ */
+
+@keyframes fade-in {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+  padding: 0 calc(var(--page-padding) * 1.5);
+  animation: fade-in 0.3s ease-in-out;
+
+  & h1 {
+    font-weight: 700;
+    font-size: 4em;
+  }
+}

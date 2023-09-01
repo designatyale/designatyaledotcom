@@ -8,8 +8,10 @@
  * below array to enable them in the SitePage document page builder type. This
  * will also automatically add them to the Sanity schema.
  */
+import ActionBarType from './ActionBarType';
+import ActionButtonType from './ActionButtonType';
 import CopyType from './CopyType';
 
-const pageElements = [CopyType];
+const pageElements = [CopyType, ActionBarType, ActionButtonType];
 
 export default pageElements;

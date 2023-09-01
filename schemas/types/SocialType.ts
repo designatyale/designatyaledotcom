@@ -32,9 +32,10 @@ const SocialType = defineType({
     }),
     defineField({
       name: 'email',
-      type: 'email' as const,
+      type: 'string' as const,
       title: 'Email',
       hidden: ({ document }) => document?.platform !== 'email',
+      validation: (Rule) => Rule.email(),
     }),
   ],
 });

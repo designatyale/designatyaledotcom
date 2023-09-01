@@ -1,0 +1,39 @@
+/*
+ * SubNav.module.scss
+ * Author: evan kirkiles
+ * Created On Fri Sep 01 2023
+ * 2023 Design at Yale 
+ */
+@import '@/styles/utils';
+
+.container {
+  width: 100%;
+  max-width: var(--max-content-width);
+  margin: 1em 0 0;
+  padding: 0.5em 0;
+  overflow: scroll hidden;
+  border-top: 1px solid theme-color('border2');
+
+  & ul {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 1px;
+    padding-right: 2em;
+    gap: 2em;
+  }
+
+  & li {
+    margin-bottom: 0;
+    font-weight: 700;
+    font-size: 2em;
+  }
+
+  & a:not([aria-current='page']) {
+    color: theme-color('border2');
+
+    &:hover {
+      color: theme-color('content2');
+    }
+  }
+}

@@ -15,7 +15,18 @@ export const pagesQuery = groq`*[_type == "site_page" && slug.current != "/"] {
 }`;
 
 export const pageQuery = groq`*[_type == "site_page" && slug.current == $pageSlug][0] {
-  _id, title, pageBuilder[] {
+  _id,
+  title,
+  pageBuilder[] {
+    ...,
+  },
+  subpageOrder,
+  rootSubPageTitle,
+  rootSubpageBuilder[] {
     ...,
   }
+}`;
+
+export const subpageQuery = groq`*[_type == "site_page" && slug.current match ($pageSlug + "/*") && slug.current != $pageSlug] {
+  _id, title, slug
 }`;

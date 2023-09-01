@@ -1,0 +1,37 @@
+/*
+ * ActionButton.module.scss
+ * author: evan kirkiles
+ * created on Fri Aug 18 2023
+ * 2023 17o1 Records 
+ */
+@import '@/styles/utils';
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 1em 0;
+  padding: 0.5em 1em;
+  gap: 0.5em;
+  border: 1px solid theme-color('border2');
+
+  &:hover {
+    background-color: theme-color('background2');
+  }
+
+  &_with_icon {
+    height: 2.5rem;
+    padding: 0;
+    border: 0;
+  }
+}
+
+.icon {
+  width: auto;
+  height: 100%;
+
+  &:hover {
+    opacity: 0.5;
+  }
+}

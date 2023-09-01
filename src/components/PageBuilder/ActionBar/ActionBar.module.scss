@@ -1,0 +1,15 @@
+/*
+ * ActionBar.module.scss
+ * author: evan kirkiles
+ * created on Fri Aug 18 2023
+ * 2023 17o1 Records 
+ */
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 1rem 0;
+  gap: 1rem;
+}

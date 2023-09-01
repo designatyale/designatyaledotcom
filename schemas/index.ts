@@ -12,15 +12,15 @@ import { SchemaTypeDefinition } from '@sanity/types';
 import SitePage from './SitePage';
 import pageElements from './page';
 import Member from './entities/Member';
-import SocialType from './types/SocialType';
 import SiteSettings from './SiteSettings';
+import subTypes from './types';
 
 const schemas: SchemaTypeDefinition[] = [
   Member,
-  SocialType,
   SiteSettings,
   SitePage,
   ...pageElements,
+  ...subTypes,
 ];
 
 export default schemas;

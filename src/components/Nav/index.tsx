@@ -52,7 +52,8 @@ export default function Nav({ children }: PropsWithChildren) {
         className={classNames(s.container, {
           [s.container__scrolled]: scrolled && !open,
         })}
-        role="primary"
+        role="navigation"
+        aria-label="Primary navigation"
         id="nav-bar"
         ref={menuRef}
         onKeyDown={open ? onKeyDown : undefined}

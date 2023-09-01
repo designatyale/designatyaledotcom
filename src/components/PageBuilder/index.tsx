@@ -7,6 +7,8 @@
 
 import { SitePage } from '@/sanity/schema';
 import Copy from './Copy';
+import ActionBar from '@/components/PageBuilder/ActionBar';
+import ActionButton from '@/components/PageBuilder/ActionButton';
 
 interface PageBuilderProps {
   content: SitePage['pageBuilder'];
@@ -24,7 +26,11 @@ export default function PageBuilder({ content, isPreview }: PageBuilderProps) {
   return content.map((pageBlock) => {
     switch (pageBlock._type) {
       case 'pe_copy':
-        return <Copy value={pageBlock} />;
+        return <Copy key={pageBlock._key} value={pageBlock} />;
+      case 'pe_action_bar':
+        return <ActionBar key={pageBlock._key} value={pageBlock} />;
+      case 'pe_action_button':
+        return <ActionButton key={pageBlock._key} value={pageBlock} />;
     }
   });
 }

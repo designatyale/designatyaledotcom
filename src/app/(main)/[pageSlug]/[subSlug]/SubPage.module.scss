@@ -1,0 +1,21 @@
+/*
+ * SubPage.module.scss
+ * Author: evan kirkiles
+ * Created On Fri Sep 01 2023
+ * 2023 Design at Yale 
+ */
+
+@keyframes fade-left {
+  from {
+    transform: translateX(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
+.container {
+  animation: fade-left 0.3s ease-in-out;
+}

@@ -8,7 +8,7 @@
  */
 
 const METADATA = {
-  title: 'A Daylight App',
+  title: 'Design at Yale',
 };
 
 export default METADATA;

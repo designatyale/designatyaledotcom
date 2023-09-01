@@ -18,18 +18,6 @@ import { notFound } from 'next/navigation';
 import METADATA from '@/app/metadata';
 import s from './Page.module.scss';
 
-/* ---------------------------- Param generation ---------------------------- */
-
-// builds the list of sub-pages to statically generate
-export async function generateStaticParams() {
-  const pages: SitePage[] = await getClient().fetch(pagesQuery, undefined, {
-    next: { revalidate: 0 },
-  });
-  return pages.map(({ slug }) => ({
-    pageSlug: slug.current.replace('/', '').split('/'),
-  }));
-}
-
 /* -------------------------------------------------------------------------- */
 /*                                    Page                                    */
 /* -------------------------------------------------------------------------- */
@@ -41,7 +29,7 @@ interface PageProps {
 
 export default async function SubPage({ params: { pageSlug } }: PageProps) {
   const preview = getPreview();
-  const params = { pageSlug: `/${pageSlug.join('/')}` };
+  const params = { pageSlug: `/${pageSlug}` };
   const page: SitePage | null = await getClient(preview).fetch(
     pageQuery,
     params,
@@ -50,19 +38,20 @@ export default async function SubPage({ params: { pageSlug } }: PageProps) {
   if (!page) notFound();
 
   return (
-    <article className={s.container}>
+    <>
       {preview && preview.token ? (
         <PreviewProvider token={preview.token}>
           <PreviewPageBuilder
             initialValue={page}
+            path="rootSubPageBuilder"
             query={pageQuery}
             params={params}
           />
         </PreviewProvider>
       ) : (
-        <PageBuilder content={page.pageBuilder} />
+        <PageBuilder content={page.rootSubPageBuilder ?? []} />
       )}
-    </article>
+    </>
   );
 }
 
@@ -74,7 +63,7 @@ export const revalidate = false;
 
 // generate the metadata for the page.
 export async function generateMetadata({ params: { pageSlug } }: PageProps) {
-  const params = { pageSlug: `/${pageSlug.join('/')}` };
+  const params = { pageSlug: `/${pageSlug}` };
   const page: SitePage | null = await getClient().fetch(pageQuery, params, {
     next: { tags: [`page:${params.pageSlug}`] },
   });

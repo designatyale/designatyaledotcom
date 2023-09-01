@@ -28,6 +28,8 @@
 
   & > main {
     grid-area: main;
+    min-height: calc(100vh - (2 * var(--header-height)));
+    min-height: calc(100svh - (2 * var(--header-height)));
   }
 
   & > footer {

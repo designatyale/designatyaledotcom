@@ -7,6 +7,7 @@
 
 import { defineArrayMember, defineField, defineType } from 'sanity';
 import pageElements from './page';
+import { groq } from 'next-sanity';
 
 const SitePage = defineType({
   name: 'site_page',
@@ -14,6 +15,7 @@ const SitePage = defineType({
   title: 'Site Page',
   groups: [
     { name: 'content', title: 'Content', default: true },
+    { name: 'subpages', title: 'Subroutes' },
     { name: 'seo', title: 'SEO' },
   ],
   fields: [
@@ -42,6 +44,66 @@ const SitePage = defineType({
       description: 'Assemble your page using configurable modules.',
       group: 'content',
       validation: (Rule) => Rule.required(),
+      codegen: { required: true },
+      // map all of our page elements to pageBuilder sub-types
+      of: pageElements.map(({ title, name }) =>
+        defineArrayMember({
+          title,
+          type: name,
+        })
+      ),
+    }),
+
+    // Sub pages
+    defineField({
+      name: 'subpageOrder',
+      type: 'array' as const,
+      title: 'Subpages',
+      description:
+        'Order of subpages (excluding the base subpage) in the nav bar.',
+      group: 'subpages',
+      hidden: ({ document }) =>
+        ((document?.slug as any)?.current.split('/').length || 3) > 2,
+      of: [
+        {
+          type: 'reference' as const,
+          to: [{ type: 'site_page' }],
+          options: {
+            filter: ({
+              document,
+            }: {
+              document: { slug: { current: string } };
+            }) => {
+              return {
+                filter: groq`slug.current in path($rootSlug + "/*")`,
+                params: {
+                  rootSlug: document.slug?.current,
+                },
+              };
+            },
+          },
+        },
+      ],
+    }),
+    defineField({
+      name: 'rootSubPageTitle',
+      type: 'string' as const,
+      title: 'Root Subpage Title',
+      description:
+        'If there are existing subroutes, use this as the initial title to display in the subroute nav.',
+      group: 'subpages',
+      hidden: ({ document }) =>
+        ((document?.slug as any)?.current.split('/').length || 3) > 2,
+    }),
+    defineField({
+      name: 'rootSubPageBuilder',
+      type: 'array' as const,
+      title: 'Base Subpage',
+      description:
+        'If there are existing subroutes, use this as the initial view to display in the subroute mechanism.',
+      group: 'subpages',
+      hidden: ({ document }) =>
+        ((document?.slug as any)?.current.split('/').length || 3) > 2,
       // map all of our page elements to pageBuilder sub-types
       of: pageElements.map(({ title, name }) =>
         defineArrayMember({

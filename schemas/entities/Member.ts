@@ -40,7 +40,6 @@ const Member = defineType({
         dateFormat: 'dddd, MMMM Do YYYY,',
       },
     }),
-
     defineField({
       name: 'about',
       type: 'array' as const,
@@ -53,7 +52,6 @@ const Member = defineType({
       type: 'array' as const,
       of: [{ type: 'social' }],
     }),
-
     defineField({
       name: 'pageBuilder',
       type: 'array' as const,

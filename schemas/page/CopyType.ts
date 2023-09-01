@@ -8,7 +8,7 @@
  */
 
 import { PiTextAlignLeftFill } from 'react-icons/pi';
-import { defineType } from 'sanity';
+import { defineField, defineType } from 'sanity';
 
 const CopyType = defineType({
   name: 'pe_copy',
@@ -17,11 +17,23 @@ const CopyType = defineType({
   icon: PiTextAlignLeftFill,
   description: 'Configurable block text.',
   fields: [
-    {
+    defineField({
       name: 'content',
       type: 'array' as const,
       of: [{ type: 'block' as const }],
-    },
+    }),
+    defineField({
+      name: 'columns',
+      description:
+        'How many evenly-spaced columns to break the text into. Default 1.',
+      type: 'number' as const,
+      initialValue: 1,
+      validation: (Rule) => Rule.required(),
+      codegen: { required: true },
+      options: {
+        list: [1, 2, 3],
+      },
+    }),
   ],
 });
 

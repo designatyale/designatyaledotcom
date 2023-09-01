@@ -26,6 +26,7 @@
 
   // a maximum width to use for main page content
   --max-main-width: 1770px;
+  --max-content-width: 100ch;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -47,7 +48,7 @@ body {
 
 p,
 li {
-  margin: 0.5em 0;
+  margin-bottom: 0.5em;
   line-height: 1.3;
 }
 
