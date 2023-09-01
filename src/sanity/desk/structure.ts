@@ -15,11 +15,8 @@ import { ComponentType } from 'react';
 // These are the root pages and their corresponding icons. Add entries here
 // to make quick-to-jump-to pages with specialized icons.
 const ROOT_PAGES: Record<string, ComponentType<{}>> = {
-  home: HomeIcon,
-  work: FiCalendar,
-  community: FiCalendar,
-  about: FiCalendar,
-  alumni: FiCalendar,
+  '/': HomeIcon,
+  '/about': FiCalendar,
 };
 
 /* --------------------------- Custom list entries -------------------------- */
@@ -47,7 +44,7 @@ const RootPages = (S: StructureBuilder) =>
           Object.entries(ROOT_PAGES).map(([id, Icon]) =>
             S.documentListItem({ schemaType: 'site_page', id })
               .icon(Icon)
-              .title(`/${id === 'home' ? '' : id}`)
+              .title(id)
           )
         )
     );

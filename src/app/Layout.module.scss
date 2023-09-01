@@ -4,33 +4,24 @@
  * Created On Sun Aug 27 2023
  * 2023 Design at Yale 
  */
-@import '@/styles/utils';
 
 .body {
   display: grid;
   grid-template:
     'nav' auto
     'main' auto
-    'footer' auto / 1fr;
+    'footer' auto / auto;
   width: 100%;
 
-  & > nav,
-  & > main,
-  & > footer {
-    width: calc(100%);
-    max-width: var(--max-main-width);
-    margin: 0 auto;
-  }
-
-  & > nav {
+  & nav {
     grid-area: nav;
   }
 
-  & > main {
+  & main {
     grid-area: main;
   }
 
-  & > footer {
+  & footer {
     grid-area: footer;
   }
 }

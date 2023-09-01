@@ -85,6 +85,13 @@ export interface SitePage extends SanityDocument {
    * SEO keywords.
    */
   seo_keywords?: string;
+
+  /**
+   * Last Revalidated — `datetime`
+   *
+   * When this page was last revalidated. Re-publish or manually revalidate to change.
+   */
+  last_revalidated?: string;
 }
 
 export type PeCopy = {
