@@ -12,10 +12,7 @@ const SitePage = defineType({
   name: 'site_page',
   type: 'document' as const,
   title: 'Site Page',
-  groups: [
-    { name: 'content', title: 'Content', default: true },
-    { name: 'seo', title: 'SEO' },
-  ],
+  groups: [{ name: 'seo', title: 'SEO' }],
   fields: [
     defineField({
       name: 'title',
@@ -24,7 +21,6 @@ const SitePage = defineType({
       validation: (Rule) => Rule.required(),
       codegen: { required: true },
       description: 'The title of the page.',
-      group: 'content',
     }),
     defineField({
       name: 'slug',
@@ -33,14 +29,12 @@ const SitePage = defineType({
       validation: (Rule) => Rule.required(),
       codegen: { required: true },
       description: 'The path to the page on the site',
-      group: 'content',
     }),
     defineField({
       name: 'pageBuilder',
       type: 'array' as const,
       title: 'Page Builder',
       description: 'Assemble your page using configurable modules.',
-      group: 'content',
       validation: (Rule) => Rule.required(),
       // map all of our page elements to pageBuilder sub-types
       of: pageElements.map(({ title, name }) =>

@@ -12,7 +12,6 @@ import {
   RefObject,
   useCallback,
   useEffect,
-  useRef,
   useState,
 } from 'react';
 
@@ -50,7 +49,6 @@ export default function useNavState({ menuRef, buttonRef }: UseNavStateOptions) 
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const mqlRef = useRef<MediaQueryList | null>(null);
 
   // 1. Close the nav menu on path change
   useEffect(() => {
@@ -61,9 +59,9 @@ export default function useNavState({ menuRef, buttonRef }: UseNavStateOptions) 
   useEffect(() => {
     // 2.1 close the menu on large screens
     const mql = window.matchMedia('(min-width: 768px)');
-    // function onLarge({ matches }: MediaQueryListEvent) {
-    //   setOpen((prev) => !matches && prev);
-    // }
+    function onLarge({ matches }: MediaQueryListEvent) {
+      setOpen((prev) => !matches && prev);
+    }
     // 2.2 set focus to button once menu is closed
     function onKeyDown(e: KeyboardEvent) {
       if (e.key === 'Escape') {
@@ -77,14 +75,12 @@ export default function useNavState({ menuRef, buttonRef }: UseNavStateOptions) 
     }
 
     // apply event listeners
-    // mql.addEventListener('change', onLarge, false);
+    mql.addEventListener('change', onLarge, false);
     window.addEventListener('keydown', onKeyDown, false);
     window.addEventListener('scroll', onScroll, false);
-    // save mql to ref
-    mqlRef.current = mql;
     return () => {
       // remove event listeners on unmount
-      // mql.removeEventListener('change', onLarge, false);
+      mql.removeEventListener('change', onLarge, false);
       window.removeEventListener('keydown', onKeyDown, false);
       window.removeEventListener('scroll', onScroll, false);
     };
@@ -127,7 +123,7 @@ export default function useNavState({ menuRef, buttonRef }: UseNavStateOptions) 
     } else {
       document
         .querySelectorAll('header,main,footer')
-        ?.forEach((el) => el.removeAttribute('aria-hidden'));
+        ?.forEach((el) => el.setAttribute('aria-hidden', 'true'));
     }
   }, [open]);
 

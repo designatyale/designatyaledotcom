@@ -6,7 +6,6 @@
  */
 
 import type { Metadata } from 'next';
-import { ABCDiatype } from '@/fonts';
 import { ColorSchemeScript } from '@/util/earlyScripts';
 import { SITE_URL } from '@/env';
 import s from './Layout.module.scss';
@@ -14,9 +13,9 @@ import './globals.scss';
 
 // Base metadata for the entire app
 export const metadata: Metadata = {
-  title: 'Design at Yale — A Studio and Community.',
-  description:
-    "Design at Yale is Yale's undergraduate design club. We run a small studio, host events exploring practice and industry across design disciplines, and have fun making things together.",
+  title: 'A DAY App',
+  description: 'Welcome to my new DAY app!',
+  themeColor: '#ffffff',
   metadataBase: new URL(SITE_URL),
 };
 
@@ -29,65 +28,27 @@ export const metadata: Metadata = {
  */
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={`${ABCDiatype.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang="en">
       <head>
         <link
           rel="apple-touch-icon"
           sizes="180x180"
           href="/apple-touch-icon.png"
-          media="(prefers-color-scheme: light)"
         />
-        {/* <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/apple-touch-icon-dark.png"
-          media="(prefers-color-scheme: dark)"
-        /> */}
         <link
           rel="icon"
           type="image/png"
           sizes="32x32"
           href="/favicon-32x32.png"
-          media="(prefers-color-scheme: light)"
         />
-        {/* <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/favicon-32x32-dark.png"
-          media="(prefers-color-scheme: dark)"
-        /> */}
         <link
           rel="icon"
           type="image/png"
           sizes="16x16"
           href="/favicon-16x16.png"
-          media="(prefers-color-scheme: light)"
         />
-        {/* <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/favicon-16x16-dark.png"
-          media="(prefers-color-scheme: dark)"
-        /> */}
         <link rel="manifest" href="/site.webmanifest" />
-        <link
-          rel="mask-icon"
-          href="/safari-pinned-tab.svg"
-          color="#000000"
-          media="(prefers-color-scheme: light)"
-        />
-        {/* <link
-          rel="mask-icon"
-          href="/safari-pinned-tab.svg"
-          color="#ffffff"
-          media="(prefers-color-scheme: dark)"
-        /> */}
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000" />
         <meta name="msapplication-TileColor" content="#ffc40d" />
         <ColorSchemeScript />
       </head>
