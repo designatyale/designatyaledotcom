@@ -95,3 +95,5 @@ export default async function SubPageLayout({
     </article>
   );
 }
+
+export const revalidate = false;

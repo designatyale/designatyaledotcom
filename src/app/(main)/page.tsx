@@ -5,10 +5,10 @@
  * 2023 Design at Yale
  */
 
-import getClient from '@/sanity/client';
-import { pageQuery } from '@/sanity/groq';
-import { SitePage } from '@/sanity/schema';
-import getPreview from '@/util/getPreview';
+// import getClient from '@/sanity/client';
+// import { pageQuery } from '@/sanity/groq';
+// import { SitePage } from '@/sanity/schema';
+// import getPreview from '@/util/getPreview';
 import s from './Root.module.scss';
 import DAY from '@/assets/svg/DAY';
 import Link from 'next/link';
@@ -18,13 +18,13 @@ import Link from 'next/link';
 /* -------------------------------------------------------------------------- */
 
 export default async function Page() {
-  const preview = getPreview();
-  const params = { pageSlug: `/` };
-  const page: SitePage | null = await getClient(preview).fetch(
-    pageQuery,
-    params,
-    { next: { tags: [`page:${params.pageSlug}`] } }
-  );
+  // const preview = getPreview();
+  // const params = { pageSlug: `/` };
+  // const page: SitePage | null = await getClient(preview).fetch(
+  //   pageQuery,
+  //   params,
+  //   { next: { tags: [`page:${params.pageSlug}`] } }
+  // );
 
   return (
     <article className={s.container}>

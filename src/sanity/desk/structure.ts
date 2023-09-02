@@ -16,10 +16,10 @@ import { ComponentType } from 'react';
 // to make quick-to-jump-to pages with specialized icons.
 const ROOT_PAGES: Record<string, ComponentType<{}>> = {
   home: HomeIcon,
-  work: FiCalendar,
+  studio: FiCalendar,
   community: FiCalendar,
+  work: FiCalendar,
   about: FiCalendar,
-  alumni: FiCalendar,
 };
 
 /* --------------------------- Custom list entries -------------------------- */

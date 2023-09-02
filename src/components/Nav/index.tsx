@@ -22,11 +22,11 @@ import { PiCaretRight, PiCaretLeft } from 'react-icons/pi';
 import { usePathname } from 'next/navigation';
 
 const NAV_LINKS = [
-  ['Work', '/work'],
+  ['Studio', '/studio'],
   ['Community', '/community'],
   [<DAY key="/" className={s.buttons_day} />, '/'],
+  ['Work', '/work'],
   ['About', '/about'],
-  ['Alumni', '/alumni'],
 ] as const;
 
 export default function Nav({ children }: PropsWithChildren) {
