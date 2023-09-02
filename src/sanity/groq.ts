@@ -19,11 +19,37 @@ export const pageQuery = groq`*[_type == "site_page" && slug.current == $pageSlu
   title,
   pageBuilder[] {
     ...,
+    _type == "pe_gallery" => {
+      ...,
+      assets[] -> {
+        ...,
+        _type == "member" => {
+          ...,
+          picture {
+            ...,
+            asset ->
+          }
+        }
+      }
+    }
   },
   subpageOrder,
   rootSubPageTitle,
-  rootSubpageBuilder[] {
+  rootSubPageBuilder[] {
     ...,
+    _type == "pe_gallery" => {
+      ...,
+      assets[] -> {
+        ...,
+        _type == "member" => {
+          ...,
+          picture {
+            ...,
+            asset ->
+          }
+        }
+      }
+    }
   }
 }`;
 

@@ -52,18 +52,23 @@ export interface Member extends SanityDocument {
   name: string;
 
   /**
-   * Slug — `slug`
+   * Image — `image`
    *
-   * The path to the page on the site
+   * A picture of the member, usually square.
    */
-  slug: { _type: "slug"; current: string };
+  picture: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
 
   /**
-   * Start Date — `date`
+   * Position — `string`
    *
-   * When this member joined DAY.
+   * (Optional) What position the member occupies in the community.
    */
-  start_date?: string;
+  position?: string;
 
   /**
    * About — `array`
@@ -80,12 +85,36 @@ export interface Member extends SanityDocument {
   socials?: Array<SanityKeyed<Social>>;
 
   /**
+   * Start Date — `date`
+   *
+   * When this member joined DAY.
+   */
+  start_date?: string;
+
+  /**
+   * Start Date — `date`
+   *
+   * (Optional) When this member graduated from DAY.
+   */
+  end_date?: string;
+
+  /**
+   * Slug — `slug`
+   *
+   * (Optional) A slug for the members page on the site.
+   */
+  slug?: { _type: "slug"; current: string };
+
+  /**
    * Page Builder — `array`
    *
-   * Assemble your page using configurable modules.
+   * The membersss page on the DAY site.
    */
   pageBuilder?: Array<
-    SanityKeyed<PeCopy> | SanityKeyed<PeActionBar> | SanityKeyed<PeActionButton>
+    | SanityKeyed<PeCopy>
+    | SanityKeyed<PeGallery>
+    | SanityKeyed<PeActionBar>
+    | SanityKeyed<PeActionButton>
   >;
 
   /**
@@ -175,7 +204,10 @@ export interface SitePage extends SanityDocument {
    * Assemble your page using configurable modules.
    */
   pageBuilder: Array<
-    SanityKeyed<PeCopy> | SanityKeyed<PeActionBar> | SanityKeyed<PeActionButton>
+    | SanityKeyed<PeCopy>
+    | SanityKeyed<PeGallery>
+    | SanityKeyed<PeActionBar>
+    | SanityKeyed<PeActionButton>
   >;
 
   /**
@@ -198,7 +230,10 @@ export interface SitePage extends SanityDocument {
    * If there are existing subroutes, use this as the initial view to display in the subroute mechanism.
    */
   rootSubPageBuilder?: Array<
-    SanityKeyed<PeCopy> | SanityKeyed<PeActionBar> | SanityKeyed<PeActionButton>
+    | SanityKeyed<PeCopy>
+    | SanityKeyed<PeGallery>
+    | SanityKeyed<PeActionBar>
+    | SanityKeyed<PeActionButton>
   >;
 
   /**
@@ -245,6 +280,30 @@ export type PeCopy = {
    * How many evenly-spaced columns to break the text into. Default 1.
    */
   columns: number;
+};
+
+export type PeGallery = {
+  _type: "pe_gallery";
+  /**
+   * Layout — `string`
+   *
+   * The type of layout.
+   */
+  layout: "columnar";
+
+  /**
+   * Assets — `array`
+   *
+   * Assets to display in the gallery.
+   */
+  assets: Array<SanityKeyedReference<Member>>;
+
+  /**
+   * Copy — `array`
+   *
+   * (Optional) Copy to display next to or above the gallery.)
+   */
+  copy: Array<SanityKeyed<SanityBlock>>;
 };
 
 export type PeActionBar = {

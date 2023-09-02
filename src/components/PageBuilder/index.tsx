@@ -9,6 +9,7 @@ import { SitePage } from '@/sanity/schema';
 import Copy from './Copy';
 import ActionBar from '@/components/PageBuilder/ActionBar';
 import ActionButton from '@/components/PageBuilder/ActionButton';
+import Gallery from '@/components/PageBuilder/Gallery';
 
 interface PageBuilderProps {
   content: SitePage['pageBuilder'];
@@ -21,9 +22,11 @@ interface PageBuilderProps {
  * that all of your components have the necessary fields, e.g. that image and
  * entity references have been expanded in your GROQ query.
  */
-export default function PageBuilder({ content, isPreview }: PageBuilderProps) {
-  if (!content) return null;
-  return content.map((pageBlock) => {
+export default function PageBuilder({
+  content,
+  isPreview,
+}: PageBuilderProps): JSX.Element[] {
+  return (content || []).map((pageBlock) => {
     switch (pageBlock._type) {
       case 'pe_copy':
         return <Copy key={pageBlock._key} value={pageBlock} />;
@@ -31,6 +34,8 @@ export default function PageBuilder({ content, isPreview }: PageBuilderProps) {
         return <ActionBar key={pageBlock._key} value={pageBlock} />;
       case 'pe_action_button':
         return <ActionButton key={pageBlock._key} value={pageBlock} />;
+      case 'pe_gallery':
+        return <Gallery key={pageBlock._key} value={pageBlock} />;
     }
   });
 }

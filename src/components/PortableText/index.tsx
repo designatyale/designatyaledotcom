@@ -45,6 +45,9 @@ const components: PortableTextComponents = {
   listItem: ({ children }) => <li className={classNames(s.li)}>{children}</li>,
   // bloc types
   block: {
+    h1: ({ children }) => <h1 className={s.h1}>{children}</h1>,
+    h2: ({ children }) => <h2 className={s.h2}>{children}</h2>,
+    h3: ({ children }) => <h3 className={s.h3}>{children}</h3>,
     normal: ({ children }) => <p className={classNames(s.p)}>{children}</p>,
   },
 };

@@ -1,0 +1,51 @@
+/*
+ * Gallery.module.scss
+ * Author: evan kirkiles
+ * Created On Sat Sep 02 2023
+ * 2023 Design at Yale 
+ */
+@import '@/styles/utils';
+
+.container {
+  display: grid;
+  grid-template:
+    'copy' auto
+    'contents' auto / 1fr;
+  width: 100%;
+  margin-bottom: 1em;
+
+  @include media('sm') {
+    grid-template: 'copy contents' auto / minmax(auto, 24ch) 1fr;
+    gap: 1em;
+  }
+}
+
+.copy {
+  grid-area: copy;
+  margin-bottom: 1em;
+}
+
+.assets {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  grid-area: contents;
+  padding: 0 1em;
+  gap: 1em;
+
+  @include media('sm') {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 250px));
+  }
+}
+
+/* ------------------------------- Components ------------------------------- */
+
+.member {
+  width: 100%;
+
+  &_image {
+    aspect-ratio: 1;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}

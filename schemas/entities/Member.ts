@@ -12,33 +12,41 @@ const Member = defineType({
   name: 'member',
   type: 'document' as const,
   title: 'Member',
-  groups: [{ name: 'page', title: 'Page' }],
+  groups: [
+    { name: 'information', title: 'Information', default: true },
+    { name: 'page', title: 'Page' },
+  ],
   fields: [
+    /* ------------------------------- Information ------------------------------ */
+
     defineField({
       name: 'name',
       type: 'string' as const,
       title: 'Name',
       validation: (Rule) => Rule.required(),
       codegen: { required: true },
+      group: 'information',
       description: 'The name of the member',
     }),
     defineField({
-      name: 'slug',
-      type: 'slug' as const,
-      title: 'Slug',
+      name: 'picture',
+      type: 'image' as const,
+      title: 'Image',
+      description: 'A picture of the member, usually square.',
       validation: (Rule) => Rule.required(),
       codegen: { required: true },
-      description: 'The path to the page on the site',
+      group: 'information',
+      options: {
+        metadata: ['lqip'],
+      },
     }),
     defineField({
-      name: 'start_date',
-      type: 'date' as const,
-      title: 'Start Date',
-      description: 'When this member joined DAY.',
-      readOnly: true,
-      options: {
-        dateFormat: 'dddd, MMMM Do YYYY,',
-      },
+      name: 'position',
+      type: 'string' as const,
+      title: 'Position',
+      group: 'information',
+      description:
+        '(Optional) What position the member occupies in the community.',
     }),
     defineField({
       name: 'about',
@@ -46,19 +54,50 @@ const Member = defineType({
       description: 'A short tag line for the team member.',
       title: 'About',
       of: [{ type: 'block' }],
+      group: 'information',
     }),
     defineField({
       name: 'socials',
       type: 'array' as const,
       of: [{ type: 'social' }],
+      group: 'information',
+    }),
+    defineField({
+      name: 'start_date',
+      type: 'date' as const,
+      title: 'Start Date',
+      description: '(Optional) When this member joined DAY.',
+      options: {
+        dateFormat: 'dddd, MMMM Do YYYY,',
+      },
+      group: 'information',
+    }),
+    defineField({
+      name: 'end_date',
+      type: 'date' as const,
+      title: 'End Date',
+      description: '(Optional) When this member graduated from DAY.',
+      options: {
+        dateFormat: 'dddd, MMMM Do YYYY,',
+      },
+      group: 'information',
+    }),
+
+    /* ---------------------------------- Page ---------------------------------- */
+
+    defineField({
+      name: 'slug',
+      type: 'slug' as const,
+      title: 'Slug',
+      group: 'page',
+      description: '(Optional) A slug for the members page on the site.',
     }),
     defineField({
       name: 'pageBuilder',
       type: 'array' as const,
       title: 'Page Builder',
       group: 'page',
-      description: 'Assemble your page using configurable modules.',
-      validation: (Rule) => Rule.required(),
+      description: 'The members page on the DAY site.',
       // map all of our page elements to pageBuilder sub-types
       of: pageElements.map(({ title, name }) =>
         defineArrayMember({
@@ -67,6 +106,8 @@ const Member = defineType({
         })
       ),
     }),
+
+    /* ------------------------------ Revalidation ------------------------------ */
 
     defineField({
       name: 'last_revalidated',
