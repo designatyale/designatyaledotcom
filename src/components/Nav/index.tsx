@@ -24,7 +24,7 @@ import { usePathname } from 'next/navigation';
 const NAV_LINKS = [
   ['Studio', '/studio'],
   ['Community', '/community'],
-  [<DAY key="/" className={s.buttons_day} />, '/'],
+  [<DAY key="/" />, '/'],
   ['Work', '/work'],
   ['About', '/about'],
 ] as const;
@@ -75,6 +75,7 @@ export default function Nav({ children }: PropsWithChildren) {
             <li key={href}>
               <Link
                 href={href}
+                className={href === '/' ? s.buttons_day : undefined}
                 aria-current={pathname.startsWith(href) ? 'page' : undefined}
               >
                 {contents}

@@ -20,6 +20,14 @@
   height: var(--header-height);
   margin: 0 auto;
   padding: 0 var(--page-padding);
+  border-bottom: 1px solid theme-color('background');
+  // backdrop-filter: blur(3px) grayscale(2);
+  background-color: color-mix(
+    in lch,
+    theme-color('background') 95%,
+    transparent
+  );
+  transition: border 0.3s ease-in-out;
 
   &::before {
     flex-grow: 0;
@@ -76,6 +84,22 @@
       padding: 0.5em 1em;
       text-underline-offset: 0.3em;
 
+      // day logo
+      &[href='/'] {
+        height: 100%;
+        padding: 0.8em 0.2em 0.2em 0.2em;
+        border-bottom: 2px solid transparent;
+
+        & svg {
+          width: auto;
+          height: 1.5em;
+        }
+
+        &:hover {
+          border-color: currentColor;
+        }
+      }
+
       &[aria-current='page'],
       &:hover {
         // font-weight: 700;
@@ -87,25 +111,12 @@
       display: grid;
     }
   }
-
-  &_day {
-    width: auto;
-    height: 1.6em;
-    margin-top: 0.4em;
-    padding-bottom: 0.1em;
-    border-bottom: 2px solid theme-color('background');
-
-    &:hover {
-      border-color: currentColor;
-    }
-  }
 }
 
 .underlay {
   z-index: zIndex('high');
   position: fixed;
   inset: 0;
-  // backdrop-filter: blur(10px);
   background-color: rgba(0, 0, 0, 0.9);
   background-color: color-mix(
     in lch,
@@ -151,7 +162,7 @@ $truecolors: rgb(0, 255, 255), rgb(255, 0, 255), rgb(255, 255, 0), rgb(255, 0, 0
   margin-left: 2.5em;
   border: 1px solid theme-color('border2');
   background: linear-gradient(to right, gradFromColors($lightcolors));
-  opacity: 0.3;
+  opacity: 0.7;
   pointer-events: none;
 
   @include media('md') {
@@ -183,8 +194,6 @@ $truecolors: rgb(0, 255, 255), rgb(255, 0, 255), rgb(255, 255, 0), rgb(255, 0, 0
   padding-bottom: var(--page-padding);
   gap: 0.5em;
   transform: translateY(calc(-100% + var(--header-height)));
-  // border-bottom: 1px solid transparent;
-  background-color: theme-color('background');
   transition:
     transform 0.3s ease,
     border-color 0.1s ease;
@@ -198,6 +207,7 @@ $truecolors: rgb(0, 255, 255), rgb(255, 0, 255), rgb(255, 255, 0), rgb(255, 0, 0
     display: grid;
     transform: translateY(0);
     border-color: theme-color('border2');
+    background-color: theme-color('background');
 
     & > * {
       opacity: 1;
