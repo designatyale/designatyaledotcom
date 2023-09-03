@@ -11,6 +11,7 @@ import { PortableText } from '@portabletext/react';
 import components from '@/components/PortableText';
 import unwrapReference from '@/util/unwrapReference';
 import SanityImage from '@/components/SanityImage';
+import classNames from 'classnames';
 
 function GalleryMember({ member }: { member: Member }) {
   const image = unwrapReference(member.picture.asset);
@@ -24,6 +25,21 @@ function GalleryMember({ member }: { member: Member }) {
 }
 
 export default function Gallery({ value }: { value: PeGallery }) {
+  if (!value.assets?.length) {
+    return (
+      <div>
+        <ul className={classNames(s.temp_class)}>
+          {value.title && (
+            <li>
+              <h3>{value.title}</h3>
+            </li>
+          )}
+          <li>Oops, this isn&apos;t ready yet!</li>
+        </ul>
+      </div>
+    );
+  }
+
   return (
     <div className={s.container}>
       {value.copy && (

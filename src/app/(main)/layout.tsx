@@ -12,14 +12,15 @@ import { PropsWithChildren } from 'react';
 import s from './Layout.module.scss';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
+import Providers from '@/app/(main)/providers';
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
-    <>
+    <Providers>
       <SkipLink />
       <Nav>hi</Nav>
       <main>{children}</main>
       <Footer />
-    </>
+    </Providers>
   );
 }

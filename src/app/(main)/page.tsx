@@ -41,20 +41,26 @@ export default async function Page() {
           and have fun making things together.
         </p>
       </section>
+      <div className={s.under_construction}>WEBSITE IS UNDER CONSTRUCTION!</div>
       <section className={s.t1}>
         <h2>
-          <Link href="/work">Work with the Studio&nbsp;→</Link>
+          <Link href="/studio">Work with the Studio&nbsp;→</Link>
         </h2>
-        <p>
-          Available for Fall 2023. <br />
-          Or work with our Alumni year-round.
-        </p>
+        <p>Available for Fall 2023—or work with our Alumni year-round.</p>
       </section>
       <section className={s.t2}>
         <h2>
-          <Link href="/work">Join the Community&nbsp;→</Link>
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLScn7wXT70fL68crb2IgtBYMJ-NObnrqlDpppMMCJkeVKQXIxQ/viewform"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Join the Community&nbsp;→
+          </a>
         </h2>
-        <p>Yale students, fill out the form and join our GroupMe!</p>
+        <p>
+          Yale students, fill out the form and keep your eyes out for events!
+        </p>
       </section>
     </article>
   );

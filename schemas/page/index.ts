@@ -12,7 +12,14 @@ import ActionBarType from './ActionBarType';
 import ActionButtonType from './ActionButtonType';
 import CopyType from './CopyType';
 import GalleryType from './GalleryType';
+import TableType from './TableType';
 
-const pageElements = [CopyType, GalleryType, ActionBarType, ActionButtonType];
+const pageElements = [
+  CopyType,
+  GalleryType,
+  TableType,
+  ActionBarType,
+  ActionButtonType,
+];
 
 export default pageElements;

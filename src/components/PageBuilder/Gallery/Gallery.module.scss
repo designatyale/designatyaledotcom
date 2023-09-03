@@ -20,6 +20,21 @@
   }
 }
 
+.temp_class {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6em 0;
+
+  & h3 {
+    display: block;
+    margin-bottom: -0.2em;
+    font-weight: 700;
+    font-size: 1.5em;
+  }
+}
+
 .copy {
   grid-area: copy;
   margin-bottom: 1em;

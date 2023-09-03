@@ -87,12 +87,12 @@ export interface Member extends SanityDocument {
   /**
    * Start Date — `date`
    *
-   * When this member joined DAY.
+   * (Optional) When this member joined DAY.
    */
   start_date?: string;
 
   /**
-   * Start Date — `date`
+   * End Date — `date`
    *
    * (Optional) When this member graduated from DAY.
    */
@@ -108,11 +108,12 @@ export interface Member extends SanityDocument {
   /**
    * Page Builder — `array`
    *
-   * The membersss page on the DAY site.
+   * The members page on the DAY site.
    */
   pageBuilder?: Array<
     | SanityKeyed<PeCopy>
     | SanityKeyed<PeGallery>
+    | SanityKeyed<PeTable>
     | SanityKeyed<PeActionBar>
     | SanityKeyed<PeActionButton>
   >;
@@ -206,6 +207,7 @@ export interface SitePage extends SanityDocument {
   pageBuilder: Array<
     | SanityKeyed<PeCopy>
     | SanityKeyed<PeGallery>
+    | SanityKeyed<PeTable>
     | SanityKeyed<PeActionBar>
     | SanityKeyed<PeActionButton>
   >;
@@ -232,6 +234,7 @@ export interface SitePage extends SanityDocument {
   rootSubPageBuilder?: Array<
     | SanityKeyed<PeCopy>
     | SanityKeyed<PeGallery>
+    | SanityKeyed<PeTable>
     | SanityKeyed<PeActionBar>
     | SanityKeyed<PeActionButton>
   >;
@@ -285,25 +288,49 @@ export type PeCopy = {
 export type PeGallery = {
   _type: "pe_gallery";
   /**
-   * Layout — `string`
+   * Title — `string`
    *
-   * The type of layout.
+   * The title of the gallery to show above it.
    */
-  layout: "columnar";
+  title?: string;
 
   /**
    * Assets — `array`
    *
    * Assets to display in the gallery.
    */
-  assets: Array<SanityKeyedReference<Member>>;
+  assets?: Array<SanityKeyedReference<Member>>;
 
   /**
    * Copy — `array`
    *
    * (Optional) Copy to display next to or above the gallery.)
    */
-  copy: Array<SanityKeyed<SanityBlock>>;
+  copy?: Array<SanityKeyed<SanityBlock>>;
+};
+
+export type PeTable = {
+  _type: "pe_table";
+  /**
+   * Asset Type — `string`
+   *
+   * The type of assets
+   */
+  asset_type: "member" | "events";
+
+  /**
+   * Additional Query — `string`
+   *
+   * An additiional query to filter the results by.
+   */
+  additional_query?: string;
+
+  /**
+   * Compact? — `boolean`
+   *
+   * If true, show all rows as "compact" initially.
+   */
+  is_compact: boolean;
 };
 
 export type PeActionBar = {

@@ -30,6 +30,26 @@
   @include media('xl') {
     grid-template: 'cta . t1 t2' 1fr / auto 1fr auto auto;
   }
+
+  & a {
+    display: inline-block;
+    margin-bottom: 0.2em;
+    text-decoration-thickness: 0.5px;
+    text-underline-offset: 0.2em;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.under_construction {
+  position: absolute;
+  top: var(--header-height);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: monospace;
+  text-align: center;
+  opacity: 0.5;
 }
 
 @keyframes fade-up {

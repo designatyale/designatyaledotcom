@@ -10,6 +10,7 @@ import Copy from './Copy';
 import ActionBar from '@/components/PageBuilder/ActionBar';
 import ActionButton from '@/components/PageBuilder/ActionButton';
 import Gallery from '@/components/PageBuilder/Gallery';
+import Table from '@/components/PageBuilder/Table';
 
 interface PageBuilderProps {
   content: SitePage['pageBuilder'];
@@ -36,6 +37,8 @@ export default function PageBuilder({
         return <ActionButton key={pageBlock._key} value={pageBlock} />;
       case 'pe_gallery':
         return <Gallery key={pageBlock._key} value={pageBlock} />;
+      case 'pe_table':
+        return <Table key={pageBlock._key} value={pageBlock} />;
     }
   });
 }

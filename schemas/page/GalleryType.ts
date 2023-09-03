@@ -17,16 +17,10 @@ const GalleryType = defineType({
   icon: FiGrid,
   fields: [
     defineField({
-      name: 'layout',
-      title: 'Layout',
-      description: 'The type of layout.',
+      name: 'title',
+      title: 'Title',
       type: 'string' as const,
-      options: {
-        list: [{ title: 'Columnar', value: 'columnar' }],
-      },
-      initialValue: 'Grid',
-      validation: (Rule) => Rule.required(),
-      codegen: { required: true },
+      description: 'The title of the gallery to show above it.',
     }),
     defineField({
       name: 'assets',
@@ -34,8 +28,6 @@ const GalleryType = defineType({
       type: 'array' as const,
       of: [{ type: 'reference' as const, to: [{ type: 'member' }] }],
       description: 'Assets to display in the gallery.',
-      validation: (Rule) => Rule.required(),
-      codegen: { required: true },
     }),
     defineField({
       name: 'copy',
@@ -43,8 +35,6 @@ const GalleryType = defineType({
       description: '(Optional) Copy to display next to or above the gallery.)',
       type: 'array' as const,
       of: [{ type: 'block' }],
-      validation: (Rule) => Rule.required(),
-      codegen: { required: true },
     }),
   ],
 });

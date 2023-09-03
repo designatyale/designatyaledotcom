@@ -31,6 +31,7 @@ export default function SubNav({ baseTitle, baseHref, subPages }: SubNavProps) {
             <Link
               href={slug.current}
               aria-current={pathname === slug.current ? 'page' : undefined}
+              scroll={false}
             >
               {title}
             </Link>
