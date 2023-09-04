@@ -7,11 +7,14 @@
 
 import { defineArrayMember, defineField, defineType } from 'sanity';
 import pageElements from '../page';
+import { FiUser } from 'react-icons/fi';
+import Socials from '../types/SocialType';
 
 const Member = defineType({
   name: 'member',
   type: 'document' as const,
   title: 'Member',
+  icon: FiUser,
   groups: [
     { name: 'information', title: 'Information', default: true },
     { name: 'page', title: 'Page' },
@@ -59,8 +62,9 @@ const Member = defineType({
     defineField({
       name: 'socials',
       type: 'array' as const,
-      of: [{ type: 'social' }],
+      of: Socials.map(({ name }) => ({ type: name })),
       group: 'information',
+      validation: (Rule) => Rule.unique(),
     }),
     defineField({
       name: 'start_date',
@@ -90,7 +94,7 @@ const Member = defineType({
       type: 'slug' as const,
       title: 'Slug',
       group: 'page',
-      description: '(Optional) A slug for the members page on the site.',
+      description: "(Optional) A slug for the member's page on the site.",
     }),
     defineField({
       name: 'pageBuilder',

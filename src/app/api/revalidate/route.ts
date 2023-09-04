@@ -36,7 +36,7 @@ type WebhookProjection = {
 
 // to add other revalidation entities, add their types in the signature here.
 function checkIsRevalidationEntity(body: any): body is WebhookProjection {
-  return !!body._type;
+  return !!body.type;
 }
 
 export async function POST(req: NextRequest) {

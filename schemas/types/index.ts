@@ -5,8 +5,8 @@
  * 2023 Design at Yale
  */
 
-import SocialType from './SocialType';
+import Socials from './SocialType';
 
-const subTypes = [SocialType];
+const subTypes = [...Socials];
 
 export default subTypes;
