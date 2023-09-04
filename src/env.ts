@@ -24,3 +24,6 @@ export const SANITY_API_VERSION = process.env.NEXT_PUBLIC_SANITY_API_VERSION!;
 // Sanity-specific variables [private]
 export const SANITY_WEBHOOK_SECRET = process.env.SANITY_WEBHOOK_SECRET!;
 export const SANITY_API_READ_TOKEN = process.env.SANITY_API_READ_TOKEN;
+
+// GA4 Google tag id (e.g. G-XXXXXXXXXX)
+export const GA4_TAG = process.env.NEXT_PUBLIC_GA4_TAG;

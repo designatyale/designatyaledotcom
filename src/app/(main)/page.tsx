@@ -41,7 +41,6 @@ export default async function Page() {
           and have fun making things together.
         </p>
       </section>
-      <div className={s.under_construction}>WEBSITE IS UNDER CONSTRUCTION!</div>
       <section className={s.t1}>
         <h2>
           <Link href="/studio">Work with the Studio&nbsp;→</Link>
@@ -62,6 +61,9 @@ export default async function Page() {
           Yale students, fill out the form and keep your eyes out for events!
         </p>
       </section>
+      <div className={s.under_construction} data-nosnippet>
+        WEBSITE IS UNDER CONSTRUCTION!
+      </div>
     </article>
   );
 }
