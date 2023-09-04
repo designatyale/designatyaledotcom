@@ -13,10 +13,25 @@ import s from './Layout.module.scss';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import Providers from '@/app/(main)/providers';
+import Script from 'next/script';
+import { GA4_TAG } from '@/env';
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
     <Providers>
+      <Script
+        async
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA4_TAG}`}
+      />
+      <Script id="google-analytics">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+ 
+          gtag('config', '${GA4_TAG}');
+      `}
+      </Script>
       <SkipLink />
       <Nav>hi</Nav>
       <main>{children}</main>

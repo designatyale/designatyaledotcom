@@ -11,8 +11,6 @@ import { ColorSchemeScript } from '@/util/earlyScripts';
 import { SITE_URL } from '@/env';
 import s from './Layout.module.scss';
 import './globals.scss';
-import { Suspense } from 'react';
-import { GTMAnalytics } from '@/components/Analytics';
 
 // Base metadata for the entire app
 export const metadata: Metadata = {
@@ -58,9 +56,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000" />
         <meta name="msapplication-TileColor" content="#ffc40d" />
         <ColorSchemeScript />
-        <Suspense>
-          <GTMAnalytics />
-        </Suspense>
       </head>
       <body className={s.body}>{children}</body>
     </html>

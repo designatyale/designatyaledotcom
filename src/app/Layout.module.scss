@@ -15,7 +15,7 @@
   width: 100%;
 
   & > nav,
-  & > main,
+  & > main:not([data-type='sanity']),
   & > footer {
     width: calc(100%);
     max-width: var(--max-main-width);
