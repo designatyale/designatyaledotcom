@@ -1,10 +1,12 @@
-/*
- * useNavState.ts
- * Author: evan kirkiles
- * Created On Mon Aug 28 2023
- * 2023 Design at Yale
- */
-'use client';
+!(
+  /*
+   * useNavState.ts
+   * Author: evan kirkiles
+   * Created On Mon Aug 28 2023
+   * 2023 Design at Yale
+   */
+  'use client'
+);
 
 import { usePathname } from 'next/navigation';
 import {
@@ -51,10 +53,15 @@ export default function useNavState({ menuRef, buttonRef }: UseNavStateOptions) 
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const mqlRef = useRef<MediaQueryList | null>(null);
+  const prevPath = useRef<string>(pathname);
 
   // 1. Close the nav menu on path change
   useEffect(() => {
     setOpen(false);
+    // scroll to top of page on base pathname change for now
+    if (prevPath.current.split('/')[1] !== pathname.split('/')[1])
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    prevPath.current = pathname;
   }, [pathname]);
 
   // 2. Close the nav menu on large screens or on ESC-click

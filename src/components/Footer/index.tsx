@@ -45,19 +45,29 @@ export default function Footer() {
                 <BackToTop className={s.back_to_top}>Back to top ↑</BackToTop>
               </li>
               <li>
-                <Link href="/studio">Studio</Link>
+                <Link href="/studio" scroll={true}>
+                  Studio
+                </Link>
               </li>
               <li>
-                <Link href="/community">Community</Link>
+                <Link href="/community" scroll={true}>
+                  Community
+                </Link>
               </li>
               <li>
-                <Link href="/community/events">Events</Link>
+                <Link href="/community/events" scroll={true}>
+                  Events
+                </Link>
               </li>
               <li>
-                <Link href="/work">Work</Link>
+                <Link href="/work" scroll={true}>
+                  Work
+                </Link>
               </li>
               <li>
-                <Link href="/about">About</Link>
+                <Link href="/about" scroll={true}>
+                  About
+                </Link>
               </li>
             </ul>
           </section>

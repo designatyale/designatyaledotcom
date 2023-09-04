@@ -75,7 +75,7 @@ const SitePage = defineType({
               document: { slug: { current: string } };
             }) => {
               return {
-                filter: groq`slug.current in path($rootSlug + "/*")`,
+                filter: groq`slug.current match $rootSlug + "/*" && slug.current != $rootSlug`,
                 params: {
                   rootSlug: document.slug?.current,
                 },
