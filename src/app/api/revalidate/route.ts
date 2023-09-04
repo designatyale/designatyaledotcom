@@ -22,18 +22,25 @@
  */
 
 import { SANITY_WEBHOOK_SECRET } from '@/env';
-import { SitePage } from '@/sanity/schema';
 import { isValidSignature, SIGNATURE_HEADER_NAME } from '@sanity/webhook';
 import { revalidateTag } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
+type WebhookProjection = {
+  type: 'site_page' | string;
+  documentId: string;
+  revisionId: string;
+  slug: { current: string };
+  operation: 'create' | 'update' | 'delete';
+};
+
 // to add other revalidation entities, add their types in the signature here.
-function checkIsRevalidationEntity(body: any): body is SitePage {
+function checkIsRevalidationEntity(body: any): body is WebhookProjection {
   return !!body._type;
 }
 
 export async function POST(req: NextRequest) {
-  const body = await req.json();
+  const body: WebhookProjection = await req.json();
 
   // first, validate the request signature
   const signature = req.headers.get(SIGNATURE_HEADER_NAME);
@@ -53,12 +60,15 @@ export async function POST(req: NextRequest) {
   // if valid request, attempt to do the revalidation
   try {
     let revalidated: string[] = [];
-    switch (body._type) {
+    switch (body.type) {
       case 'site_page':
         revalidated.push(`page:${body.slug.current}`);
         break;
       default:
         throw new Error('Invalid revalidation type.');
+    }
+    if (body.operation === 'create' || body.operation === 'delete') {
+      revalidated.push(`${body.type}:list`);
     }
     revalidated.forEach(revalidateTag);
     return NextResponse.json({ success: true, revalidated });

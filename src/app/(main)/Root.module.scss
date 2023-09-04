@@ -44,12 +44,12 @@
 
 .under_construction {
   position: absolute;
-  top: var(--header-height);
+  top: calc(var(--header-height) + 0.2em);
   left: 50%;
   transform: translateX(-50%);
   font-family: monospace;
   text-align: center;
-  opacity: 0.5;
+  opacity: 0.7;
 }
 
 @keyframes fade-up {
