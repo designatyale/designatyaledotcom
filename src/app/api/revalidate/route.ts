@@ -67,9 +67,9 @@ export async function POST(req: NextRequest) {
       default:
         throw new Error('Invalid revalidation type.');
     }
-    // if (body.operation === 'create' || body.operation === 'delete') {
-    //   revalidated.push(`${body.type}:list`);
-    // }
+    if (body.operation === 'create' || body.operation === 'delete') {
+      revalidated.push(`${body.type}:list`);
+    }
     revalidated.forEach(revalidateTag);
     return NextResponse.json({ success: true, revalidated });
   } catch (e) {
