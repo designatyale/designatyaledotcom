@@ -27,3 +27,8 @@ export const SANITY_API_READ_TOKEN = process.env.SANITY_API_READ_TOKEN;
 
 // GA4 Google tag id (e.g. G-XXXXXXXXXX)
 export const GA4_TAG = process.env.NEXT_PUBLIC_GA4_TAG;
+
+// Algolia stuff
+export const ALGOLIA_APP_ID = process.env.NEXT_PUBLIC_ALGOLIA_APP_ID!;
+export const ALGOLIA_SEARCH_API_KEY =
+  process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY!;

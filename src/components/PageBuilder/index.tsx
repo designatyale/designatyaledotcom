@@ -12,6 +12,7 @@ import ActionButton from '@/components/PageBuilder/ActionButton';
 import Gallery from '@/components/PageBuilder/Gallery';
 import Table from '@/components/PageBuilder/Table';
 import TableContents from '@/components/PageBuilder/Table/contents';
+import TableContents2 from '@/components/PageBuilder/Table/contentsis';
 
 interface PageBuilderProps {
   content: SitePage['pageBuilder'];
@@ -40,7 +41,7 @@ export default function PageBuilder({
         return <Gallery key={pageBlock._key} value={pageBlock} />;
       case 'pe_table':
         if (isPreview)
-          return <TableContents key={pageBlock._key} value={pageBlock} />;
+          return <TableContents2 key={pageBlock._key} value={pageBlock} />;
         return <Table key={pageBlock._key} value={pageBlock} />;
     }
   });

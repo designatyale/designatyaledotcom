@@ -6,6 +6,10 @@
  */
 @import '@/styles/utils';
 
+.container {
+  width: 100%;
+}
+
 .table {
   width: 100%;
   // border-collapse: collapse;
@@ -82,7 +86,14 @@
   margin: 0.5em 0;
   gap: 0.5em;
 
-  & > div {
+  & legend {
+    visibility: none;
+    position: absolute;
+    top: 0;
+    left: -50000px;
+  }
+
+  & form {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -94,14 +105,7 @@
     }
   }
 
-  & legend {
-    visibility: none;
-    position: absolute;
-    top: 0;
-    left: -50000px;
-  }
-
-  & input[type='text'] {
+  & input[type='search'] {
     flex: 1;
     padding: 0.2em;
     border-bottom: 1px solid theme-color('border2');

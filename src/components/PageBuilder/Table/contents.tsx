@@ -3,11 +3,13 @@
  * Author: evan kirkiles
  * Created On Sat Sep 02 2023
  * 2023 Design at Yale
+ *
+ * An Algolia search-powered table to lessen the load on our Sanity free tier.
+ * It is synced with our Sanity documents using a webhook.
  */
 'use client';
 
 import {
-  Row,
   createColumnHelper,
   flexRender,
   getCoreRowModel,
@@ -15,15 +17,15 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { Member, PeTable } from '@/sanity/schema';
-import { Fragment, useId, useMemo, useState } from 'react';
+import { useId, useMemo, useState } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import getClient from '@/sanity/client';
 import { TABLE_ITEMS_PER_PAGE, tableGroq } from '@/components/PageBuilder/Table';
 import s from './Table.module.scss';
 import unwrapReference from '@/util/unwrapReference';
 import TagPill from '@/components/TagPill';
-import Dropdown from 'react-dropdown';
-import 'react-dropdown/style.css';
+import { InstantSearch } from 'react-instantsearch';
+import { searchClient } from '@/util/algolia';
 
 interface TableContentsProps<T = PeTable['asset_type']> {
   value: Omit<PeTable, 'asset_type'> & { asset_type: T };
@@ -132,11 +134,11 @@ export default function TableContents<T = PeTable['asset_type']>({
             )}
             {value.is_filterable && (
               <div>
-                <label htmlFor={`${tableId}-filter`}>Specialty: </label>
+                {/* <label htmlFor={`${tableId}-filter`}>Specialty: </label>
                 <Dropdown
                   options={['hi', 'hi2']}
                   controlClassName={s.dropdown_control}
-                />
+                /> */}
               </div>
             )}
           </fieldset>
