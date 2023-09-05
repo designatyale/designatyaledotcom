@@ -73,6 +73,6 @@ export async function POST(req: NextRequest) {
     revalidated.forEach(revalidateTag);
     return NextResponse.json({ success: true, revalidated });
   } catch (e) {
-    return NextResponse.json({ success: false, error: e });
+    return NextResponse.json({ success: false, error: e, body });
   }
 }
