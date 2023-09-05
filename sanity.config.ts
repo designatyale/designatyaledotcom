@@ -8,6 +8,7 @@
 import { defineConfig, isDev } from 'sanity';
 import { media } from 'sanity-plugin-media';
 import { visionTool } from '@sanity/vision';
+import { colorInput } from '@sanity/color-input';
 import { deskTool } from 'sanity/desk';
 import schemaTypes from './schemas';
 import { SANITY_PROJECT_ID, SANITY_DATASET } from '@/env';
@@ -31,6 +32,7 @@ export default defineConfig({
     }),
     media(),
     visionTool(),
+    colorInput(),
     ...(isDev ? devOnlyPlugins : []),
   ],
   document: {

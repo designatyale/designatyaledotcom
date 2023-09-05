@@ -1,0 +1,122 @@
+/*
+ * Table.module.scss
+ * Author: evan kirkiles
+ * Created On Mon Sep 04 2023
+ * 2023 Design at Yale 
+ */
+@import '@/styles/utils';
+
+.table {
+  width: 100%;
+  // border-collapse: collapse;
+
+  thead {
+    display: table-header-group;
+    width: 100%;
+  }
+  tbody {
+    display: table-row-group;
+    width: 100%;
+  }
+  tr {
+    display: table-row;
+    width: 100%;
+  }
+  th,
+  td {
+    display: table-cell;
+    min-width: 10em;
+
+    &:nth-of-type(2) {
+      width: 100%;
+    }
+
+    & ul {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5em;
+    }
+  }
+
+  @include media('xs-down') {
+    tbody,
+    thead,
+    th,
+    td {
+      display: block;
+      width: 100%;
+      min-height: unset;
+      border: unset;
+    }
+
+    tr {
+      display: grid;
+      padding: 0.5em 0;
+      border-bottom: 1px solid theme-color('border2');
+    }
+
+    thead > tr {
+      border-bottom: 1px solid theme-color('border');
+    }
+  }
+}
+
+.th {
+  padding: 0.5em 1em;
+  border-bottom: 1px solid theme-color('border');
+}
+
+.td {
+  min-height: 2em;
+  padding: 0.5em;
+  border-bottom: 1px solid theme-color('border2');
+}
+
+.search_fields {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  margin: 0.5em 0;
+  gap: 0.5em;
+
+  & > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5em;
+    white-space: nowrap;
+
+    &:first-of-type {
+      flex: 1;
+    }
+  }
+
+  & legend {
+    visibility: none;
+    position: absolute;
+    top: 0;
+    left: -50000px;
+  }
+
+  & input[type='text'] {
+    flex: 1;
+    padding: 0.2em;
+    border-bottom: 1px solid theme-color('border2');
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.dropdown_control {
+  padding: 0.5em 4em 0.5em 1em;
+  // border: 1px solid theme-color('border2');
+  border: unset;
+  outline: unset;
+  background-color: theme-color('background');
+  cursor: pointer;
+}

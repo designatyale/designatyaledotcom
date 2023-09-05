@@ -37,6 +37,29 @@ export type {
 };
 
 /**
+ * Design Tag
+ *
+ * Represents a "tag" to signify and filter by different types of design.
+ */
+export interface DesignTag extends SanityDocument {
+  _type: "design_tag";
+
+  /**
+   * Color — `color`
+   *
+   * The color to signify this tag by.
+   */
+  color?: Color;
+
+  /**
+   * Title — `string`
+   *
+   * The title of this design tag.
+   */
+  title?: string;
+}
+
+/**
  * Member
  *
  *
@@ -82,7 +105,19 @@ export interface Member extends SanityDocument {
    *
    *
    */
-  socials?: Array<SanityKeyed<Social>>;
+  socials?: Array<
+    | SanityKeyed<SocialInstagram>
+    | SanityKeyed<SocialWebsite>
+    | SanityKeyed<SocialTwitter>
+    | SanityKeyed<SocialEmail>
+  >;
+
+  /**
+   * Design Focuses — `array`
+   *
+   *
+   */
+  design_tags?: Array<SanityKeyedReference<DesignTag>>;
 
   /**
    * Start Date — `date`
@@ -101,7 +136,7 @@ export interface Member extends SanityDocument {
   /**
    * Slug — `slug`
    *
-   * (Optional) A slug for the members page on the site.
+   * (Optional) A slug for the member's page on the site.
    */
   slug?: { _type: "slug"; current: string };
 
@@ -331,6 +366,20 @@ export type PeTable = {
    * If true, show all rows as "compact" initially.
    */
   is_compact: boolean;
+
+  /**
+   * Searchable? — `boolean`
+   *
+   * If true, allow searching for elements based on the "title" field.
+   */
+  is_searchable: boolean;
+
+  /**
+   * Filterable? — `boolean`
+   *
+   * If true, allow filtering for elements based on the "design tags" field.
+   */
+  is_filterable: boolean;
 };
 
 export type PeActionBar = {
@@ -406,28 +455,58 @@ export type PeActionButton = {
   href: string;
 };
 
-export type Social = {
-  _type: "social";
+export type SocialInstagram = {
+  _type: "social_instagram";
   /**
-   * Platform — `string`
+   * Username — `string`
    *
    *
    */
-  platform: "instagram" | "facebook" | "twitter" | "email" | "href";
+  username?: string;
+};
 
+export type SocialWebsite = {
+  _type: "social_website";
   /**
    * Link — `url`
    *
    *
    */
   link?: string;
+};
 
+export type SocialTwitter = {
+  _type: "social_twitter";
   /**
-   * Email — `string`
+   * Username — `string`
    *
    *
    */
-  email?: string;
+  username?: string;
 };
 
-export type Documents = Member | SiteSettings | SitePage;
+export type SocialEmail = {
+  _type: "social_email";
+  /**
+   * Email — `email`
+   *
+   *
+   */
+  email?: Email;
+};
+
+export type Documents = DesignTag | Member | SiteSettings | SitePage;
+
+/**
+ * This interface is a stub. It was referenced in your sanity schema but
+ * the definition was not actually found. Future versions of
+ * sanity-codegen will let you type this explicity.
+ */
+type Color = any;
+
+/**
+ * This interface is a stub. It was referenced in your sanity schema but
+ * the definition was not actually found. Future versions of
+ * sanity-codegen will let you type this explicity.
+ */
+type Email = any;

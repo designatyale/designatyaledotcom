@@ -60,7 +60,7 @@ export default function useNavState({ menuRef, buttonRef }: UseNavStateOptions) 
     setOpen(false);
     // scroll to top of page on base pathname change for now
     if (prevPath.current.split('/')[1] !== pathname.split('/')[1])
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0 });
     prevPath.current = pathname;
   }, [pathname]);
 

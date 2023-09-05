@@ -67,6 +67,14 @@ const Member = defineType({
       validation: (Rule) => Rule.unique(),
     }),
     defineField({
+      name: 'design_tags',
+      type: 'array' as const,
+      title: 'Design Focuses',
+      of: [{ type: 'reference', to: [{ type: 'design_tag' }] }],
+      validation: (Rule) => Rule.unique().max(4),
+      group: 'information',
+    }),
+    defineField({
       name: 'start_date',
       type: 'date' as const,
       title: 'Start Date',

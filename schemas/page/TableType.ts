@@ -46,6 +46,26 @@ const TableType = defineType({
       validation: (Rule) => Rule.required(),
       codegen: { required: true },
     }),
+    defineField({
+      name: 'is_searchable',
+      title: 'Searchable?',
+      description:
+        'If true, allow searching for elements based on the "title" field.',
+      type: 'boolean' as const,
+      initialValue: true,
+      validation: (Rule) => Rule.required(),
+      codegen: { required: true },
+    }),
+    defineField({
+      name: 'is_filterable',
+      title: 'Filterable?',
+      description:
+        'If true, allow filtering for elements based on the "design tags" field.',
+      type: 'boolean' as const,
+      initialValue: true,
+      validation: (Rule) => Rule.required(),
+      codegen: { required: true },
+    }),
   ],
 });
 

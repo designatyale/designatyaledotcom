@@ -20,6 +20,16 @@ const InstagramType = defineType({
       title: 'Username',
     }),
   ],
+  preview: {
+    select: {
+      title: 'username',
+    },
+    prepare({ title }) {
+      return {
+        title: `@${title}`,
+      };
+    },
+  },
 });
 
 const WebsiteType = defineType({
@@ -34,6 +44,16 @@ const WebsiteType = defineType({
       title: 'Link',
     }),
   ],
+  preview: {
+    select: {
+      title: 'link',
+    },
+    prepare({ title }) {
+      return {
+        title: `${title}`,
+      };
+    },
+  },
 });
 
 const TwitterType = defineType({
@@ -48,6 +68,16 @@ const TwitterType = defineType({
       title: 'Username',
     }),
   ],
+  preview: {
+    select: {
+      title: 'username',
+    },
+    prepare({ title }) {
+      return {
+        title: `@${title}`,
+      };
+    },
+  },
 });
 
 const EmailType = defineType({
@@ -62,6 +92,16 @@ const EmailType = defineType({
       title: 'Email',
     }),
   ],
+  preview: {
+    select: {
+      title: 'email',
+    },
+    prepare({ title }) {
+      return {
+        title,
+      };
+    },
+  },
 });
 
 const Socials = [InstagramType, WebsiteType, TwitterType, EmailType];

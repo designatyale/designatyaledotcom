@@ -18,8 +18,8 @@
   & > main:not([data-type='sanity']),
   & > footer {
     width: calc(100%);
-    max-width: var(--max-main-width);
-    margin: 0 auto;
+    // max-width: var(--max-main-width);
+    // margin: 0 auto;
   }
 
   & > nav {

@@ -1,0 +1,38 @@
+/*
+ * TagPill.module.scss
+ * Author: evan kirkiles
+ * Created On Mon Sep 04 2023
+ * 2023 Design at Yale 
+ */
+@import '@/styles/utils';
+
+.container {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0.3em 0.75em;
+  gap: 0.5em;
+  border: 1px solid theme-color('border2');
+  border-radius: 1rem;
+  background-color: theme-color('background');
+  line-height: 1;
+  cursor: pointer;
+
+  & span {
+    margin-bottom: 0.1em;
+  }
+
+  &:hover {
+    background-color: theme-color('background2');
+  }
+}
+
+.color {
+  display: inline-block;
+  width: 0.8em;
+  height: 0.8em;
+  border: 1px solid theme-color('border2');
+  border-radius: 50%;
+}

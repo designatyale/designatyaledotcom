@@ -4,26 +4,23 @@
  * Created On Sat Sep 02 2023
  * 2023 Design at Yale
  */
-import {
-  createColumnHelper,
-  flexRender,
-  getCoreRowModel,
-  getExpandedRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from '@tanstack/react-table';
 import { PeTable } from '@/sanity/schema';
-import { useMemo, useState } from 'react';
 import getClient from '@/sanity/client';
 import groq from 'groq';
 import TableContents from '@/components/PageBuilder/Table/contents';
+
+export const TABLE_ITEMS_PER_PAGE = 20;
 
 export const tableGroq = (
   additionalQuery?: string
 ) => groq`*[_type == $assetType ${
   additionalQuery ? `&& ${additionalQuery} &&` : ''
-} && _id > $lastId] | order(_id) [0...20] {
-  ...
+} && _id > $lastId] | order(_id) [0...${TABLE_ITEMS_PER_PAGE}] {
+  ...,
+  _type == "member" => {
+    ...,
+    design_tags[] ->
+  }
 }`;
 
 export default async function Table({ value }: { value: PeTable }) {

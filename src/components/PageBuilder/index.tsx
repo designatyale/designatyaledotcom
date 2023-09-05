@@ -11,6 +11,7 @@ import ActionBar from '@/components/PageBuilder/ActionBar';
 import ActionButton from '@/components/PageBuilder/ActionButton';
 import Gallery from '@/components/PageBuilder/Gallery';
 import Table from '@/components/PageBuilder/Table';
+import TableContents from '@/components/PageBuilder/Table/contents';
 
 interface PageBuilderProps {
   content: SitePage['pageBuilder'];
@@ -38,6 +39,8 @@ export default function PageBuilder({
       case 'pe_gallery':
         return <Gallery key={pageBlock._key} value={pageBlock} />;
       case 'pe_table':
+        if (isPreview)
+          return <TableContents key={pageBlock._key} value={pageBlock} />;
         return <Table key={pageBlock._key} value={pageBlock} />;
     }
   });
