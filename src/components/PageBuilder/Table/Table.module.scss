@@ -10,8 +10,20 @@
   width: 100%;
 }
 
+@keyframes fade-up {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
 .table {
   width: 100%;
+  animation: fade-up 0.3s ease-in-out;
   // border-collapse: collapse;
 
   thead {

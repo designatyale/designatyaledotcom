@@ -33,7 +33,7 @@ export const pageQuery = groq`*[_type == "site_page" && slug.current == $pageSlu
       }
     }
   },
-  subpageOrder,
+  subpageOrder[] -> ,
   rootSubPageTitle,
   rootSubPageBuilder[] {
     ...,

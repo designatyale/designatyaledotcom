@@ -100,7 +100,7 @@ export default function TabledHits<T = PeTable['asset_type']>({
         {rows.map((row) => (
           <tr key={row.id}>
             {row.getVisibleCells().map((cell) => (
-              <td key={cell.id} className={s.td}>
+              <td key={cell.id} className={s.td} data-column-id={cell.column.id}>
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </td>
             ))}

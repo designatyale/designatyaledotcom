@@ -17,6 +17,7 @@ import s from './Page.module.scss';
 import { PropsWithChildren } from 'react';
 import SubNav from '@/components/SubNav';
 import PreviewSubNav from '@/components/SubNav/preview';
+import unwrapReference from '@/util/unwrapReference';
 
 /* ---------------------------- Param generation ---------------------------- */
 
@@ -82,13 +83,11 @@ export default async function SubPageLayout({
       ) : (
         <>
           <PageBuilder content={page.pageBuilder} />
-          {subPages?.length ? (
-            <SubNav
-              baseTitle={page.rootSubPageTitle}
-              baseHref={params.pageSlug}
-              subPages={subPages}
-            />
-          ) : null}
+          <SubNav
+            baseTitle={page.rootSubPageTitle}
+            baseHref={params.pageSlug}
+            subPages={page.subpageOrder?.map(unwrapReference)}
+          />
         </>
       )}
       {children}

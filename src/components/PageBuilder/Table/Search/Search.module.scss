@@ -6,6 +6,17 @@
  */
 @import '@/styles/utils';
 
+@keyframes fade-down {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
 .container {
   display: flex;
   flex: 1;
@@ -13,6 +24,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 1em;
+  animation: fade-down 0.3s ease-in-out;
 }
 
 .button {
@@ -46,6 +58,7 @@
   min-width: 20vw;
   padding: 0.4em;
   border-bottom: 1px solid theme-color('border2');
+  border-radius: 0;
 
   &:focus {
     outline: none;

@@ -14,11 +14,12 @@ import { usePathname } from 'next/navigation';
 interface SubNavProps {
   baseTitle?: string;
   baseHref: string;
-  subPages: Pick<SitePage, 'title' | 'slug'>[];
+  subPages?: Pick<SitePage, 'title' | 'slug'>[];
 }
 
 export default function SubNav({ baseTitle, baseHref, subPages }: SubNavProps) {
   const pathname = usePathname();
+  if (!subPages || subPages.length === 0) return null;
 
   return (
     <nav className={s.container} role="navigation" aria-label="Secondary menu">
