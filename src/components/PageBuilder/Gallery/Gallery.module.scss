@@ -12,7 +12,7 @@
     'copy' auto
     'contents' auto / 1fr;
   width: 100%;
-  margin-bottom: 1em;
+  margin: 1em 0;
 
   @include media('sm') {
     grid-template: 'copy contents' auto / minmax(auto, 24ch) 1fr;
@@ -42,25 +42,33 @@
 
 .assets {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
   grid-area: contents;
   padding: 0 1em;
   gap: 1em;
-
-  @include media('sm') {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 250px));
-  }
 }
 
 /* ------------------------------- Components ------------------------------- */
 
 .member {
   width: 100%;
+  max-width: 12em;
 
   &_image {
     aspect-ratio: 1;
     width: 100%;
     object-fit: cover;
     object-position: center;
+  }
+
+  & a {
+    color: theme-color('content2');
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    overflow-wrap: break-word;
+
+    &:hover {
+      color: theme-color('content');
+    }
   }
 }

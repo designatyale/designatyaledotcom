@@ -120,6 +120,13 @@ export interface Member extends SanityDocument {
   design_tags?: Array<SanityKeyedReference<DesignTag>>;
 
   /**
+   * Class Year — `number`
+   *
+   * (Optional) The members graduation year, for sorting purposes.
+   */
+  class_year?: number;
+
+  /**
    * Start Date — `date`
    *
    * (Optional) When this member joined DAY.
@@ -152,6 +159,13 @@ export interface Member extends SanityDocument {
     | SanityKeyed<PeActionBar>
     | SanityKeyed<PeActionButton>
   >;
+
+  /**
+   * Hidden from Search — `boolean`
+   *
+   * If true, hide this member from the DAY Directory search.
+   */
+  search_hidden?: boolean;
 
   /**
    * Last Revalidated — `datetime`
@@ -462,7 +476,7 @@ export type SocialInstagram = {
    *
    *
    */
-  username?: string;
+  username: string;
 };
 
 export type SocialWebsite = {
@@ -472,7 +486,7 @@ export type SocialWebsite = {
    *
    *
    */
-  link?: string;
+  link: string;
 };
 
 export type SocialTwitter = {
@@ -482,7 +496,7 @@ export type SocialTwitter = {
    *
    *
    */
-  username?: string;
+  username: string;
 };
 
 export type SocialEmail = {
@@ -492,7 +506,7 @@ export type SocialEmail = {
    *
    *
    */
-  email?: Email;
+  email: Email;
 };
 
 export type Documents = DesignTag | Member | SiteSettings | SitePage;

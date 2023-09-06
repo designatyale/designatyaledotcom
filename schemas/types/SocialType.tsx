@@ -18,6 +18,8 @@ const InstagramType = defineType({
       name: 'username',
       type: 'string' as const,
       title: 'Username',
+      validation: (Rule) => Rule.required(),
+      codegen: { required: true },
     }),
   ],
   preview: {
@@ -42,6 +44,8 @@ const WebsiteType = defineType({
       name: 'link',
       type: 'url' as const,
       title: 'Link',
+      validation: (Rule) => Rule.required(),
+      codegen: { required: true },
     }),
   ],
   preview: {
@@ -66,6 +70,8 @@ const TwitterType = defineType({
       name: 'username',
       type: 'string' as const,
       title: 'Username',
+      validation: (Rule) => Rule.required(),
+      codegen: { required: true },
     }),
   ],
   preview: {
@@ -90,6 +96,8 @@ const EmailType = defineType({
       name: 'email',
       type: 'email' as const,
       title: 'Email',
+      validation: (Rule) => Rule.required(),
+      codegen: { required: true },
     }),
   ],
   preview: {

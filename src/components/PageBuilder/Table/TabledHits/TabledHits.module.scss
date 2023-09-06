@@ -50,6 +50,25 @@
     }
   }
 
+  td[data-column-id='name'] {
+    grid-area: name;
+  }
+
+  td[data-column-id='specialties'] {
+    grid-area: tags;
+  }
+
+  td[data-column-id='class_year'] {
+    grid-area: year;
+    &::before {
+      content: "'";
+    }
+  }
+
+  td[data-column-id='contact'] {
+    grid-area: contact;
+  }
+
   @include media('xs-down') {
     tbody,
     thead,
@@ -83,26 +102,6 @@
       padding: 0.3em;
     }
 
-    td[data-column-id='name'] {
-      grid-area: name;
-      font-weight: 700;
-    }
-
-    td[data-column-id='specialties'] {
-      grid-area: tags;
-    }
-
-    td[data-column-id='class_year'] {
-      grid-area: year;
-      &::before {
-        content: "'";
-      }
-    }
-
-    td[data-column-id='contact'] {
-      grid-area: contact;
-    }
-
     thead > tr {
       border-bottom: 1px solid theme-color('border');
     }
@@ -111,11 +110,11 @@
 
 .th {
   padding: 0.5em 1em;
-  border-bottom: 1px solid theme-color('border');
+  border-bottom: 1px solid theme-color('content2');
 }
 
 .td {
   min-height: 2em;
-  padding: 0.5em;
-  border-bottom: 1px solid theme-color('border2');
+  padding: 0.5em 1em;
+  border-bottom: 1px dashed theme-color('border2');
 }

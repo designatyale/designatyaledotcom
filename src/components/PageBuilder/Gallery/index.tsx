@@ -5,7 +5,7 @@
  * 2023 Design at Yale
  */
 
-import { Member, PeGallery } from '@/sanity/schema';
+import { Member, PeGallery, SanityKeyed, SocialWebsite } from '@/sanity/schema';
 import s from './Gallery.module.scss';
 import { PortableText } from '@portabletext/react';
 import components from '@/components/PortableText';
@@ -15,11 +15,21 @@ import classNames from 'classnames';
 
 function GalleryMember({ member }: { member: Member }) {
   const image = unwrapReference(member.picture.asset);
+  const website = member.socials?.find(
+    (arg): arg is SanityKeyed<SocialWebsite> => arg._type === 'social_website'
+  );
   return (
     <div className={s.member}>
       <SanityImage image={image} className={s.member_image} />
       <div>{member.name}</div>
       <div>{member.position}</div>
+      {website && (
+        <div>
+          <a href={website.link} target="_blank" rel="noopener noreferrer">
+            {new URL(website.link).hostname}
+          </a>
+        </div>
+      )}
     </div>
   );
 }
@@ -53,7 +63,7 @@ export default function Gallery({ value }: { value: PeGallery }) {
           switch (asset._type) {
             case 'member':
               return (
-                <li key={asset._key}>
+                <li key={asset._id}>
                   <GalleryMember member={asset} />
                 </li>
               );

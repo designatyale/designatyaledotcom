@@ -32,11 +32,12 @@
   height: 100%;
   padding: 0.5em;
   border: 1px solid theme-color('border2');
+  border-radius: 3px;
   color: theme-color('content');
-  font-size: 0.75em;
+  font-size: 0.85em;
 
   &:hover {
-    color: theme-color('content2');
+    background-color: theme-color('background2');
   }
 
   & svg {

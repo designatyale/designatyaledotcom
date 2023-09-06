@@ -82,6 +82,11 @@ export async function POST(req: NextRequest) {
         default:
           return document;
       }
+    },
+    (document: SanityDocumentStub) => {
+      if (document.hasOwnProperty('search_hidden'))
+        return !document.search_hidden;
+      return true;
     }
   );
 
