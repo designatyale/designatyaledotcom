@@ -56,7 +56,7 @@ export default function TabledHits<T = PeTable['asset_type']>({
           }),
           columnHelper.accessor('class_year', {
             id: 'class_year',
-            header: 'Year',
+            header: 'Class',
             cell: (hi) => {
               const value = hi.getValue();
               if (!value) return null;

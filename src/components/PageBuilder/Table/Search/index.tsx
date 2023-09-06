@@ -11,11 +11,18 @@ import { TfiSearch, TfiClose } from 'react-icons/tfi';
 
 let TIMER_ID: number | undefined = undefined;
 
-export default function Search() {
+interface SearchProps {
+  placeholder?: string;
+}
+
+export default function Search({ placeholder }: SearchProps) {
   return (
     <SearchBox
-      placeholder={'Search for a designer...'}
-      searchAsYouType={false}
+      placeholder={placeholder}
+      queryHook={(query, search) => {
+        if (TIMER_ID) window.clearTimeout(TIMER_ID);
+        TIMER_ID = window.setTimeout(() => search(query), 300);
+      }}
       submitIconComponent={() => <TfiSearch />}
       resetIconComponent={() => <TfiClose />}
       classNames={{

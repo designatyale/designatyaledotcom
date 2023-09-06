@@ -34,16 +34,23 @@
 
 /* Panel */
 .ais-Dropdown.ais-Panel {
+  position: relative;
   margin: 0;
 }
 
 .ais-Dropdown .ais-Panel-body {
   position: absolute;
+  right: 0;
+  width: min-content;
   margin-top: 0.5rem;
   padding: 0.8rem;
   border: 1px solid theme-color('border2');
   border-radius: 0.25rem;
   background-color: theme-color('background');
+
+  @include media('xs-down') {
+    left: 0;
+  }
 }
 
 .ais-Dropdown .ais-Panel-header {
@@ -79,9 +86,9 @@
     position: fixed;
     margin: 0;
     inset: 0;
-    padding-bottom: 4rem;
+    padding-top: calc(var(--header-height) + 1em);
     overflow-y: auto;
-    background: #fff;
+    background: theme-color('background');
   }
 
   .ais-Dropdown.ais-Dropdown--opened .ais-Panel-footer {
@@ -91,7 +98,8 @@
     left: 0;
     justify-content: center;
     width: 100%;
-    background: #fff;
+    padding-bottom: calc(var(--page-padding) + 1em);
+    background: theme-color('background');
   }
 
   .ais-Dropdown--opened .ais-Dropdown-close {

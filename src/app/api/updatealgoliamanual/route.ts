@@ -63,6 +63,11 @@ export async function GET() {
         default:
           return document;
       }
+    },
+    (document: SanityDocumentStub) => {
+      if (document.hasOwnProperty('search_hidden'))
+        return !document.search_hidden;
+      return true;
     }
   );
 

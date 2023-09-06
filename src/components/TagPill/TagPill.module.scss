@@ -24,8 +24,13 @@
     margin-bottom: 0.1em;
   }
 
-  &:hover {
+  &:hover:not(.container_checked) {
     background-color: theme-color('background2');
+  }
+
+  &_checked {
+    background-color: theme-color('content');
+    color: theme-color('background');
   }
 }
 
@@ -35,4 +40,23 @@
   height: 0.8em;
   border: 1px solid theme-color('border2');
   border-radius: 50%;
+}
+
+.label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2em;
+  cursor: pointer;
+
+  & input {
+    display: none;
+  }
+
+  & span:last-of-type {
+    font-size: 0.75em;
+    vertical-align: text-top;
+    opacity: 0.5;
+  }
 }

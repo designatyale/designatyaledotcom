@@ -1,0 +1,34 @@
+/*
+ * RefinementList.module.scss
+ * Author: evan kirkiles
+ * Created On Wed Sep 06 2023
+ * 2023 Design at Yale 
+ */
+@import '@/styles/utils';
+
+.search {
+  margin-bottom: 0.2em;
+  padding: 0.4em;
+  border-bottom: 1px solid theme-color('border2');
+  &:focus {
+    outline: unset;
+  }
+}
+
+.showmore {
+  width: 100%;
+  padding: 0.4em;
+  border: 1px solid theme-color('border2');
+
+  &:hover {
+    background-color: theme-color('background2');
+  }
+}
+
+.ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0.5em 0;
+  gap: 0.5em;
+}

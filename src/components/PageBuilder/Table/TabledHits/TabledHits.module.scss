@@ -36,7 +36,8 @@
   th,
   td {
     display: table-cell;
-    min-width: 10em;
+    flex-shrink: 0;
+    max-width: 10em;
 
     &:nth-of-type(2) {
       width: 100%;
@@ -52,6 +53,8 @@
 
   td[data-column-id='name'] {
     grid-area: name;
+    min-width: 15ch;
+    white-space: nowrap;
   }
 
   td[data-column-id='specialties'] {
@@ -77,6 +80,7 @@
       display: block;
       width: 100%;
       min-width: unset;
+      max-width: unset;
       min-height: unset;
       border: unset;
     }
@@ -100,6 +104,11 @@
 
     td {
       padding: 0.3em;
+    }
+
+    td[data-column-id='name'] {
+      min-width: unset;
+      font-weight: 700;
     }
 
     thead > tr {

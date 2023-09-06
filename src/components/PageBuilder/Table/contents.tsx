@@ -9,16 +9,13 @@
 import { FacetDropdown } from '@/components/PageBuilder/Table/FacetDropdown';
 import { PeTable } from '@/sanity/schema';
 import { searchClient } from '@/util/algolia';
-import {
-  InstantSearch,
-  RefinementList,
-  useHitsPerPage,
-} from 'react-instantsearch';
+import { InstantSearch, useHitsPerPage } from 'react-instantsearch';
 import s from './Table.module.scss';
 import Search from '@/components/PageBuilder/Table/Search';
 import TabledHits from '@/components/PageBuilder/Table/TabledHits';
+import RefinementList from '@/components/PageBuilder/Table/RefinementList';
 
-const closeOnChange = () => window.innerWidth > 375;
+const closeOnChange = () => false;
 
 interface TableContentsProps<T = PeTable['asset_type']> {
   value: Omit<PeTable, 'asset_type'> & { asset_type: T };
@@ -45,9 +42,9 @@ export default function TableContents<T = PeTable['asset_type']>({
       />
       <div className={s.container}>
         <section className={s.search_fields} role="search">
-          <Search />
+          <Search placeholder="Find a student designer..." />
           <div className={s.filters}>
-            <FacetDropdown buttonText={'Year'} closeOnChange={closeOnChange}>
+            <FacetDropdown buttonText={'Class'} closeOnChange={closeOnChange}>
               <RefinementList
                 attribute="class_year"
                 searchable={true}
