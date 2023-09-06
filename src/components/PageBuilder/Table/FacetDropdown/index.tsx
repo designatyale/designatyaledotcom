@@ -21,14 +21,17 @@ import type {
 } from 'instantsearch.js/es/connectors/current-refinements/connectCurrentRefinements';
 import type { UiState } from 'instantsearch.js';
 import { useCurrentRefinements, useInstantSearch } from 'react-instantsearch';
-
-import Panel from '../Panel';
-import { useCloseDropdown } from '../hooks/useCloseDropdown';
-import { useLockedBody } from '../hooks/useLockedBody';
-import { useMediaQuery } from '../hooks/useMediaQuery';
-import { capitalize, getFirstChildPropValue } from '../utils';
+import Panel from './Panel';
+import { useCloseDropdown } from './hooks/useCloseDropdown';
+import { useLockedBody } from './hooks/useLockedBody';
+import { useMediaQuery } from './hooks/useMediaQuery';
+import { capitalize, getFirstChildPropValue } from './utils';
 import cx from 'classnames';
 import s from './FacetDropDown.module.scss';
+
+/* -------------------------------------------------------------------------- */
+/*                                    Types                                   */
+/* -------------------------------------------------------------------------- */
 
 export type DropdownProps = PropsWithChildren<{
   buttonText?: string | ((options: DropdownButtonTextOptions) => string);
@@ -49,6 +52,10 @@ export type DropdownClassNames = {
   closeButton: string;
   mobileTitle: string;
 };
+
+/* -------------------------------------------------------------------------- */
+/*                                 Middleware                                 */
+/* -------------------------------------------------------------------------- */
 
 type MiddlewareProps = Pick<DropdownProps, 'closeOnChange'> & {
   isOpened: boolean;
@@ -86,6 +93,10 @@ function DropdownMiddleware({
 
   return null;
 }
+
+/* -------------------------------------------------------------------------- */
+/*                                  Component                                 */
+/* -------------------------------------------------------------------------- */
 
 export function FacetDropdown({
   children,

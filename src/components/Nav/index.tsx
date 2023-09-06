@@ -102,6 +102,7 @@ export default function Nav({ children }: PropsWithChildren) {
                       aria-current={
                         pathname.startsWith(href) ? 'page' : undefined
                       }
+                      tabIndex={!open ? -1 : undefined}
                     >
                       <span>{contents}</span>
                     </Link>

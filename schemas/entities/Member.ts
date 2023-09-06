@@ -75,6 +75,14 @@ const Member = defineType({
       group: 'information',
     }),
     defineField({
+      name: 'class_year',
+      type: 'number' as const,
+      title: 'Class Year',
+      description:
+        '(Optional) The members graduation year, for sorting purposes.',
+      group: 'information',
+    }),
+    defineField({
       name: 'start_date',
       type: 'date' as const,
       title: 'Start Date',
@@ -121,6 +129,13 @@ const Member = defineType({
 
     /* ------------------------------ Revalidation ------------------------------ */
 
+    defineField({
+      name: 'search_hidden',
+      type: 'boolean' as const,
+      title: 'Hidden from Search',
+      description: 'If true, hide this member from the DAY Directory search.',
+      initialValue: false,
+    }),
     defineField({
       name: 'last_revalidated',
       type: 'datetime' as const,

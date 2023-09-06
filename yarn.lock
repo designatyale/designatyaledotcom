@@ -2820,7 +2820,7 @@ algoliasearch-helper@3.14.0:
   dependencies:
     "@algolia/events" "^4.0.1"
 
-algoliasearch@^4.19.1:
+algoliasearch@^4.19.1, algoliasearch@^4.5.1:
   version "4.19.1"
   resolved "https://registry.yarnpkg.com/algoliasearch/-/algoliasearch-4.19.1.tgz#18111fb422eaf841737adb92d5ab12133d244218"
   integrity sha512-IJF5b93b2MgAzcE/tuzW0yOPnuUyRgGAtaPv5UUywXM8kzqfdwZTO4sPJBzoGz1eOy6H9uEchsJsBFTELZSu+g==
@@ -6917,6 +6917,14 @@ safe-regex-test@^1.0.0:
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
+sanity-algolia@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/sanity-algolia/-/sanity-algolia-1.1.0.tgz#d4ded0a9c4c259dc3d9feb44f6388464f9bfb3b9"
+  integrity sha512-y/wr/tzJMz4rBk5PXu5okoerm2hmto57RosulntSGubCUqGGsOCzseed638VyZsRIA7zqTCbTVi6NL56k1dcoQ==
+  dependencies:
+    algoliasearch "^4.5.1"
+    stopword "^1.0.3"
+
 sanity-codegen@^0.9.8:
   version "0.9.8"
   resolved "https://registry.yarnpkg.com/sanity-codegen/-/sanity-codegen-0.9.8.tgz#b09b2021e8908a0f9bd7a0db7e8f0b8e1f9ffb57"
@@ -7313,6 +7321,11 @@ sprintf-js@~1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
   integrity sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==
+
+stopword@^1.0.3:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/stopword/-/stopword-1.0.11.tgz#2f9f36558bf1ad8c9e1197e572442e9b8814f153"
+  integrity sha512-rMBuk91/PTdV7GpVIwlZRLGcmZ9OMbTM+KXJN19oKIkgns+EhTVEzXfb4q8/v4ExuoGxNSBSHmuzt+DUijuQqQ==
 
 stream-each@^1.1.0:
   version "1.2.3"

@@ -1,14 +1,10 @@
 /*
- * Table.module.scss
+ * TabledHits.module.scss
  * Author: evan kirkiles
- * Created On Mon Sep 04 2023
+ * Created On Tue Sep 05 2023
  * 2023 Design at Yale 
  */
 @import '@/styles/utils';
-
-.container {
-  width: 100%;
-}
 
 .table {
   width: 100%;
@@ -75,32 +71,4 @@
   min-height: 2em;
   padding: 0.5em;
   border-bottom: 1px solid theme-color('border2');
-}
-
-.search_fields {
-  display: flex;
-  column-gap: 1em;
-  row-gap: 0.5em;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  width: 100%;
-}
-
-.dropdown_control {
-  padding: 0.5em 4em 0.5em 1em;
-  // border: 1px solid theme-color('border2');
-  border: unset;
-  outline: unset;
-  background-color: theme-color('background');
-  cursor: pointer;
-}
-
-.filters {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 0.5em;
 }

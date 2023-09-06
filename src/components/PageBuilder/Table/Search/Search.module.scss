@@ -1,0 +1,53 @@
+/*
+ * Search.module.scss
+ * Author: evan kirkiles
+ * Created On Tue Sep 05 2023
+ * 2023 Design at Yale 
+ */
+@import '@/styles/utils';
+
+.container {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1em;
+}
+
+.button {
+  aspect-ratio: 1;
+  height: 100%;
+  padding: 0.5em;
+  border: 1px solid theme-color('border2');
+  color: theme-color('content');
+  font-size: 0.75em;
+
+  &:hover {
+    color: theme-color('content2');
+  }
+
+  & svg {
+    stroke: currentColor;
+  }
+}
+
+.form {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5em;
+  white-space: nowrap;
+}
+
+.input {
+  flex: 1;
+  min-width: 20vw;
+  padding: 0.4em;
+  border-bottom: 1px solid theme-color('border2');
+
+  &:focus {
+    outline: none;
+  }
+}

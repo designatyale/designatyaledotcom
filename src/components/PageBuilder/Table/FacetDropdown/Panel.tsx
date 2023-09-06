@@ -6,7 +6,7 @@
  */
 import { ComponentProps, forwardRef, PropsWithChildren, ReactNode } from 'react';
 import cx from 'classnames';
-import s from '../FacetDropdown/FacetDropDown.module.scss';
+import s from './FacetDropDown.module.scss';
 
 export type PanelProps = ComponentProps<'div'> &
   PropsWithChildren<{

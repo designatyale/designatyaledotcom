@@ -1,26 +1,31 @@
-/* Button */
+/*
+ * FacetDropDown.module.scss
+ * Author: evan kirkiles
+ * Created On Tue Sep 05 2023
+ * 2023 Design at Yale 
+ */
+@import '@/styles/utils';
+
 .ais-Dropdown-button {
   appearance: none;
-  padding: 0.75rem 1.5rem;
-  border: 1px solid #d6d6e7;
+  padding: 0.3em 1em;
+  border: 1px solid theme-color('content2');
   border-radius: 3px;
-  background-image: linear-gradient(-180deg, #fff, #fcfcfd);
-  background-color: #fff;
-  box-shadow: 0 1px 0 0 rgb(35 38 59 / 5%);
-  color: #23263b;
+  color: theme-color('content2');
   cursor: pointer;
   user-select: none;
 }
 
-.ais-Dropdown-button:hover {
-  background-image: linear-gradient(-180deg, #fff, #f5f5fa);
+.ais-Dropdown-button:not(:disabled):hover {
+  background-color: theme-color('background2');
 }
 
 .ais-Dropdown-button:disabled[disabled] {
-  border-color: #efeff5;
-  background-image: linear-gradient(-180deg, #fff, #f5f5fa);
+  border-color: theme-color('content2');
   box-shadow: none;
-  color: #b6b7d5;
+  color: theme-color('content2');
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 .ais-Dropdown-button--refined {
@@ -36,9 +41,9 @@
   position: absolute;
   margin-top: 0.5rem;
   padding: 0.8rem;
-  border: 1px solid #d6d6e7;
+  border: 1px solid theme-color('border2');
   border-radius: 0.25rem;
-  background-color: #fff;
+  background-color: theme-color('background');
 }
 
 .ais-Dropdown .ais-Panel-header {

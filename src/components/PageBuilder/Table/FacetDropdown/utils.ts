@@ -9,12 +9,6 @@
 
 import { Children, isValidElement, ReactNode } from 'react';
 
-export function cx(
-  ...classNames: Array<string | number | boolean | undefined | null>
-) {
-  return classNames.filter(Boolean).join(' ');
-}
-
 export function capitalize(value: string) {
   if (typeof value !== 'string') return '';
   return value.charAt(0).toUpperCase() + value.slice(1);
