@@ -8,6 +8,9 @@ import { PeTable } from '@/sanity/schema';
 import getClient from '@/sanity/client';
 import groq from 'groq';
 import TableContents from '@/components/PageBuilder/Table/contents';
+import { searchClient } from '@/util/algolia';
+import { cache } from 'react';
+import { getInitialSearchState } from '@/components/PageBuilder/Table/getSearch';
 
 export const TABLE_ITEMS_PER_PAGE = 20;
 
@@ -24,15 +27,11 @@ export const tableGroq = (
 }`;
 
 export default async function Table({ value }: { value: PeTable }) {
-  const initialItems = await getClient().fetch(
-    tableGroq(value.additional_query),
-    {
-      assetType: value.asset_type,
-      lastId: '',
-    },
-    { next: { tags: [`${value.asset_type}:list`] } }
+  const initialState = await getInitialSearchState(value.asset_type);
+  return (
+    <TableContents
+      value={value}
+      initialState={{ [value.asset_type]: initialState }}
+    />
   );
-  console.log(initialItems);
-
-  return <TableContents value={value} initialItems={initialItems} />;
 }

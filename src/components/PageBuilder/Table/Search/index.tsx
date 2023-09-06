@@ -15,10 +15,7 @@ export default function Search() {
   return (
     <SearchBox
       placeholder={'Search for a designer...'}
-      queryHook={(query, search) => {
-        if (TIMER_ID) window.clearTimeout(TIMER_ID);
-        TIMER_ID = window.setTimeout(() => search(query), 500);
-      }}
+      searchAsYouType={false}
       submitIconComponent={() => <TfiSearch />}
       resetIconComponent={() => <TfiClose />}
       classNames={{

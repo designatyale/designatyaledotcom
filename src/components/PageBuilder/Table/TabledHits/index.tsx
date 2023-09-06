@@ -7,7 +7,6 @@
 
 import TagPill from '@/components/TagPill';
 import { DesignTag, PeTable } from '@/sanity/schema';
-import unwrapReference from '@/util/unwrapReference';
 import {
   createColumnHelper,
   flexRender,
@@ -16,19 +15,19 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { useMemo, useState } from 'react';
-import { useHits } from 'react-instantsearch';
+import { useInfiniteHits } from 'react-instantsearch';
 import s from './TabledHits.module.scss';
 import { AlgoliaMember } from '@/util/algolia';
 
 type TabledHitsProps<T = PeTable['asset_type']> = {
   value: Omit<PeTable, 'asset_type'> & { asset_type: T };
-} & Parameters<typeof useHits>[0];
+} & Parameters<typeof useInfiniteHits>[0];
 
 export default function TabledHits<T = PeTable['asset_type']>({
   value,
   ...props
 }: TabledHitsProps<T>) {
-  const { hits: data } = useHits<AlgoliaMember>(props);
+  const { hits: data } = useInfiniteHits<AlgoliaMember>(props);
 
   // columns
   const columns = useMemo(() => {
@@ -53,6 +52,15 @@ export default function TabledHits<T = PeTable['asset_type']>({
                   })}
                 </ul>
               );
+            },
+          }),
+          columnHelper.accessor('class_year', {
+            id: 'class_year',
+            header: 'Year',
+            cell: (hi) => {
+              const value = hi.getValue();
+              if (!value) return null;
+              return (value as number).toString();
             },
           }),
         ];

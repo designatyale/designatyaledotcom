@@ -1,181 +1,73 @@
 /*
- * contents.tsx
+ * contentsis.tsx
  * Author: evan kirkiles
- * Created On Sat Sep 02 2023
+ * Created On Tue Sep 05 2023
  * 2023 Design at Yale
- *
- * An Algolia search-powered table to lessen the load on our Sanity free tier.
- * It is synced with our Sanity documents using a webhook.
  */
 'use client';
 
-import {
-  createColumnHelper,
-  flexRender,
-  getCoreRowModel,
-  getExpandedRowModel,
-  useReactTable,
-} from '@tanstack/react-table';
-import { Member, PeTable } from '@/sanity/schema';
-import { useId, useMemo, useState } from 'react';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import getClient from '@/sanity/client';
-import { TABLE_ITEMS_PER_PAGE, tableGroq } from '@/components/PageBuilder/Table';
-import s from './Table.module.scss';
-import unwrapReference from '@/util/unwrapReference';
-import TagPill from '@/components/TagPill';
-import { InstantSearch } from 'react-instantsearch';
+import { FacetDropdown } from '@/components/PageBuilder/Table/FacetDropdown';
+import { PeTable } from '@/sanity/schema';
 import { searchClient } from '@/util/algolia';
+import {
+  InstantSearch,
+  RefinementList,
+  useHitsPerPage,
+} from 'react-instantsearch';
+import s from './Table.module.scss';
+import Search from '@/components/PageBuilder/Table/Search';
+import TabledHits from '@/components/PageBuilder/Table/TabledHits';
+
+const closeOnChange = () => window.innerWidth > 375;
 
 interface TableContentsProps<T = PeTable['asset_type']> {
   value: Omit<PeTable, 'asset_type'> & { asset_type: T };
-  initialItems?: AssetType<T>[];
+  initialState?: Parameters<typeof InstantSearch>[0]['initialUiState'];
 }
 
-type AssetType<T = PeTable['asset_type']> = T extends 'member' ? Member : Member;
+function FakeHitsPerPage(props: Parameters<typeof useHitsPerPage>[0]) {
+  useHitsPerPage(props);
+  return null;
+}
 
 export default function TableContents<T = PeTable['asset_type']>({
   value,
-  initialItems = [],
+  initialState,
 }: TableContentsProps<T>) {
-  const tableId = useId();
-
-  // data fetching
-  const { data, fetchNextPage } = useInfiniteQuery(
-    [value.asset_type],
-    async ({ pageParam = '' }) =>
-      getClient().fetch(tableGroq(value.additional_query), {
-        assetType: value.asset_type,
-        lastId: pageParam,
-      }),
-    {
-      initialData: initialItems.length
-        ? {
-            pages: [initialItems],
-            pageParams: [initialItems[initialItems.length - 1]._id],
-          }
-        : undefined,
-      staleTime: Infinity,
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
-      getNextPageParam: (lastPage) => {
-        if (lastPage.length < TABLE_ITEMS_PER_PAGE) return null;
-        return lastPage[lastPage.length - 1]._id;
-      },
-    }
-  );
-
-  const flatData = useMemo(() => data?.pages?.flat() ?? [], [data]);
-  const totalFetched = flatData.length;
-
-  // columns
-  const columns = useMemo(() => {
-    switch (value.asset_type) {
-      case 'member':
-        const columnHelper = createColumnHelper<Member>();
-        return [
-          columnHelper.accessor('name', {
-            id: 'name',
-            header: 'Name',
-          }),
-          columnHelper.accessor('design_tags', {
-            id: 'specialties',
-            header: 'Specialties',
-            cell: (hi) => {
-              const value = hi.getValue();
-              if (!value) return null;
-              return (
-                <ul key={hi.column.id}>
-                  {value.map((val) => {
-                    const tag = unwrapReference(val);
-                    return <TagPill key={tag._id} tag={tag} />;
-                  })}
-                </ul>
-              );
-            },
-          }),
-          // columnHelper.accessor('')
-        ];
-      case 'events':
-        return [];
-    }
-    return [];
-  }, [value.asset_type]);
-
-  // table creation
-  const [expanded, setExpanded] = useState({});
-  const table = useReactTable({
-    data: flatData,
-    columns,
-    state: { expanded },
-    // initialState: { expanded: !value.is_compact },
-    enableExpanding: true,
-    getCoreRowModel: getCoreRowModel(),
-    getExpandedRowModel: getExpandedRowModel(),
-    onExpandedChange: setExpanded,
-  });
-  const { rows } = table.getRowModel();
-
   return (
-    <>
-      {(value.is_filterable || value.is_searchable) && (
-        <form role="search" aria-controls="#day-table">
-          <fieldset className={s.search_fields}>
-            <legend>Search form</legend>
-            {value.is_searchable && (
-              <div>
-                <label htmlFor={`${tableId}-search`}>Search: </label>
-                <input
-                  id={`${tableId}-search`}
-                  type="text"
-                  placeholder="By name..."
-                />
-              </div>
-            )}
-            {value.is_filterable && (
-              <div>
-                {/* <label htmlFor={`${tableId}-filter`}>Specialty: </label>
-                <Dropdown
-                  options={['hi', 'hi2']}
-                  controlClassName={s.dropdown_control}
-                /> */}
-              </div>
-            )}
-          </fieldset>
-        </form>
-      )}
-      <table id="day-table" className={s.table}>
-        <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <th
-                  key={header.id}
-                  colSpan={header.colSpan}
-                  style={{ width: header.getSize() }}
-                  className={s.th}
-                >
-                  {flexRender(
-                    header.column.columnDef.header,
-                    header.getContext()
-                  )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {rows.map((row) => (
-            <tr key={row.id}>
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className={s.td}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </>
+    <InstantSearch
+      initialUiState={initialState}
+      searchClient={searchClient}
+      indexName={value.asset_type as string | undefined}
+    >
+      <FakeHitsPerPage
+        items={[{ label: '20 items per page.', value: 20, default: true }]}
+      />
+      <div className={s.container}>
+        <section className={s.search_fields} role="search">
+          <Search />
+          <div className={s.filters}>
+            <FacetDropdown buttonText={'Year'} closeOnChange={closeOnChange}>
+              <RefinementList
+                attribute="class_year"
+                searchable={true}
+                searchablePlaceholder="Search..."
+              />
+            </FacetDropdown>
+            <FacetDropdown
+              buttonText={'Specialty'}
+              closeOnChange={closeOnChange}
+            >
+              <RefinementList
+                attribute="design_tags.title"
+                searchable={true}
+                searchablePlaceholder="Search..."
+              />
+            </FacetDropdown>
+          </div>
+        </section>
+        <TabledHits value={value} />
+      </div>
+    </InstantSearch>
   );
 }

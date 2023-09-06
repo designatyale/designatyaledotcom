@@ -12,7 +12,7 @@ import ActionButton from '@/components/PageBuilder/ActionButton';
 import Gallery from '@/components/PageBuilder/Gallery';
 import Table from '@/components/PageBuilder/Table';
 import TableContents from '@/components/PageBuilder/Table/contents';
-import TableContents2 from '@/components/PageBuilder/Table/contentsis';
+import TableContents2 from '@/components/PageBuilder/Table/contents';
 
 interface PageBuilderProps {
   content: SitePage['pageBuilder'];

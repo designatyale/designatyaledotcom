@@ -140,7 +140,7 @@ export function FacetDropdown({
   // Get the header button text
   let text;
   if (typeof buttonText === 'string') {
-    text = buttonText;
+    text = buttonText + (refinements.length ? ` (${refinements.length})` : '');
   } else if (typeof buttonText === 'function') {
     text = buttonText({ results, uiState, refinements });
   } else if (typeof attribute === 'string') {
