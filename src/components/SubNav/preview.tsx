@@ -9,43 +9,34 @@
 import PageBuilder from '@/components/PageBuilder';
 import SubNav from '@/components/SubNav';
 import { SitePage } from '@/sanity/schema';
+import unwrapReference from '@/util/unwrapReference';
 import { useLiveQuery } from '@sanity/preview-kit';
 
-interface PreviewProps<T> {
-  initialValue: T;
+interface PreviewSubNavProps {
+  baseHref: string;
+  initialValue: Pick<SitePage, 'rootSubPageTitle' | 'subpageOrder'>;
   query: Parameters<typeof useLiveQuery>[1];
   params?: Parameters<typeof useLiveQuery>[2];
   options?: Parameters<typeof useLiveQuery>[3];
 }
-
-interface PreviewSubNavProps {
-  baseHref: string;
-  page: PreviewProps<Pick<SitePage, 'rootSubPageTitle'>>;
-  subpages: PreviewProps<SitePage[] | null>;
-}
-
 /**
  * A page builder client component which dynamically updates the content of the
  * page builder based on drafted changes in the Sanity Studio.
  */
 export default function PreviewSubNav({
   baseHref,
-  page: pq,
-  subpages: sp,
+  initialValue,
+  query,
+  params,
+  options,
 }: PreviewSubNavProps) {
-  const [page] = useLiveQuery(pq.initialValue, pq.query, pq.params, pq.options);
-  const [subpages] = useLiveQuery(
-    sp.initialValue,
-    sp.query,
-    sp.params,
-    sp.options
-  );
-  if (!page || !subpages || !subpages.length) return null;
+  const [data] = useLiveQuery(initialValue, query, params, options);
+  if (!data) return null;
   return (
     <SubNav
-      baseTitle={page.rootSubPageTitle}
+      baseTitle={data.rootSubPageTitle}
       baseHref={baseHref}
-      subPages={subpages}
+      subPages={data.subpageOrder?.map(unwrapReference)}
     />
   );
 }

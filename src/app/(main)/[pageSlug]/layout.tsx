@@ -68,16 +68,9 @@ export default async function SubPageLayout({
           />
           <PreviewSubNav
             baseHref={params.pageSlug}
-            page={{
-              initialValue: page,
-              query: pageQuery,
-              params,
-            }}
-            subpages={{
-              initialValue: subPages,
-              query: subpageQuery,
-              params,
-            }}
+            initialValue={page}
+            query={pageQuery}
+            params={params}
           />
         </PreviewProvider>
       ) : (

@@ -12,14 +12,16 @@ import ActionBarType from './ActionBarType';
 import ActionButtonType from './ActionButtonType';
 import CopyType from './CopyType';
 import GalleryType from './GalleryType';
+import ShowcaseType from './ShowcaseType';
 import TableType from './TableType';
 
 const pageElements = [
   CopyType,
-  GalleryType,
-  TableType,
   ActionBarType,
   ActionButtonType,
+  GalleryType,
+  TableType,
+  ShowcaseType,
 ];
 
 export default pageElements;

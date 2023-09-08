@@ -15,10 +15,12 @@ import Member from './entities/Member';
 import SiteSettings from './SiteSettings';
 import subTypes from './types';
 import DesignTag from './entities/DesignTag';
+import Project from './entities/Project';
 
 const schemas: SchemaTypeDefinition[] = [
   DesignTag,
   Member,
+  Project,
   SiteSettings,
   SitePage,
   ...pageElements,

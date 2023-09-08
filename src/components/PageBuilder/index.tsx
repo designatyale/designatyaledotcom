@@ -13,6 +13,7 @@ import Gallery from '@/components/PageBuilder/Gallery';
 import Table from '@/components/PageBuilder/Table';
 import TableContents from '@/components/PageBuilder/Table/contents';
 import TableContents2 from '@/components/PageBuilder/Table/contents';
+import Showcase from '@/components/PageBuilder/Showcase';
 
 interface PageBuilderProps {
   content: SitePage['pageBuilder'];
@@ -39,6 +40,8 @@ export default function PageBuilder({
         return <ActionButton key={pageBlock._key} value={pageBlock} />;
       case 'pe_gallery':
         return <Gallery key={pageBlock._key} value={pageBlock} />;
+      case 'pe_showcase':
+        return <Showcase key={pageBlock._key} value={pageBlock} />;
       case 'pe_table':
         if (isPreview)
           return <TableContents2 key={pageBlock._key} value={pageBlock} />;

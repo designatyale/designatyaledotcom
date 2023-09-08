@@ -1,0 +1,68 @@
+/*
+ * Showcase.module.scss
+ * Author: evan kirkiles
+ * Created On Wed Sep 06 2023
+ * 2023 Design at Yale 
+ */
+@import '@/styles/utils';
+
+.container {
+  display: grid;
+  grid-template:
+    'copy' auto
+    'contents' auto / 1fr;
+  width: 100%;
+  margin: 1em 0;
+
+  @include media('sm') {
+    grid-template: 'copy contents' auto / auto 1fr;
+  }
+}
+
+.copy {
+  grid-area: copy;
+  margin-bottom: 1em;
+
+  @include media('sm') {
+    max-width: 24ch;
+    margin-right: 1em;
+    margin-bottom: 0;
+  }
+
+  &_inner {
+    position: sticky;
+    top: var(--header-height);
+    width: 100%;
+  }
+}
+
+.assets {
+  display: flex;
+  grid-area: contents;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.project {
+  width: 100%;
+  scroll-padding-top: calc(-1 * var(--header-height));
+
+  &_image {
+    width: 100%;
+    height: auto;
+  }
+
+  & a {
+    color: theme-color('content2');
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    overflow-wrap: break-word;
+
+    &:hover {
+      color: theme-color('content');
+    }
+  }
+}
+
+.legend {
+}

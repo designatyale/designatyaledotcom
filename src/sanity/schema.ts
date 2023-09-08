@@ -154,10 +154,11 @@ export interface Member extends SanityDocument {
    */
   pageBuilder?: Array<
     | SanityKeyed<PeCopy>
-    | SanityKeyed<PeGallery>
-    | SanityKeyed<PeTable>
     | SanityKeyed<PeActionBar>
     | SanityKeyed<PeActionButton>
+    | SanityKeyed<PeGallery>
+    | SanityKeyed<PeTable>
+    | SanityKeyed<PeShowcase>
   >;
 
   /**
@@ -166,6 +167,123 @@ export interface Member extends SanityDocument {
    * If true, hide this member from the DAY Directory search.
    */
   search_hidden?: boolean;
+
+  /**
+   * Last Revalidated — `datetime`
+   *
+   * When this page was last revalidated. Re-publish or manually revalidate to change.
+   */
+  last_revalidated?: string;
+}
+
+/**
+ * Project
+ *
+ *
+ */
+export interface Project extends SanityDocument {
+  _type: "project";
+
+  /**
+   * Name — `string`
+   *
+   * The name of the project
+   */
+  name: string;
+
+  /**
+   * Hero Image — `image`
+   *
+   * A hero picture of the project.
+   */
+  picture: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
+
+  /**
+   * Additional Images — `array`
+   *
+   * Additional pictures of the project
+   */
+  pictures?: Array<
+    SanityKeyed<{
+      _type: "image";
+      asset: SanityReference<SanityImageAsset>;
+      crop?: SanityImageCrop;
+      hotspot?: SanityImageHotspot;
+    }>
+  >;
+
+  /**
+   * Client — `string`
+   *
+   * (Optional) The client this project was made for.
+   */
+  client?: string;
+
+  /**
+   * About — `array`
+   *
+   * A short tag line for the project.
+   */
+  about?: Array<SanityKeyed<SanityBlock>>;
+
+  /**
+   * socials — `array`
+   *
+   *
+   */
+  socials?: Array<
+    | SanityKeyed<SocialInstagram>
+    | SanityKeyed<SocialWebsite>
+    | SanityKeyed<SocialTwitter>
+    | SanityKeyed<SocialEmail>
+  >;
+
+  /**
+   * Design Focuses — `array`
+   *
+   *
+   */
+  design_tags?: Array<SanityKeyedReference<DesignTag>>;
+
+  /**
+   * Start Date — `date`
+   *
+   * (Optional) When this project started.
+   */
+  start_date?: string;
+
+  /**
+   * End Date — `date`
+   *
+   * (Optional) When this project ended.
+   */
+  end_date?: string;
+
+  /**
+   * Slug — `slug`
+   *
+   * (Optional) A slug for the project's page on the site.
+   */
+  slug?: { _type: "slug"; current: string };
+
+  /**
+   * Page Builder — `array`
+   *
+   * The project's page on the DAY site.
+   */
+  pageBuilder?: Array<
+    | SanityKeyed<PeCopy>
+    | SanityKeyed<PeActionBar>
+    | SanityKeyed<PeActionButton>
+    | SanityKeyed<PeGallery>
+    | SanityKeyed<PeTable>
+    | SanityKeyed<PeShowcase>
+  >;
 
   /**
    * Last Revalidated — `datetime`
@@ -255,10 +373,11 @@ export interface SitePage extends SanityDocument {
    */
   pageBuilder: Array<
     | SanityKeyed<PeCopy>
-    | SanityKeyed<PeGallery>
-    | SanityKeyed<PeTable>
     | SanityKeyed<PeActionBar>
     | SanityKeyed<PeActionButton>
+    | SanityKeyed<PeGallery>
+    | SanityKeyed<PeTable>
+    | SanityKeyed<PeShowcase>
   >;
 
   /**
@@ -282,10 +401,11 @@ export interface SitePage extends SanityDocument {
    */
   rootSubPageBuilder?: Array<
     | SanityKeyed<PeCopy>
-    | SanityKeyed<PeGallery>
-    | SanityKeyed<PeTable>
     | SanityKeyed<PeActionBar>
     | SanityKeyed<PeActionButton>
+    | SanityKeyed<PeGallery>
+    | SanityKeyed<PeTable>
+    | SanityKeyed<PeShowcase>
   >;
 
   /**
@@ -332,68 +452,6 @@ export type PeCopy = {
    * How many evenly-spaced columns to break the text into. Default 1.
    */
   columns: number;
-};
-
-export type PeGallery = {
-  _type: "pe_gallery";
-  /**
-   * Title — `string`
-   *
-   * The title of the gallery to show above it.
-   */
-  title?: string;
-
-  /**
-   * Assets — `array`
-   *
-   * Assets to display in the gallery.
-   */
-  assets?: Array<SanityKeyedReference<Member>>;
-
-  /**
-   * Copy — `array`
-   *
-   * (Optional) Copy to display next to or above the gallery.)
-   */
-  copy?: Array<SanityKeyed<SanityBlock>>;
-};
-
-export type PeTable = {
-  _type: "pe_table";
-  /**
-   * Asset Type — `string`
-   *
-   * The type of assets
-   */
-  asset_type: "member" | "events";
-
-  /**
-   * Additional Query — `string`
-   *
-   * An additiional query to filter the results by.
-   */
-  additional_query?: string;
-
-  /**
-   * Compact? — `boolean`
-   *
-   * If true, show all rows as "compact" initially.
-   */
-  is_compact: boolean;
-
-  /**
-   * Searchable? — `boolean`
-   *
-   * If true, allow searching for elements based on the "title" field.
-   */
-  is_searchable: boolean;
-
-  /**
-   * Filterable? — `boolean`
-   *
-   * If true, allow filtering for elements based on the "design tags" field.
-   */
-  is_filterable: boolean;
 };
 
 export type PeActionBar = {
@@ -469,6 +527,92 @@ export type PeActionButton = {
   href: string;
 };
 
+export type PeGallery = {
+  _type: "pe_gallery";
+  /**
+   * Title — `string`
+   *
+   * The title of the gallery to show above it.
+   */
+  title?: string;
+
+  /**
+   * Assets — `array`
+   *
+   * Assets to display in the gallery.
+   */
+  assets?: Array<SanityKeyedReference<Member>>;
+
+  /**
+   * Copy — `array`
+   *
+   * (Optional) Copy to display next to or above the gallery.)
+   */
+  copy?: Array<SanityKeyed<SanityBlock>>;
+};
+
+export type PeTable = {
+  _type: "pe_table";
+  /**
+   * Asset Type — `string`
+   *
+   * The type of assets
+   */
+  asset_type: "member" | "events";
+
+  /**
+   * Additional Query — `string`
+   *
+   * An additiional query to filter the results by.
+   */
+  additional_query?: string;
+
+  /**
+   * Compact? — `boolean`
+   *
+   * If true, show all rows as "compact" initially.
+   */
+  is_compact: boolean;
+
+  /**
+   * Searchable? — `boolean`
+   *
+   * If true, allow searching for elements based on the "title" field.
+   */
+  is_searchable: boolean;
+
+  /**
+   * Filterable? — `boolean`
+   *
+   * If true, allow filtering for elements based on the "design tags" field.
+   */
+  is_filterable: boolean;
+};
+
+export type PeShowcase = {
+  _type: "pe_showcase";
+  /**
+   * Assets — `array`
+   *
+   * Assets to display in the gallery.
+   */
+  assets?: Array<SanityKeyedReference<Project>>;
+
+  /**
+   * Show legend? — `boolean`
+   *
+   * If true, displays a list of items to jump to next to the portfolio.
+   */
+  show_legend: boolean;
+
+  /**
+   * Copy — `array`
+   *
+   * (Optional) Copy to display above the gallery legend.)
+   */
+  copy?: Array<SanityKeyed<SanityBlock>>;
+};
+
 export type SocialInstagram = {
   _type: "social_instagram";
   /**
@@ -509,7 +653,7 @@ export type SocialEmail = {
   email: Email;
 };
 
-export type Documents = DesignTag | Member | SiteSettings | SitePage;
+export type Documents = DesignTag | Member | Project | SiteSettings | SitePage;
 
 /**
  * This interface is a stub. It was referenced in your sanity schema but
