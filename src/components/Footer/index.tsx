@@ -11,6 +11,14 @@ import Link from 'next/link';
 import getPreview from '@/util/getPreview';
 import DAY from '@/assets/svg/DAY';
 
+const FooterLinks = [
+  ['Studio', '/studio'],
+  ['Community', '/community'],
+  ['Events', '/community/events'],
+  ['Work', '/work'],
+  ['About', '/about'],
+] as const;
+
 export default function Footer() {
   const preview = getPreview();
 
@@ -44,31 +52,13 @@ export default function Footer() {
               <li>
                 <BackToTop className={s.back_to_top}>Back to top ↑</BackToTop>
               </li>
-              <li>
-                <Link href="/studio" scroll={true}>
-                  Studio
-                </Link>
-              </li>
-              <li>
-                <Link href="/community" scroll={true}>
-                  Community
-                </Link>
-              </li>
-              <li>
-                <Link href="/community/events" scroll={true}>
-                  Events
-                </Link>
-              </li>
-              <li>
-                <Link href="/work" scroll={true}>
-                  Work
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" scroll={true}>
-                  About
-                </Link>
-              </li>
+              {FooterLinks.map(([text, href]) => (
+                <li key={href}>
+                  <Link href={href} scroll={false}>
+                    {text}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </section>
         </div>

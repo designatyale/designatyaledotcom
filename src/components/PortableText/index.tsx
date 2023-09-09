@@ -30,7 +30,7 @@ const components: PortableTextComponents = {
           </a>
         );
       return (
-        <Link href={href} className={classNames(s.link)}>
+        <Link href={href} className={classNames(s.link)} scroll={false}>
           {children}
         </Link>
       );
@@ -48,6 +48,7 @@ const components: PortableTextComponents = {
     h1: ({ children }) => <h1 className={s.h1}>{children}</h1>,
     h2: ({ children }) => <h2 className={s.h2}>{children}</h2>,
     h3: ({ children }) => <h3 className={s.h3}>{children}</h3>,
+    h4: ({ children }) => <h4 className={s.h4}>{children}</h4>,
     normal: ({ children }) => <p className={classNames(s.p)}>{children}</p>,
   },
 };

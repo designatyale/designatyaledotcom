@@ -218,13 +218,6 @@ export interface Project extends SanityDocument {
   >;
 
   /**
-   * Client — `string`
-   *
-   * (Optional) The client this project was made for.
-   */
-  client?: string;
-
-  /**
    * About — `array`
    *
    * A short tag line for the project.
@@ -251,18 +244,11 @@ export interface Project extends SanityDocument {
   design_tags?: Array<SanityKeyedReference<DesignTag>>;
 
   /**
-   * Start Date — `date`
+   * Date — `string`
    *
-   * (Optional) When this project started.
+   * When did this project take place?
    */
-  start_date?: string;
-
-  /**
-   * End Date — `date`
-   *
-   * (Optional) When this project ended.
-   */
-  end_date?: string;
+  date?: string;
 
   /**
    * Slug — `slug`

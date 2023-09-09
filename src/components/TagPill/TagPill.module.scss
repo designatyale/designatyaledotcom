@@ -32,6 +32,58 @@
     background-color: theme-color('content');
     color: theme-color('background');
   }
+
+  &_collapsed {
+    display: grid;
+    position: relative;
+    margin-bottom: 0;
+    padding: 0.3em;
+    border: 1px solid theme-color('border2');
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:hover {
+      background-color: theme-color('background2');
+    }
+  }
+
+  &_appearing {
+    position: absolute;
+    bottom: calc(100% + 0.5em);
+    left: -2em;
+    transform: translateX(-50%);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease-in-out;
+
+    @include media('xl') {
+      left: 50%;
+    }
+
+    &[class~='enter'] {
+      transform: translateX(-50%) translateY(10px);
+      opacity: 0;
+    }
+
+    &[class~='enter-active'] {
+      transform: translateX(-50%) translateY(0px);
+      opacity: 1;
+    }
+
+    &[class~='enter-done'] {
+      opacity: 1;
+    }
+
+    &[class~='exit'] {
+      transform: translateX(-50%) translateY(0px);
+      opacity: 1;
+    }
+
+    &[class~='exit-active'] {
+      transform: translateX(-50%) translateY(10px);
+      opacity: 0;
+    }
+  }
 }
 
 .color {
@@ -40,6 +92,11 @@
   height: 0.8em;
   border: 1px solid theme-color('border2');
   border-radius: 50%;
+
+  &_smaller {
+    width: 0.6em;
+    height: 0.6em;
+  }
 }
 
 .label {

@@ -77,6 +77,7 @@ export default function Nav({ children }: PropsWithChildren) {
                 href={href}
                 className={href === '/' ? s.buttons_day : undefined}
                 aria-current={pathname.startsWith(href) ? 'page' : undefined}
+                scroll={false}
               >
                 {contents}
               </Link>
@@ -103,6 +104,7 @@ export default function Nav({ children }: PropsWithChildren) {
                         pathname.startsWith(href) ? 'page' : undefined
                       }
                       tabIndex={!open ? -1 : undefined}
+                      scroll={false}
                     >
                       <span>{contents}</span>
                     </Link>

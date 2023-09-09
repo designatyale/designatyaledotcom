@@ -59,13 +59,6 @@ const Project = defineType({
       group: 'information',
     }),
     defineField({
-      name: 'client',
-      type: 'string' as const,
-      title: 'Client',
-      group: 'information',
-      description: '(Optional) The client this project was made for.',
-    }),
-    defineField({
       name: 'about',
       type: 'array' as const,
       description: 'A short tag line for the project.',
@@ -89,23 +82,10 @@ const Project = defineType({
       group: 'information',
     }),
     defineField({
-      name: 'start_date',
-      type: 'date' as const,
-      title: 'Start Date',
-      description: '(Optional) When this project started.',
-      options: {
-        dateFormat: 'dddd, MMMM Do YYYY,',
-      },
-      group: 'information',
-    }),
-    defineField({
-      name: 'end_date',
-      type: 'date' as const,
-      title: 'End Date',
-      description: '(Optional) When this project ended.',
-      options: {
-        dateFormat: 'dddd, MMMM Do YYYY,',
-      },
+      name: 'date',
+      type: 'string' as const,
+      title: 'Date',
+      description: 'When did this project take place?',
       group: 'information',
     }),
 

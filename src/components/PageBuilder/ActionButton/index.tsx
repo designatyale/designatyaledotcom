@@ -20,7 +20,11 @@ export default function ActionButton({
 }) {
   if (value.href.startsWith('/')) {
     return (
-      <Link href={value.href} className={classNames(s.container, className)}>
+      <Link
+        href={value.href}
+        className={classNames(s.container, className)}
+        scroll={false}
+      >
         {value.content}
       </Link>
     );

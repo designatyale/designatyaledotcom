@@ -28,7 +28,8 @@ export const pageQuery = groq`*[_type == "site_page" && slug.current == $pageSlu
           picture {
             ...,
             asset ->
-          }
+          },
+          design_tags[] ->
         }
       }
     }
@@ -46,7 +47,8 @@ export const pageQuery = groq`*[_type == "site_page" && slug.current == $pageSlu
           picture {
             ...,
             asset ->
-          }
+          },
+          design_tags[] ->
         }
       }
     }
