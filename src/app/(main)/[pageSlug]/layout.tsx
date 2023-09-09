@@ -9,8 +9,8 @@ import PageBuilder from '@/components/PageBuilder';
 import PreviewPageBuilder from '@/components/PageBuilder/preview';
 import PreviewProvider from '@/components/PreviewProvider';
 import getClient from '@/sanity/client';
-import { pageQuery, pagesQuery, subpageQuery } from '@/sanity/groq';
-import { SanityKeyed, SitePage } from '@/sanity/schema';
+import { pageQuery, pagesQuery } from '@/sanity/groq';
+import { SitePage } from '@/sanity/schema';
 import getPreview from '@/util/getPreview';
 import { notFound } from 'next/navigation';
 import s from './Page.module.scss';
@@ -52,9 +52,6 @@ export default async function SubPageLayout({
     { next: { tags: [`page:${params.pageSlug}`] } }
   );
   if (!page) notFound();
-  const subPages: SanityKeyed<SitePage>[] | null = await getClient(
-    preview
-  ).fetch(subpageQuery, params, { next: { tags: [`page:${params.pageSlug}`] } });
 
   return (
     <article className={s.container}>
