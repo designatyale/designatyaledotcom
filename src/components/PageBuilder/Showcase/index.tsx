@@ -18,7 +18,9 @@ import SanityImage from '@/components/SanityImage';
 import classNames from 'classnames';
 import { PortableText } from '@portabletext/react';
 import components from '@/components/PortableText';
-import ShowcaseLink from '@/components/PageBuilder/Showcase/button';
+import ShowcaseLink, {
+  BackToTop,
+} from '@/components/PageBuilder/Showcase/button';
 import TagPillHoverable from '@/components/TagPill/hoverable';
 
 function ShowcaseProject({ project }: { project: Project }) {
@@ -76,30 +78,38 @@ export default function Showcase({ value }: { value: PeShowcase }) {
   return (
     <div className={s.container}>
       {(value.copy || value.show_legend) && (
-        <div className={s.copy}>
-          <div className={s.copy_inner}>
-            {value.copy && (
-              <PortableText value={value.copy} components={components} />
-            )}
-            {value.show_legend && (
-              <ol className={s.legend}>
-                {value.assets.map((assetRef) => {
-                  const asset = unwrapReference(assetRef);
-                  switch (asset._type) {
-                    case 'project':
-                      return (
-                        <li key={asset._id}>
-                          <ShowcaseLink targetId={`showcase_${asset._id}`}>
-                            {asset.name}
-                          </ShowcaseLink>
-                        </li>
-                      );
-                  }
-                })}
-              </ol>
-            )}
+        <>
+          <div className={s.copy}>
+            <div className={s.copy_inner}>
+              {value.copy && (
+                <PortableText value={value.copy} components={components} />
+              )}
+              {value.show_legend && (
+                <ol className={s.legend}>
+                  {value.assets.map((assetRef) => {
+                    const asset = unwrapReference(assetRef);
+                    switch (asset._type) {
+                      case 'project':
+                        return (
+                          <li key={asset._id}>
+                            <ShowcaseLink targetId={`showcase_${asset._id}`}>
+                              {asset.name}
+                            </ShowcaseLink>
+                          </li>
+                        );
+                    }
+                  })}
+                </ol>
+              )}
+            </div>
           </div>
-        </div>
+          <BackToTop
+            className={s.backtotop}
+            aria-label="Scroll back to the top of the page"
+          >
+            ↑ Back to top
+          </BackToTop>
+        </>
       )}
       <ul className={s.assets}>
         {value.assets.map((assetRef) => {

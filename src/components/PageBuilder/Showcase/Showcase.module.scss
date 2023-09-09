@@ -15,7 +15,9 @@
   margin: 1em 0;
 
   @include media('sm') {
-    grid-template: 'copy contents' auto / auto 1fr;
+    grid-template:
+      'copy contents' 1fr
+      'backtotop contents' auto / auto 1fr;
   }
 }
 
@@ -30,9 +32,29 @@
   }
 
   &_inner {
+    display: flex;
     position: sticky;
     top: calc(var(--header-height) + 1em);
+    flex-direction: column;
     width: 100%;
+    max-height: calc(100vh - var(--header-height) - 1em);
+  }
+}
+
+.backtotop {
+  display: none;
+  position: sticky;
+  bottom: 0;
+  padding: 0.5em 0 1em;
+  background-color: theme-color('background');
+  text-align: left;
+
+  &:hover {
+    color: theme-color('content2');
+  }
+
+  @include media('sm') {
+    display: block;
   }
 }
 
@@ -43,6 +65,17 @@
   gap: 1em;
 }
 
+@keyframes fade-up {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
 .project {
   display: grid;
   grid-template:
@@ -51,13 +84,23 @@
     'website dates' auto / 1fr 1fr;
   width: 100%;
   gap: 0.2em;
+  animation: fade-up 0.3s ease-in-out;
+  animation-delay: 4 * 150ms;
+  animation-fill-mode: backwards;
   scroll-padding-top: calc(-1 * var(--header-height));
+
+  @for $i from 0 through 4 {
+    &:nth-child(#{$i}) {
+      animation-delay: $i * 150ms;
+    }
+  }
 
   &_image {
     grid-area: picture;
     width: 100%;
     height: auto;
     margin-bottom: 0.5em;
+    border: 1px solid theme-color('border2');
   }
 
   &_tags {
@@ -114,10 +157,17 @@
     flex-wrap: wrap;
   }
 
+  & li {
+    display: flex;
+    flex-direction: row;
+
+    & button {
+      text-align: left;
+    }
+  }
+
   & li::before {
-    display: inline-block;
     margin-right: 0.5em;
-    transform: translateY(0.1em);
     content: '⟐';
   }
 

@@ -30,3 +30,15 @@ export default function ShowcaseLink({
     </button>
   );
 }
+
+export function BackToTop({ children, ...props }: HTMLProps<HTMLButtonElement>) {
+  return (
+    <button
+      {...props}
+      type="button"
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+    >
+      {children}
+    </button>
+  );
+}
