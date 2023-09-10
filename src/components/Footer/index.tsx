@@ -10,6 +10,7 @@ import BackToTop from '@/components/Footer/scrollTop';
 import Link from 'next/link';
 import getPreview from '@/util/getPreview';
 import DAY from '@/assets/svg/DAY';
+import ColorScheme from '@/components/Footer/colorScheme';
 
 const FooterLinks = [
   ['Studio', '/studio'],
@@ -45,6 +46,7 @@ export default function Footer() {
             <Link href="/studio" className={s.section_button}>
               Join DAY Studio
             </Link>
+            <ColorScheme />
           </section>
           <section className={s.section}>
             <h2>MORE LINKS</h2>
