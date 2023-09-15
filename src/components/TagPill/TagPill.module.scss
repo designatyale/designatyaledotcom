@@ -49,24 +49,19 @@
 
   &_appearing {
     position: absolute;
+    right: 5px;
     bottom: calc(100% + 0.5em);
-    left: -2em;
-    transform: translateX(-50%);
     opacity: 0;
     pointer-events: none;
     transition: all 0.3s ease-in-out;
 
-    @include media('xl') {
-      left: 50%;
-    }
-
     &[class~='enter'] {
-      transform: translateX(-50%) translateY(10px);
+      transform: translateY(10px);
       opacity: 0;
     }
 
     &[class~='enter-active'] {
-      transform: translateX(-50%) translateY(0px);
+      transform: translateY(0px);
       opacity: 1;
     }
 
@@ -75,13 +70,43 @@
     }
 
     &[class~='exit'] {
-      transform: translateX(-50%) translateY(0px);
+      transform: translateY(0px);
       opacity: 1;
     }
 
     &[class~='exit-active'] {
-      transform: translateX(-50%) translateY(10px);
+      transform: translateY(10px);
       opacity: 0;
+    }
+
+    @include media('xl') {
+      right: unset;
+      left: 50%;
+      transform: translateX(-50%);
+
+      &[class~='enter'] {
+        transform: translateX(-50%) translateY(10px);
+        opacity: 0;
+      }
+
+      &[class~='enter-active'] {
+        transform: translateX(-50%) translateY(0px);
+        opacity: 1;
+      }
+
+      &[class~='enter-done'] {
+        opacity: 1;
+      }
+
+      &[class~='exit'] {
+        transform: translateX(-50%) translateY(0px);
+        opacity: 1;
+      }
+
+      &[class~='exit-active'] {
+        transform: translateX(-50%) translateY(10px);
+        opacity: 0;
+      }
     }
   }
 }

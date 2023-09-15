@@ -22,6 +22,7 @@
   padding: 0 var(--page-padding);
   border-bottom: 1px solid theme-color('background');
   // backdrop-filter: blur(3px) grayscale(2);
+  background-color: theme-color('background');
   background-color: color-mix(
     in lch,
     theme-color('background') 95%,
@@ -117,7 +118,7 @@
   z-index: zIndex('high');
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: theme-color('background');
   background-color: color-mix(
     in lch,
     theme-color('background') 90%,
