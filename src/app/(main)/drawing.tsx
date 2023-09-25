@@ -76,7 +76,7 @@ export default function Drawing({ className }: { className?: string }) {
       ref={canvasRef}
       canvasColor="transparent"
       strokeWidth={15}
-      strokeColor={colorScheme.evalScheme === 'light' ? '#070707' : '#fff'}
+      // strokeColor={colorScheme.evalScheme === 'light' ? '#070707' : '#fff'}
     />
   );
 }

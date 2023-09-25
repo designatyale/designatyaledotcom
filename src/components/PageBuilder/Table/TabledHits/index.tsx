@@ -118,7 +118,6 @@ export default function TabledHits<T = PeTable['asset_type']>({
         ? [{ contents: row.about, links: row.socials }]
         : [],
     onExpandedChange: setExpanded,
-    debugTable: true,
   });
 
   return (
@@ -162,10 +161,6 @@ export default function TabledHits<T = PeTable['asset_type']>({
               ))
             ) : (
               <td colSpan={3} className={s.td_subrow}>
-                {(function () {
-                  console.log(row);
-                  return null;
-                })()}
                 {row.original.contents && (
                   <PortableText
                     value={row.original.contents}

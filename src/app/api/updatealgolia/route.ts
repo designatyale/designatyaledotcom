@@ -71,7 +71,20 @@ export async function POST(req: NextRequest) {
       event: {
         index: algolia.initIndex('event'),
         projection: `{
-
+          title,
+          slug,
+          "pictureUrl": picture.asset->url,
+          about,
+          search_hidden,
+          location,
+          date,
+          design_tags[] -> {
+            _id,
+            title,
+            color {
+              hex
+            }
+          }
       }`,
       },
     },

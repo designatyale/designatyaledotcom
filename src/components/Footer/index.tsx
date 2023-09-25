@@ -38,14 +38,16 @@ export default function Footer() {
       <div className={s.footer}>
         <div className={s.row}>
           <section className={s.section}>
-            <h2>JOIN THE STUDIO</h2>
-            <p>
-              Want to be a close part of DAY? Studio member applications are
-              open!
-            </p>
-            <Link href="/studio" className={s.section_button}>
-              Join DAY Studio
-            </Link>
+            <h2>WORK WITH DAY</h2>
+            <p>Have a project needing design? DAY Studio is open for work!</p>
+            <a
+              href="mailto:studio@designatyale.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={s.section_button}
+            >
+              Contact the Studio
+            </a>
             <ColorScheme />
           </section>
           <section className={s.section}>

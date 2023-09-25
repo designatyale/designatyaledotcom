@@ -16,9 +16,11 @@ import SiteSettings from './SiteSettings';
 import subTypes from './types';
 import DesignTag from './entities/DesignTag';
 import Project from './entities/Project';
+import Event from './entities/Event';
 
 const schemas: SchemaTypeDefinition[] = [
   DesignTag,
+  Event,
   Member,
   Project,
   SiteSettings,

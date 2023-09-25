@@ -16,7 +16,7 @@ import { NextResponse } from 'next/server';
 const algolia = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_ADMIN_API_KEY);
 
 // Fetch the _id of all the documents we want to index
-const types = ['member'];
+const types = ['member', 'event'];
 const query = `* [_type in $types && !(_id in path("drafts.**"))][]._id`;
 
 export async function GET() {
@@ -52,8 +52,21 @@ export async function GET() {
       event: {
         index: algolia.initIndex('event'),
         projection: `{
-
-        }`,
+          title,
+          slug,
+          "pictureUrl": picture.asset->url,
+          about,
+          search_hidden,
+          location,
+          date,
+          design_tags[] -> {
+            _id,
+            title,
+            color {
+              hex
+            }
+          }
+      }`,
       },
     },
     (document: SanityDocumentStub) => {
