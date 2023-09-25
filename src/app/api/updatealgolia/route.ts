@@ -13,10 +13,8 @@ import {
 import { isValidSignature, SIGNATURE_HEADER_NAME } from '@sanity/webhook';
 import { NextRequest, NextResponse } from 'next/server';
 import algoliasearch from 'algoliasearch';
-import indexer from 'sanity-algolia';
-import { Member } from '@/sanity/schema';
-import { SanityDocumentStub } from 'next-sanity';
 import getClient from '@/sanity/client';
+import buildSanityAlgolia from '@/app/api/algoliaUtils';
 
 // init our admin Algolia instance
 const algolia = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_ADMIN_API_KEY);
@@ -48,60 +46,7 @@ export async function POST(req: NextRequest) {
   }
 
   // Configure this to match an existing Algolia index name
-  const sanityAlgolia = indexer(
-    {
-      member: {
-        index: algolia.initIndex('member'),
-        projection: `{
-        name,
-        slug,
-        about,
-        class_year,
-        search_hidden,
-        socials[] { ... },
-        design_tags[] -> {
-          _id,
-          title,
-          color {
-            hex
-          }
-        }
-      }`,
-      },
-      event: {
-        index: algolia.initIndex('event'),
-        projection: `{
-          title,
-          slug,
-          "pictureUrl": picture.asset->url,
-          about,
-          search_hidden,
-          location,
-          date,
-          design_tags[] -> {
-            _id,
-            title,
-            color {
-              hex
-            }
-          }
-      }`,
-      },
-    },
-    (document: SanityDocumentStub) => {
-      switch (document._type) {
-        case 'member':
-        case 'event':
-        default:
-          return document;
-      }
-    },
-    (document: SanityDocumentStub) => {
-      if (document.hasOwnProperty('search_hidden'))
-        return !document.search_hidden;
-      return true;
-    }
-  );
+  const sanityAlgolia = buildSanityAlgolia(algolia);
 
   // Finally connect the Sanity webhook payload to Algolia indices via the
   // configured serializers and optional visibility function. `webhookSync` will

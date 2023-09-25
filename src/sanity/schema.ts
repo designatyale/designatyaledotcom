@@ -60,6 +60,97 @@ export interface DesignTag extends SanityDocument {
 }
 
 /**
+ * Event
+ *
+ *
+ */
+export interface Event extends SanityDocument {
+  _type: "event";
+
+  /**
+   * Title — `string`
+   *
+   * The title of the event
+   */
+  title: string;
+
+  /**
+   * Image — `image`
+   *
+   * A picture to use as a promotional icon of the event—this should be square. Also note that the page this image is displayed on can have either a black or white background.
+   */
+  picture: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
+
+  /**
+   * About — `array`
+   *
+   * A short description of the event.
+   */
+  about?: Array<SanityKeyed<SanityBlock>>;
+
+  /**
+   * Design Tags — `array`
+   *
+   *
+   */
+  design_tags?: Array<SanityKeyedReference<DesignTag>>;
+
+  /**
+   * Location — `array`
+   *
+   * Where will/did this event take place? (Keep this short, but add a link to Google Maps or the Zoom meeting if possible)
+   */
+  location?: Array<SanityKeyed<SanityBlock>>;
+
+  /**
+   * Date & Time — `datetime`
+   *
+   * When will/did this event take place?
+   */
+  date?: string;
+
+  /**
+   * Slug — `slug`
+   *
+   * (Optional) A slug for the event's page on the site.
+   */
+  slug?: { _type: "slug"; current: string };
+
+  /**
+   * Page Builder — `array`
+   *
+   * The event's page on the DAY site.
+   */
+  pageBuilder?: Array<
+    | SanityKeyed<PeCopy>
+    | SanityKeyed<PeActionBar>
+    | SanityKeyed<PeActionButton>
+    | SanityKeyed<PeGallery>
+    | SanityKeyed<PeTable>
+    | SanityKeyed<PeShowcase>
+  >;
+
+  /**
+   * Hidden from Search — `boolean`
+   *
+   * If true, hide this event from the DAY Directory search.
+   */
+  search_hidden?: boolean;
+
+  /**
+   * Last Revalidated — `datetime`
+   *
+   * When this page was last revalidated. Re-publish or manually revalidate to change.
+   */
+  last_revalidated?: string;
+}
+
+/**
  * Member
  *
  *
@@ -639,7 +730,13 @@ export type SocialEmail = {
   email: Email;
 };
 
-export type Documents = DesignTag | Member | Project | SiteSettings | SitePage;
+export type Documents =
+  | DesignTag
+  | Event
+  | Member
+  | Project
+  | SiteSettings
+  | SitePage;
 
 /**
  * This interface is a stub. It was referenced in your sanity schema but
