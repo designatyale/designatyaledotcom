@@ -72,7 +72,7 @@ export async function GET() {
   );
 
   // add to algolia
-  getClient()
+  await getClient()
     .fetch(query, { types })
     .then((ids) => {
       console.log(ids);
@@ -80,4 +80,6 @@ export async function GET() {
         ids: { created: ids, updated: [], deleted: [] },
       });
     });
+
+  return NextResponse.json({ success: true });
 }
