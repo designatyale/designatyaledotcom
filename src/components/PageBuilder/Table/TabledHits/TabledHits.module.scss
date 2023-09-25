@@ -49,6 +49,23 @@
       flex-wrap: wrap;
       gap: 0.5em;
     }
+
+    & button {
+      display: block;
+
+      & svg {
+        display: inline-block;
+        margin-right: 0.2em;
+        vertical-align: bottom;
+        transition: transform 0.1s linear;
+      }
+
+      &:hover {
+        & svg {
+          color: theme-color('content2');
+        }
+      }
+    }
   }
 
   td[data-column-id='name'] {
@@ -122,8 +139,53 @@
   border-bottom: 1px solid theme-color('content2');
 }
 
+@keyframes fade-left {
+  from {
+    transform: translateY(-5px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
 .td {
   min-height: 2em;
   padding: 0.5em 1em;
   border-bottom: 1px dashed theme-color('border2');
+
+  &_subrow {
+    padding: 0.5em 1em;
+    padding-top: 0;
+    border-bottom: 1px dashed theme-color('border2');
+
+    & > * {
+      animation: fade-left 0.3s ease-in-out;
+    }
+
+    @include media('sm-down') {
+      padding-top: 0;
+    }
+
+    & ol {
+      display: flex;
+      column-gap: 1em;
+      flex-wrap: wrap;
+
+      & a {
+        display: flex;
+        align-items: center;
+        gap: 0.25em;
+        color: theme-color('content2');
+        text-decoration: underline;
+        text-decoration-thickness: 0.05em;
+        text-underline-offset: 0.3em;
+
+        &:hover {
+          color: theme-color('content');
+        }
+      }
+    }
+  }
 }

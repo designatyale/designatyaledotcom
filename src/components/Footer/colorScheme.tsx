@@ -32,7 +32,7 @@ export default function ColorScheme() {
               id={`color_scheme_${scheme}`}
               name="color_scheme"
               value={scheme}
-              checked={colorScheme === scheme}
+              checked={colorScheme.scheme === scheme}
               onChange={onChange}
             />
             <label htmlFor={`color_scheme_${scheme}`}>

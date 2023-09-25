@@ -10,10 +10,13 @@ import Copy from './Copy';
 import ActionBar from '@/components/PageBuilder/ActionBar';
 import ActionButton from '@/components/PageBuilder/ActionButton';
 import Gallery from '@/components/PageBuilder/Gallery';
-import Table from '@/components/PageBuilder/Table';
-import TableContents from '@/components/PageBuilder/Table/contents';
-import TableContents2 from '@/components/PageBuilder/Table/contents';
 import Showcase from '@/components/PageBuilder/Showcase';
+import dynamic from 'next/dynamic';
+
+const TableContents = dynamic(
+  () => import('@/components/PageBuilder/Table/contents'),
+  { ssr: false }
+);
 
 interface PageBuilderProps {
   content: SitePage['pageBuilder'];
@@ -28,7 +31,6 @@ interface PageBuilderProps {
  */
 export default function PageBuilder({
   content,
-  isPreview,
 }: PageBuilderProps): JSX.Element[] {
   return (content || []).map((pageBlock) => {
     switch (pageBlock._type) {
@@ -43,9 +45,7 @@ export default function PageBuilder({
       case 'pe_showcase':
         return <Showcase key={pageBlock._key} value={pageBlock} />;
       case 'pe_table':
-        if (isPreview)
-          return <TableContents2 key={pageBlock._key} value={pageBlock} />;
-        return <Table key={pageBlock._key} value={pageBlock} />;
+        return <TableContents key={pageBlock._key} value={pageBlock} />;
     }
   });
 }

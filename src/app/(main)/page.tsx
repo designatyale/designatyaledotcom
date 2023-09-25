@@ -5,13 +5,14 @@
  * 2023 Design at Yale
  */
 
-// import getClient from '@/sanity/client';
-// import { pageQuery } from '@/sanity/groq';
-// import { SitePage } from '@/sanity/schema';
-// import getPreview from '@/util/getPreview';
 import s from './Root.module.scss';
 import DAY from '@/assets/svg/DAY';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+
+const Drawing = dynamic(() => import('@/app/(main)/drawing'), {
+  ssr: false,
+});
 
 /* -------------------------------------------------------------------------- */
 /*                                    Page                                    */
@@ -28,11 +29,12 @@ export default async function Page() {
 
   return (
     <article className={s.container}>
+      <Drawing className={s.canvas} />
       <section className={s.cta}>
         <div className={s.cta_logo}>
           <DAY />
         </div>
-        <h1>
+        <h1 data-nosnippet>
           Design at Yale is a<br /> Studio and Community.
         </h1>
         <p>
@@ -61,9 +63,9 @@ export default async function Page() {
           Yale students, fill out the form and keep your eyes out for events!
         </p>
       </section>
-      <div className={s.under_construction} data-nosnippet>
+      {/* <div className={s.under_construction} data-nosnippet>
         WEBSITE IS UNDER CONSTRUCTION!
-      </div>
+      </div> */}
     </article>
   );
 }

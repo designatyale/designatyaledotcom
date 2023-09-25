@@ -18,7 +18,7 @@ const ROOT_PAGES: Record<string, ComponentType<{}>> = {
   home: HomeIcon,
   studio: FiCalendar,
   community: FiCalendar,
-  work: FiCalendar,
+  events: FiCalendar,
   about: FiCalendar,
 };
 

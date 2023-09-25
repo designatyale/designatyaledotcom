@@ -25,7 +25,7 @@ const NAV_LINKS = [
   ['Studio', '/studio'],
   ['Community', '/community'],
   [<DAY key="/" />, '/'],
-  ['Work', '/work'],
+  ['Events', '/events'],
   ['About', '/about'],
 ] as const;
 

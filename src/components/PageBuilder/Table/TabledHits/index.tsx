@@ -8,6 +8,7 @@
 import TagPill from '@/components/TagPill';
 import { DesignTag, PeTable } from '@/sanity/schema';
 import {
+  ExpandedState,
   createColumnHelper,
   flexRender,
   getCoreRowModel,
@@ -18,6 +19,10 @@ import { useMemo, useState } from 'react';
 import { useInfiniteHits } from 'react-instantsearch';
 import s from './TabledHits.module.scss';
 import { AlgoliaMember } from '@/util/algolia';
+import { RxCaretRight } from 'react-icons/rx';
+import { PortableText } from '@portabletext/react';
+import components from '@/components/PortableText';
+import SOCIAL_MAP, { Social } from '@/util/socials';
 
 type TabledHitsProps<T = PeTable['asset_type']> = {
   value: Omit<PeTable, 'asset_type'> & { asset_type: T };
@@ -37,16 +42,46 @@ export default function TabledHits<T = PeTable['asset_type']>({
         return [
           columnHelper.accessor('name', {
             id: 'name',
-            header: 'Name',
+            header: ({ table }) => (
+              <button {...{ onClick: table.getToggleAllRowsExpandedHandler() }}>
+                <RxCaretRight
+                  style={{
+                    transform: table.getIsAllRowsExpanded()
+                      ? 'rotate(90deg)'
+                      : '',
+                  }}
+                />{' '}
+                Name
+              </button>
+            ),
+            cell: ({ row, getValue }) => (
+              <button
+                {...{ onClick: row.getToggleExpandedHandler() }}
+                style={{
+                  pointerEvents: !row.getCanExpand() ? 'none' : undefined,
+                }}
+              >
+                <RxCaretRight
+                  style={{
+                    transform:
+                      row.getCanExpand() && row.getIsExpanded()
+                        ? 'rotate(90deg)'
+                        : '',
+                    opacity: !row.getCanExpand() ? 0.2 : undefined,
+                  }}
+                />{' '}
+                {getValue()}
+              </button>
+            ),
           }),
           columnHelper.accessor('design_tags', {
             id: 'specialties',
             header: 'Specialties',
-            cell: (hi) => {
-              const value = hi.getValue();
+            cell: ({ getValue }) => {
+              const value = getValue();
               if (!value) return null;
               return (
-                <ul key={hi.column.id}>
+                <ul>
                   {value.map((tag: DesignTag) => {
                     return <TagPill key={tag._id} tag={tag} />;
                   })}
@@ -57,8 +92,8 @@ export default function TabledHits<T = PeTable['asset_type']>({
           columnHelper.accessor('class_year', {
             id: 'class_year',
             header: 'Class',
-            cell: (hi) => {
-              const value = hi.getValue();
+            cell: ({ getValue }) => {
+              const value = getValue();
               if (!value) return null;
               return (value as number).toString();
             },
@@ -71,17 +106,20 @@ export default function TabledHits<T = PeTable['asset_type']>({
   }, [value.asset_type]);
 
   // table creation
-  const [expanded, setExpanded] = useState({});
+  const [expanded, setExpanded] = useState<ExpandedState>({});
   const table = useReactTable({
     data,
     columns,
     state: { expanded },
-    enableExpanding: true,
     getCoreRowModel: getCoreRowModel(),
     getExpandedRowModel: getExpandedRowModel(),
+    getSubRows: (row) =>
+      row.about || row.socials
+        ? [{ contents: row.about, links: row.socials }]
+        : [],
     onExpandedChange: setExpanded,
+    debugTable: true,
   });
-  const { rows } = table.getRowModel();
 
   return (
     <table id="day-table" className={s.table}>
@@ -97,13 +135,64 @@ export default function TabledHits<T = PeTable['asset_type']>({
         ))}
       </thead>
       <tbody>
-        {rows.map((row) => (
-          <tr key={row.id}>
-            {row.getVisibleCells().map((cell) => (
-              <td key={cell.id} className={s.td} data-column-id={cell.column.id}>
-                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+        {table.getRowModel().rows.map((row) => (
+          <tr
+            key={row.id}
+            style={{
+              borderBottom:
+                row.getCanExpand() && row.getIsExpanded() ? 'none' : undefined,
+              paddingTop: row.depth > 0 ? 0 : undefined,
+            }}
+          >
+            {row.depth === 0 ? (
+              row.getVisibleCells().map((cell) => (
+                <td
+                  key={cell.id}
+                  className={s.td}
+                  data-column-id={cell.column.id}
+                  style={{
+                    borderBottom:
+                      row.getCanExpand() && row.getIsExpanded()
+                        ? 'none'
+                        : undefined,
+                  }}
+                >
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </td>
+              ))
+            ) : (
+              <td colSpan={3} className={s.td_subrow}>
+                {(function () {
+                  console.log(row);
+                  return null;
+                })()}
+                {row.original.contents && (
+                  <PortableText
+                    value={row.original.contents}
+                    components={components}
+                  />
+                )}
+                {row.original.links && (
+                  <ol>
+                    {row.original.links.map((social: Social, i: number) => {
+                      const { Icon, link, text } = SOCIAL_MAP(social);
+                      return (
+                        <li key={i}>
+                          <a
+                            href={link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <Icon />
+                            {text}
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </ol>
+                )}
               </td>
-            ))}
+            )}
           </tr>
         ))}
       </tbody>

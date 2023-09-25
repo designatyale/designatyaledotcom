@@ -65,6 +65,9 @@ const Member = defineType({
       of: Socials.map(({ name }) => ({ type: name })),
       group: 'information',
       validation: (Rule) => Rule.unique(),
+      options: {
+        sortable: true,
+      },
     }),
     defineField({
       name: 'design_tags',
