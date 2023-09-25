@@ -36,7 +36,7 @@ export async function GET() {
         projection: `{
           name,
           slug,
-          "about": pt::text(about),
+          about,
           class_year,
           search_hidden,
           socials[] { ... },

@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
         projection: `{
         name,
         slug,
-        "about": pt::text(about),
+        about,
         class_year,
         search_hidden,
         socials[] { ... },
