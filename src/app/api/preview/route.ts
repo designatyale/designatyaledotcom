@@ -9,7 +9,7 @@ import { draftMode } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { NextRequest } from 'next/server';
 
-export async function GET(req: NextRequest) {
+export async function GET(req: NextRequest): Promise<any> {
   const url = new URL(req.url);
   const redir = url.searchParams.get('redirect');
   draftMode().enable();
