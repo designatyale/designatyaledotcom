@@ -7,7 +7,7 @@
 
 import type { Metadata } from 'next';
 import { ABCDiatype } from '@/fonts';
-import { ColorSchemeScript } from '@/util/earlyScripts';
+import { ColorSchemeScript, MuffleStrokeWarnScript } from '@/util/earlyScripts';
 import { SITE_URL } from '@/env';
 import s from './Layout.module.scss';
 import './globals.scss';
@@ -56,6 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000" />
         <meta name="msapplication-TileColor" content="#ffc40d" />
         <ColorSchemeScript />
+        <MuffleStrokeWarnScript />
       </head>
       <body className={s.body}>{children}</body>
     </html>

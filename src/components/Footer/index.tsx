@@ -14,10 +14,11 @@ import ColorScheme from '@/components/Footer/colorScheme';
 
 const FooterLinks = [
   ['Studio', '/studio'],
-  ['Community', '/community'],
-  ['Events', '/community/events'],
-  ['Work', '/work'],
+  ['Events', '/community'],
+  ['Past Events', '/community/pastevents'],
+  ['Directory', '/directory'],
   ['About', '/about'],
+  ['Alumni', '/about/alumni'],
 ] as const;
 
 export default function Footer() {

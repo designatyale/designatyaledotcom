@@ -34,3 +34,21 @@ export const ColorSchemeScript = () => (
     }}
   />
 );
+
+const MUFFLE_STROKE_WARN = javascript`
+const { warn } = console;
+console.warn = function(...args) {
+  if (args[0] == "No stroke found!") return;
+  warn(...args);
+}
+`;
+
+export const MuffleStrokeWarnScript = () => (
+  <script
+    id="muffle-stroke-warn-script"
+    type="text/javascript"
+    dangerouslySetInnerHTML={{
+      __html: MUFFLE_STROKE_WARN,
+    }}
+  />
+);
