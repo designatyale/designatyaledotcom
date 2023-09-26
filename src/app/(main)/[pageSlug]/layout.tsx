@@ -26,9 +26,11 @@ export async function generateStaticParams() {
   const pages: SitePage[] = await getClient().fetch(pagesQuery, undefined, {
     next: { revalidate: 0 },
   });
-  return pages.map(({ slug }) => ({
-    pageSlug: slug.current.replace('/', ''),
-  }));
+  return pages
+    .filter(({ slug }) => slug.current.split('/').length === 2) // make sure only one slash (the start)
+    .map(({ slug }) => ({
+      pageSlug: slug.current.replace('/', ''),
+    }));
 }
 
 /* -------------------------------------------------------------------------- */
