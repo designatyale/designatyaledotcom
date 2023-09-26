@@ -28,7 +28,7 @@ type TabledHitsProps<T = PeTable['asset_type']> = {
   value: Omit<PeTable, 'asset_type'> & { asset_type: T };
 } & Parameters<typeof useInfiniteHits>[0];
 
-export default function TabledHits<T = PeTable['asset_type']>({
+export default function TabledHits<T = 'member'>({
   value,
   ...props
 }: TabledHitsProps<T>) {
@@ -106,7 +106,9 @@ export default function TabledHits<T = PeTable['asset_type']>({
   }, [value.asset_type]);
 
   // table creation
-  const [expanded, setExpanded] = useState<ExpandedState>({});
+  const [expanded, setExpanded] = useState<ExpandedState>(
+    value.is_compact ? {} : true
+  );
   const table = useReactTable({
     data,
     columns,

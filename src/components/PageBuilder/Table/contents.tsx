@@ -14,6 +14,7 @@ import s from './Table.module.scss';
 import Search from '@/components/PageBuilder/Table/Search';
 import TabledHits from '@/components/PageBuilder/Table/TabledHits';
 import RefinementList from '@/components/PageBuilder/Table/RefinementList';
+import GroupedHits from '@/components/PageBuilder/Table/GroupedHits';
 
 const closeOnChange = () => false;
 
@@ -26,6 +27,16 @@ function FakeHitsPerPage(props: Parameters<typeof useHitsPerPage>[0]) {
   useHitsPerPage(props);
   return null;
 }
+
+const ALGOLIA_FACETS: {
+  [key in PeTable['asset_type']]: { attribute: string; buttonText: string }[];
+} = {
+  member: [
+    { attribute: 'class_year', buttonText: 'Class' },
+    { attribute: 'design_tags.title', buttonText: 'Specialty' },
+  ],
+  event: [{ attribute: 'design_tags.title', buttonText: 'Topic' }],
+};
 
 export default function TableContents<T = PeTable['asset_type']>({
   value,
@@ -42,28 +53,34 @@ export default function TableContents<T = PeTable['asset_type']>({
       />
       <div className={s.container}>
         <section className={s.search_fields} role="search">
-          <Search placeholder="Find a student designer..." />
-          <div className={s.filters}>
-            <FacetDropdown buttonText={'Class'} closeOnChange={closeOnChange}>
-              <RefinementList
-                attribute="class_year"
-                searchable={true}
-                searchablePlaceholder="Search..."
-              />
-            </FacetDropdown>
-            <FacetDropdown
-              buttonText={'Specialty'}
-              closeOnChange={closeOnChange}
-            >
-              <RefinementList
-                attribute="design_tags.title"
-                searchable={true}
-                searchablePlaceholder="Search..."
-              />
-            </FacetDropdown>
-          </div>
+          {value.is_searchable && (
+            <Search placeholder={value.search_placeholder} />
+          )}
+          {value.is_filterable && (
+            <div className={s.filters}>
+              {ALGOLIA_FACETS[value.asset_type as PeTable['asset_type']].map(
+                ({ attribute, buttonText }) => (
+                  <FacetDropdown
+                    key={attribute}
+                    buttonText={buttonText}
+                    closeOnChange={closeOnChange}
+                  >
+                    <RefinementList
+                      attribute={attribute}
+                      searchable={true}
+                      searchablePlaceholder="Search..."
+                    />
+                  </FacetDropdown>
+                )
+              )}
+            </div>
+          )}
         </section>
-        <TabledHits value={value} />
+        {value.asset_type === 'event' ? (
+          <GroupedHits value={value} />
+        ) : (
+          <TabledHits value={value} />
+        )}
       </div>
     </InstantSearch>
   );

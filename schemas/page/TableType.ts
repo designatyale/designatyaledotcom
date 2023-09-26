@@ -15,27 +15,44 @@ const TableType = defineType({
   description:
     'A searchable table of text-based assets——generally, designers or events.',
   icon: FiColumns,
+  initialValue: {
+    asset_type: 'member',
+    date_filter: 'all',
+  },
   fields: [
     defineField({
       name: 'asset_type',
-      title: 'Asset Type',
-      description: 'The type of assets',
+      title: 'Algolia Index Name',
+      description: 'The name of the Algolia index to pull results from.',
       type: 'string' as const,
-      initialValue: 'designers',
+      initialValue: 'member',
       options: {
         list: [
           { title: 'Members', value: 'member' },
-          { title: 'Events', value: 'events' },
+          { title: 'Events', value: 'event' },
         ],
+        layout: 'radio',
       },
       validation: (Rule) => Rule.required(),
       codegen: { required: true },
     }),
     defineField({
-      name: 'additional_query',
-      title: 'Additional Query',
-      description: 'An additiional query to filter the results by.',
+      name: 'date_filter',
+      title: 'Date Filter',
+      description:
+        'How to filter the events displayed in this table, based on the current date.',
       type: 'string' as const,
+      options: {
+        list: [
+          { title: 'All', value: 'all' },
+          { title: 'Upcoming', value: 'upcoming' },
+          { title: 'Past', value: 'past' },
+        ],
+        layout: 'radio',
+      },
+      hidden: ({ parent }) => parent.asset_type !== 'event',
+      validation: (Rule) => Rule.required(),
+      codegen: { required: true },
     }),
     defineField({
       name: 'is_compact',
@@ -50,17 +67,25 @@ const TableType = defineType({
       name: 'is_searchable',
       title: 'Searchable?',
       description:
-        'If true, allow searching for elements based on the "title" field.',
+        'If true, allow searching for elements based on their textual information.',
       type: 'boolean' as const,
       initialValue: true,
       validation: (Rule) => Rule.required(),
       codegen: { required: true },
     }),
     defineField({
+      name: 'search_placeholder',
+      title: 'Search Placeholder',
+      description: "A placeholder string for the table's search bar.",
+      type: 'string' as const,
+      hidden: ({ parent }) => !parent.is_searchable,
+      placeholder: 'E.g. Search for a designer...',
+    }),
+    defineField({
       name: 'is_filterable',
       title: 'Filterable?',
       description:
-        'If true, allow filtering for elements based on the "design tags" field.',
+        'If true, allow filtering for elements based on Algolia-defined facets.',
       type: 'boolean' as const,
       initialValue: true,
       validation: (Rule) => Rule.required(),

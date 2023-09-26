@@ -631,18 +631,18 @@ export type PeGallery = {
 export type PeTable = {
   _type: "pe_table";
   /**
-   * Asset Type — `string`
+   * Algolia Index Name — `string`
    *
-   * The type of assets
+   * The name of the Algolia index to pull results from.
    */
-  asset_type: "member" | "events";
+  asset_type: "member" | "event";
 
   /**
-   * Additional Query — `string`
+   * Date Filter — `string`
    *
-   * An additiional query to filter the results by.
+   * How to filter the events displayed in this table, based on the current date.
    */
-  additional_query?: string;
+  date_filter: "all" | "upcoming" | "past";
 
   /**
    * Compact? — `boolean`
@@ -654,14 +654,21 @@ export type PeTable = {
   /**
    * Searchable? — `boolean`
    *
-   * If true, allow searching for elements based on the "title" field.
+   * If true, allow searching for elements based on their textual information.
    */
   is_searchable: boolean;
 
   /**
+   * Search Placeholder — `string`
+   *
+   * A placeholder string for the table's search bar.
+   */
+  search_placeholder?: string;
+
+  /**
    * Filterable? — `boolean`
    *
-   * If true, allow filtering for elements based on the "design tags" field.
+   * If true, allow filtering for elements based on Algolia-defined facets.
    */
   is_filterable: boolean;
 };

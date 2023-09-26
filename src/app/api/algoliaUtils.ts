@@ -63,7 +63,9 @@ export default function buildSanityAlgolia(algolia: SearchClient) {
           const { date } = document as Event;
           return {
             ...document,
-            date_timestamp: date ? new Date(date).getTime() : undefined,
+            date_timestamp: date
+              ? Math.floor(new Date(date).getTime() / 1000)
+              : undefined,
           };
         case 'member':
         default:

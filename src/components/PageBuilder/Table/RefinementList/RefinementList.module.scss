@@ -7,9 +7,13 @@
 @import '@/styles/utils';
 
 .search {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 150px;
   margin-bottom: 0.2em;
   padding: 0.4em;
   border-bottom: 1px solid theme-color('border2');
+
   &:focus {
     outline: unset;
   }

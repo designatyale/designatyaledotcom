@@ -10,7 +10,7 @@ import { useLayoutEffect } from 'react';
 
 export function useLockedBody(locked = false) {
   useLayoutEffect(() => {
-    if (!locked) {
+    if (!locked || !document.body) {
       return;
     }
 

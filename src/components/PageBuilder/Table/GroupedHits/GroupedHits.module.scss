@@ -1,0 +1,115 @@
+/*
+ * GroupedHits.module.scss
+ * Author: Evan Kirkiles
+ * Created On Mon Sep 25 2023
+ * 2023 Design at Yale 
+ */
+@import '@/styles/utils';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+@keyframes fade-up {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+.group {
+  width: 100%;
+  margin: 0.5em 0;
+
+  & hgroup {
+    margin-bottom: 0.5em;
+  }
+
+  & h2 {
+    display: inline-block;
+    margin-right: 0.1em;
+    font-weight: 700;
+    font-size: 1.5em;
+  }
+  & small {
+    color: theme-color('content2');
+  }
+
+  &_items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, max-content));
+    width: 100%;
+    gap: 1.5rem;
+
+    & > * {
+      animation: fade-up 0.3s ease-in-out;
+      animation-delay: 4 * 100ms;
+      animation-fill-mode: backwards;
+
+      @for $i from 0 through 4 {
+        &:nth-child(#{$i}) {
+          animation-delay: $i * 100ms;
+        }
+      }
+    }
+
+    @include media('xs') {
+      grid-template-columns: repeat(auto-fit, minmax(180px, max-content));
+    }
+
+    @include media('sm') {
+      grid-template-columns: repeat(auto-fit, minmax(220px, max-content));
+    }
+
+    @include media('lg') {
+      grid-template-columns: repeat(auto-fit, minmax(245px, max-content));
+    }
+
+    @include media('xl') {
+      grid-template-columns: repeat(auto-fit, minmax(280px, max-content));
+    }
+
+    & article {
+      max-width: 380px;
+    }
+
+    & img {
+      aspect-ratio: 1;
+      width: 100%;
+      border: 1px solid theme-color('border2');
+    }
+
+    & h3 {
+      margin: 0.5rem 0;
+      font-weight: 700;
+      font-size: 1.3em;
+    }
+
+    & p {
+      margin: 0;
+      line-height: 1.2;
+    }
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: 0.2em 0;
+  gap: 0.4em;
+  color: theme-color('content2');
+
+  & svg {
+    flex-shrink: 0;
+    width: 1em;
+    height: 1em;
+    margin: 0.1em 0 0;
+  }
+}

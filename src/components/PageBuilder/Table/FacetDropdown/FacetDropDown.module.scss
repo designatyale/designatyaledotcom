@@ -39,6 +39,7 @@
 }
 
 .ais-Dropdown .ais-Panel-body {
+  z-index: zIndex('high');
   position: absolute;
   right: 0;
   width: min-content;
@@ -83,7 +84,9 @@
 
 @media only screen and (max-width: 375px) {
   .ais-Dropdown.ais-Dropdown--opened .ais-Panel-body {
+    z-index: 1;
     position: fixed;
+    width: 100%;
     margin: 0;
     inset: 0;
     padding-top: calc(var(--header-height) + 1em);
@@ -93,12 +96,13 @@
 
   .ais-Dropdown.ais-Dropdown--opened .ais-Panel-footer {
     display: flex;
+    z-index: 2;
     position: fixed;
     bottom: 0;
     left: 0;
     justify-content: center;
     width: 100%;
-    padding-bottom: calc(var(--page-padding) + 1em);
+    padding-bottom: 1em;
     background: theme-color('background');
   }
 
