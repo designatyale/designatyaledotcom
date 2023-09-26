@@ -6,13 +6,15 @@
  */
 'use client';
 
-import useColorScheme from '@/hooks/useColorScheme';
-import { useEffect, useRef } from 'react';
+import { useEffect, useReducer, useRef } from 'react';
 import { ReactSketchCanvas, ReactSketchCanvasRef } from 'react-sketch-canvas';
 
 export default function Drawing({ className }: { className?: string }) {
   const canvasRef = useRef<ReactSketchCanvasRef | null>(null);
-  const { colorScheme } = useColorScheme();
+  const [eraseMode, setEraseMode] = useReducer((_: boolean, action: boolean) => {
+    canvasRef.current?.eraseMode(action);
+    return action;
+  }, false);
   const prevDims = useRef({
     innerHeight: typeof window !== 'undefined' ? window.innerHeight : 0,
     innerWidth: typeof window !== 'undefined' ? window.innerWidth : 0,
@@ -46,7 +48,7 @@ export default function Drawing({ className }: { className?: string }) {
     };
     window.addEventListener('keydown', keyListener, false);
 
-    // clear canvas on windo wresize
+    // clear canvas on window resize
     function resizeHandler() {
       if (!canvasRef.current || typeof window === 'undefined') return;
       const { innerHeight, innerWidth } = window;
@@ -70,13 +72,15 @@ export default function Drawing({ className }: { className?: string }) {
   }, []);
 
   return (
-    <ReactSketchCanvas
-      className={className}
-      style={{}}
-      ref={canvasRef}
-      canvasColor="transparent"
-      strokeWidth={15}
-      // strokeColor={colorScheme.evalScheme === 'light' ? '#070707' : '#fff'}
-    />
+    <>
+      <ReactSketchCanvas
+        className={className}
+        style={{}}
+        ref={canvasRef}
+        canvasColor="transparent"
+        strokeWidth={15}
+        // strokeColor={colorScheme.evalScheme === 'light' ? '#070707' : '#fff'}
+      />
+    </>
   );
 }

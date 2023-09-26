@@ -24,6 +24,7 @@
  * });
  * ```
  */
+import { Libre_Barcode_128_Text } from 'next/font/google';
 import localFont from 'next/font/local';
 
 export const ABCDiatype = localFont({
@@ -45,4 +46,9 @@ export const ABCDiatype = localFont({
       style: 'normal',
     },
   ],
+});
+
+export const MonsieurLaDoulaise = Libre_Barcode_128_Text({
+  weight: '400',
+  subsets: ['latin'],
 });
