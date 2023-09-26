@@ -15,7 +15,7 @@ import ColorScheme from '@/components/Footer/colorScheme';
 const FooterLinks = [
   ['Studio', '/studio'],
   ['Events', '/community'],
-  ['Past Events', '/community/pastevents'],
+  ['Past Events', '/community/past-events'],
   ['Directory', '/directory'],
   ['About', '/about'],
   ['Alumni', '/about/alumni'],
