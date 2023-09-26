@@ -24,28 +24,28 @@ export default function GroupedHits<T = 'event'>({
   ...props
 }: TabledHitsProps<Event & BaseHit, T>) {
   const { hits: data } = useInfiniteHits(props);
-  const groupedData = useMemo(
-    () =>
-      Object.entries(
-        data.reduce<{ [k: string]: typeof data }>(
-          (acc, curr) => {
-            const year = curr.date
-              ? new Date(curr.date).getFullYear().toString()
-              : 'Unknown';
-            acc[year.toString()] = [...(acc[year.toString()] ?? []), curr];
-            return acc;
-          },
-          {} as { [k: number]: typeof data }
-        )
-      ).toSorted(([key1], [key2]) =>
-        key2 === 'Unknown'
-          ? -Infinity
-          : key1 === 'Unknown'
-          ? Infinity
-          : parseInt(key1) - parseInt(key2)
-      ),
-    [data]
-  );
+  const groupedData = useMemo(() => {
+    const vals = Object.entries(
+      data.reduce<{ [k: string]: typeof data }>(
+        (acc, curr) => {
+          const year = curr.date
+            ? new Date(curr.date).getFullYear().toString()
+            : 'Unknown';
+          acc[year.toString()] = [...(acc[year.toString()] ?? []), curr];
+          return acc;
+        },
+        {} as { [k: number]: typeof data }
+      )
+    );
+    vals.sort(([key1], [key2]) =>
+      key2 === 'Unknown'
+        ? -Infinity
+        : key1 === 'Unknown'
+        ? Infinity
+        : parseInt(key1) - parseInt(key2)
+    );
+    return vals;
+  }, [data]);
 
   return (
     <div role="list" className={s.container}>
