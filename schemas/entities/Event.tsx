@@ -79,6 +79,20 @@ const Event = defineType({
         timeFormat: 'h:mm A',
       },
     }),
+    defineField({
+      name: 'calendar_link',
+      type: 'url' as const,
+      title: 'GCal Link',
+      description: 'A link to the Google Calendar event.',
+      group: 'information',
+    }),
+    defineField({
+      name: 'more_info',
+      type: 'url' as const,
+      title: 'More Info Link',
+      description: 'A link to any additional information.',
+      group: 'information',
+    }),
 
     /* ---------------------------------- Page ---------------------------------- */
 
@@ -126,6 +140,24 @@ const Event = defineType({
       },
     }),
   ],
+  preview: {
+    select: {
+      title: 'title',
+      date: 'date',
+      media: 'picture',
+    },
+    prepare(selection) {
+      const { title, date, media } = selection;
+      return {
+        title: title,
+        media: media,
+        subtitle: new Date(date).toLocaleString('en-us', {
+          dateStyle: 'long',
+          timeStyle: 'short',
+        }), // YYYY-MM-DDT --> YYYY
+      };
+    },
+  },
 });
 
 export default Event;

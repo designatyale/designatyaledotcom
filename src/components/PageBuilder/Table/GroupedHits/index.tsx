@@ -93,10 +93,20 @@ export default function GroupedHits<T = 'event'>({
                     </p>
                   </div>
                 )}
-                <div className={s.field}>
-                  <FiCheckSquare />
-                  <p>RSVP {'->'}</p>
-                </div>
+                {event.calendar_link && (
+                  <div className={s.field}>
+                    <FiCheckSquare />
+                    <p>
+                      <a
+                        href={event.calendar_link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Add to Calendar {'->'}
+                      </a>
+                    </p>
+                  </div>
+                )}
               </article>
             ))}
           </div>

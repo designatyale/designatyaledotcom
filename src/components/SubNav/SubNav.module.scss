@@ -20,13 +20,14 @@
     width: 100%;
     max-width: 1px;
     padding-right: 2em;
-    gap: 1.5em;
+    gap: 1em;
   }
 
   & li {
     margin-bottom: 0;
     font-weight: 700;
     font-size: 2em;
+    white-space: nowrap;
   }
 
   & a:not([aria-current='page']) {

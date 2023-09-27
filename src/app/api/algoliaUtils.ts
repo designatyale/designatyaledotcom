@@ -46,6 +46,8 @@ export default function buildSanityAlgolia(algolia: SearchClient) {
         search_hidden,
         location,
         date,
+        calendar_link,
+        more_info,
         design_tags[] -> {
           _id,
           title,

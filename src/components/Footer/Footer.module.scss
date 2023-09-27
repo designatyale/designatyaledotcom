@@ -113,6 +113,7 @@
   }
 
   & input[type='email'] {
+    box-sizing: border-box;
     width: 100%;
     margin-top: 0.5rem;
     padding: 0.3rem;
@@ -130,6 +131,8 @@
     margin: 0.5rem 0;
     padding: 0.5rem;
     border: 1px solid theme-color('border2');
+    border-radius: 0;
+    color: theme-color('content');
     text-align: center;
     cursor: pointer;
 

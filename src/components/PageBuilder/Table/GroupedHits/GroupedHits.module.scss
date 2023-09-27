@@ -112,4 +112,13 @@
     height: 1em;
     margin: 0.1em 0 0;
   }
+
+  & a {
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+
+    &:hover {
+      color: theme-color('content');
+    }
+  }
 }

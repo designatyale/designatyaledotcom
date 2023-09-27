@@ -42,9 +42,8 @@
 
 .assets {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(10em, max-content));
   grid-area: contents;
-  padding: 0 1em;
   gap: 1em;
 }
 
@@ -52,7 +51,7 @@
 
 .member {
   width: 100%;
-  max-width: 12em;
+  max-width: 20em;
 
   &_image {
     aspect-ratio: 1;

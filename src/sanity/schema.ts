@@ -115,6 +115,20 @@ export interface Event extends SanityDocument {
   date?: string;
 
   /**
+   * GCal Link — `url`
+   *
+   * A link to the Google Calendar event.
+   */
+  calendar_link?: string;
+
+  /**
+   * More Info Link — `url`
+   *
+   * A link to any additional information.
+   */
+  more_info?: string;
+
+  /**
    * Slug — `slug`
    *
    * (Optional) A slug for the event's page on the site.
