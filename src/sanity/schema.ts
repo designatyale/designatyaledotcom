@@ -147,6 +147,7 @@ export interface Event extends SanityDocument {
     | SanityKeyed<PeGallery>
     | SanityKeyed<PeTable>
     | SanityKeyed<PeShowcase>
+    | SanityKeyed<PeNlsignup>
   >;
 
   /**
@@ -264,6 +265,7 @@ export interface Member extends SanityDocument {
     | SanityKeyed<PeGallery>
     | SanityKeyed<PeTable>
     | SanityKeyed<PeShowcase>
+    | SanityKeyed<PeNlsignup>
   >;
 
   /**
@@ -374,6 +376,7 @@ export interface Project extends SanityDocument {
     | SanityKeyed<PeGallery>
     | SanityKeyed<PeTable>
     | SanityKeyed<PeShowcase>
+    | SanityKeyed<PeNlsignup>
   >;
 
   /**
@@ -469,6 +472,7 @@ export interface SitePage extends SanityDocument {
     | SanityKeyed<PeGallery>
     | SanityKeyed<PeTable>
     | SanityKeyed<PeShowcase>
+    | SanityKeyed<PeNlsignup>
   >;
 
   /**
@@ -497,6 +501,7 @@ export interface SitePage extends SanityDocument {
     | SanityKeyed<PeGallery>
     | SanityKeyed<PeTable>
     | SanityKeyed<PeShowcase>
+    | SanityKeyed<PeNlsignup>
   >;
 
   /**
@@ -709,6 +714,23 @@ export type PeShowcase = {
    * (Optional) Copy to display above the gallery legend.)
    */
   copy?: Array<SanityKeyed<SanityBlock>>;
+};
+
+export type PeNlsignup = {
+  _type: "pe_nlsignup";
+  /**
+   * Copy — `string`
+   *
+   * Text to display above the newsletter signup form. (Optional)
+   */
+  copy?: string;
+
+  /**
+   * Placeholder — `string`
+   *
+   * Placeholder text for the email input field.
+   */
+  placeholder?: string;
 };
 
 export type SocialInstagram = {

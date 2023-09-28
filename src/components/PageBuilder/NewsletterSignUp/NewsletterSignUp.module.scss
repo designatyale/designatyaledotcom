@@ -1,0 +1,39 @@
+/*
+ * NewsletterSignUp.module.scss
+ * Author: Evan Kirkiles
+ * Created On Thu Sep 28 2023
+ * 2023 Design at Yale 
+ */
+@import '@/styles/utils';
+
+.form {
+  width: 100%;
+
+  & fieldset {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 0.5em;
+  }
+
+  & input[type='email'] {
+    flex: 10;
+    padding: 0.2em;
+    border-bottom: 1px solid theme-color('border2');
+    border-radius: 0;
+  }
+
+  & input[type='submit'] {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.5em 1em;
+    border: 1px solid theme-color('border2');
+    color: theme-color('content');
+    cursor: pointer;
+
+    &:hover {
+      background-color: theme-color('background2');
+    }
+  }
+}

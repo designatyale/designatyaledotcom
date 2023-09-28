@@ -12,6 +12,7 @@ import ActionButton from '@/components/PageBuilder/ActionButton';
 import Gallery from '@/components/PageBuilder/Gallery';
 import Showcase from '@/components/PageBuilder/Showcase';
 import dynamic from 'next/dynamic';
+import NewsletterSignUp from '@/components/PageBuilder/NewsletterSignUp';
 
 const TableContents = dynamic(
   () => import('@/components/PageBuilder/Table/contents'),
@@ -46,6 +47,8 @@ export default function PageBuilder({
         return <Showcase key={pageBlock._key} value={pageBlock} />;
       case 'pe_table':
         return <TableContents key={pageBlock._key} value={pageBlock} />;
+      case 'pe_nlsignup':
+        return <NewsletterSignUp key={pageBlock._key} value={pageBlock} />;
     }
   });
 }

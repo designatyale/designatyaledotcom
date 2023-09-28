@@ -57,7 +57,7 @@ export default async function SubSubPage({
   const page: SitePage | null = await getClient(preview).fetch(
     pageQuery,
     params,
-    { next: { tags: [`page:${params.pageSlug}`] } }
+    { next: { tags: [`page:/${pageSlug}`, `page:/${pageSlug}/${subSlug}`] } }
   );
   if (!page) notFound();
 

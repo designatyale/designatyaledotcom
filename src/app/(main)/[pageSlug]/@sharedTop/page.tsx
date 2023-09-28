@@ -29,7 +29,7 @@ export default async function SharedTopComponent({
   const page: SitePage | null = await getClient(preview).fetch(
     pageQuery,
     params,
-    { next: { tags: [`page:${params.pageSlug}`] } }
+    { next: { tags: [`page:/${pageSlug}`] } }
   );
   if (!page) notFound();
 

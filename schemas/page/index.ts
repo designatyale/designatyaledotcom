@@ -12,6 +12,7 @@ import ActionBarType from './ActionBarType';
 import ActionButtonType from './ActionButtonType';
 import CopyType from './CopyType';
 import GalleryType from './GalleryType';
+import NewsletterSignUpType from './NewsletterSignUpType';
 import ShowcaseType from './ShowcaseType';
 import TableType from './TableType';
 
@@ -22,6 +23,7 @@ const pageElements = [
   GalleryType,
   TableType,
   ShowcaseType,
+  NewsletterSignUpType,
 ];
 
 export default pageElements;
