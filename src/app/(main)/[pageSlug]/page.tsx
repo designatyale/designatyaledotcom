@@ -24,7 +24,7 @@ import s from './[subSlug]/SubPage.module.scss';
 // All subpages are simply a wrapped PageBuilder with necessary DOM elements.
 
 interface PageProps {
-  params: { pageSlug: string[] };
+  params: { pageSlug: string };
 }
 
 export default async function SubPage({ params: { pageSlug } }: PageProps) {
