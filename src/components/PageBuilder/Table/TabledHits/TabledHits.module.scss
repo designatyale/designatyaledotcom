@@ -51,12 +51,13 @@
     }
 
     & button {
-      display: block;
+      display: flex;
+      text-align: left;
 
       & svg {
-        display: inline-block;
+        display: block;
+        flex-shrink: 0;
         margin-right: 0.2em;
-        vertical-align: bottom;
         transition: transform 0.1s linear;
       }
 
