@@ -53,7 +53,7 @@ export default async function Image({ params: { pageSlug } }: PageProps) {
         <div style={{ fontFamily: 'ABCDiatype', fontWeight: 700 }}>
           {`/${pageSlug}`}
         </div>
-        <div
+        {/* <div
           style={{
             position: 'absolute',
             top: '50vh',
@@ -76,7 +76,7 @@ export default async function Image({ params: { pageSlug } }: PageProps) {
             border: '8px dashed black',
             transform: 'translate(-50%, -50%)',
           }}
-        />
+        /> */}
       </div>
     ),
     {

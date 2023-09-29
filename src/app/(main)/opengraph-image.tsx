@@ -44,18 +44,6 @@ export default async function Image() {
             width: '50vh',
           }}
         />
-        <div
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            height: '70vh',
-            width: '70vh',
-            borderRadius: '50%',
-            border: '1px solid black',
-            transform: 'translate(-50%, -50%)',
-          }}
-        />
       </div>
     ),
     {
