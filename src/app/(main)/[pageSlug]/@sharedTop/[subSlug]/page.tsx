@@ -11,11 +11,31 @@ import PreviewProvider from '@/components/PreviewProvider';
 import SubNav from '@/components/SubNav';
 import PreviewSubNav from '@/components/SubNav/preview';
 import getClient from '@/sanity/client';
-import { pageQuery } from '@/sanity/groq';
-import { SitePage } from '@/sanity/schema';
+import { pageQuery, subpageQuery } from '@/sanity/groq';
+import { SanityKeyed, SitePage } from '@/sanity/schema';
 import getPreview from '@/util/getPreview';
 import unwrapReference from '@/util/unwrapReference';
 import { notFound } from 'next/navigation';
+
+// builds the list of sub-pages to statically generate
+export async function generateStaticParams({
+  params: { pageSlug },
+}: {
+  params: { pageSlug: string };
+}) {
+  const params = { pageSlug: `/${pageSlug}` };
+  const subPages: SanityKeyed<SitePage>[] | null = await getClient().fetch(
+    subpageQuery,
+    params,
+    { next: { revalidate: 0 } }
+  );
+  return (
+    subPages?.map(({ slug }) => ({
+      pageSlug,
+      subSlug: slug.current.replace(`${params.pageSlug}/`, ''),
+    })) ?? []
+  );
+}
 
 interface PageProps {
   params: { pageSlug: string; subSlug: string[] };
