@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "source ./get-sc-creds.sh; next build",
     "postbuild": "next-sitemap --config next-sitemap.config.js",
     "codegen": "npx sanity-codegen",
     "start": "next start",
