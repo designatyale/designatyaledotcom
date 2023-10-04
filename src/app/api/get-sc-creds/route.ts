@@ -27,6 +27,8 @@ export function GET(req: NextRequest) {
     return NextResponse.json(
       `SUSPENSE_CACHE_URL=${SUSPENSE_CACHE_URL} SUSPENSE_CACHE_ENDPOINT=${SUSPENSE_CACHE_ENDPOINT} SUSPENSE_CACHE_AUTH_TOKEN=${SUSPENSE_CACHE_AUTH_TOKEN}`
     );
-  } catch (e) {}
+  } catch (e) {
+    console.error(e);
+  }
   return NextResponse.json('');
 }
