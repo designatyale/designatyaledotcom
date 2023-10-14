@@ -21,6 +21,103 @@ type TabledHitsProps<K extends BaseHit = BaseHit, T = PeTable['asset_type']> = {
   value: Omit<PeTable, 'asset_type'> & { asset_type: T };
 } & Parameters<typeof useInfiniteHits<K>>[0];
 
+const now = new Date();
+now.setHours(0, 0, 0);
+
+function EventHitDisplay({ event }: { event: Event }) {
+  let title: React.ReactNode = event.title;
+  if (event.title.includes('DAY Speaker Series: ')) {
+    title = (
+      <>
+        <span style={{ display: 'inline-block' }}>DAY Speaker Series:</span>{' '}
+        <span style={{ display: 'inline-block' }}>
+          {event.title.replace('DAY Speaker Series: ', '')}
+        </span>
+      </>
+    );
+  }
+
+  return (
+    <div className={s.event}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={(event as { pictureUrl?: string }).pictureUrl}
+        alt={`Promo for event ${event.title}`}
+      />
+      <h3>{title}</h3>
+      {event.date && (
+        <div className={s.field}>
+          <FiCalendar />
+          <p>
+            {new Date(event.date).toLocaleString('en-us', {
+              dateStyle: 'long',
+              timeStyle: 'short',
+            })}
+          </p>
+        </div>
+      )}
+      {event.location && (
+        <div className={s.field}>
+          <FiMapPin />
+          <div>
+            <PortableText components={components} value={event.location} />
+          </div>
+        </div>
+      )}
+      {event.date && new Date(event.date) >= now && (
+        <div className={s.upcoming} role="presentation">
+          UPCOMING!
+        </div>
+      )}
+      <br />
+      <PortableText components={components} value={event.about ?? []} />
+      <br />
+      <div style={{ flex: 1 }} />
+      {event.design_tags && event.design_tags.length && (
+        <ul className={s.field}>
+          {event.design_tags?.map((design_tag) => {
+            const tag = unwrapReference(design_tag);
+            return <TagPillHoverable key={tag._id} tag={tag} />;
+          })}
+        </ul>
+      )}
+      {/* {event.location && (
+        <div className={s.field}>
+          <FiMapPin />
+          <div>
+            <PortableText components={components} value={event.location} />
+          </div>
+        </div>
+      )}
+      {event.date && (
+        <div className={s.field}>
+          <FiCalendar />
+          <p>
+            {new Date(event.date).toLocaleString('en-us', {
+              dateStyle: 'long',
+              timeStyle: 'short',
+            })}
+          </p>
+        </div>
+      )} */}
+      {event.calendar_link && (
+        <div className={s.field}>
+          <FiCheckSquare />
+          <p>
+            <a
+              href={event.calendar_link}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Add to Calendar {'->'}
+            </a>
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function GroupedHits<T = 'event'>({
   value,
   ...props
@@ -49,9 +146,6 @@ export default function GroupedHits<T = 'event'>({
     return vals;
   }, [data]);
 
-  const now = new Date();
-  now.setHours(0, 0, 0);
-
   return (
     <div role="list" className={s.container}>
       {groupedData.map(([key, hits]) => (
@@ -64,66 +158,7 @@ export default function GroupedHits<T = 'event'>({
           </hgroup>
           <div className={s.group_items}>
             {hits.map((event) => (
-              <div key={event._id} className={s.event}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={event.pictureUrl as string}
-                  alt={`Promo for event ${event.title}`}
-                />
-                <h3>{event.title}</h3>
-                {event.date && new Date(event.date) >= now && (
-                  <div className={s.upcoming}>UPCOMING!</div>
-                )}
-                <PortableText
-                  components={components}
-                  value={event.about ?? []}
-                />
-                <br />
-                {event.design_tags && event.design_tags.length && (
-                  <ul className={s.field}>
-                    {event.design_tags?.map((design_tag) => {
-                      const tag = unwrapReference(design_tag);
-                      return <TagPillHoverable key={tag._id} tag={tag} />;
-                    })}
-                  </ul>
-                )}
-                {event.location && (
-                  <div className={s.field}>
-                    <FiMapPin />
-                    <div>
-                      <PortableText
-                        components={components}
-                        value={event.location}
-                      />
-                    </div>
-                  </div>
-                )}
-                {event.date && (
-                  <div className={s.field}>
-                    <FiCalendar />
-                    <p>
-                      {new Date(event.date).toLocaleString('en-us', {
-                        dateStyle: 'long',
-                        timeStyle: 'short',
-                      })}
-                    </p>
-                  </div>
-                )}
-                {event.calendar_link && (
-                  <div className={s.field}>
-                    <FiCheckSquare />
-                    <p>
-                      <a
-                        href={event.calendar_link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Add to Calendar {'->'}
-                      </a>
-                    </p>
-                  </div>
-                )}
-              </div>
+              <EventHitDisplay key={event._id} event={event} />
             ))}
           </div>
         </section>

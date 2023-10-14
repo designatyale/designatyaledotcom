@@ -43,7 +43,7 @@
 
   &_items {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, max-content));
+    grid-template-columns: repeat(auto-fit, minmax(180px, max-content));
     width: 100%;
     gap: 1.5rem;
 
@@ -82,7 +82,7 @@
     }
 
     & h3 {
-      margin: 0.5rem 0;
+      margin: 0.75rem 0 0.25rem;
       font-weight: 700;
       font-size: 1.3em;
     }
@@ -107,14 +107,16 @@
 }
 
 .event {
+  display: flex;
   position: relative;
+  flex-direction: column;
   max-width: 380px;
 }
 
 .upcoming {
   position: absolute;
-  top: 1em;
-  right: 1em;
+  top: -1em;
+  right: 0.5em;
   padding: 0.25em 1em;
   border: 1px solid theme-color('border');
   border-radius: 1em;
@@ -128,7 +130,7 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  margin: 0.2em 0;
+  margin-bottom: 0.2em;
   gap: 0.4em;
   color: theme-color('content2');
 
