@@ -38,7 +38,7 @@ export default async function SubPage({ params: { pageSlug } }: PageProps) {
   if (!page) notFound();
 
   return (
-    <section aria-labelledby="subpage-header" className={s.container}>
+    <article aria-labelledby="subpage-header" className={s.container}>
       {preview && preview.token ? (
         <PreviewProvider token={preview.token}>
           <PreviewPageBuilder
@@ -51,7 +51,7 @@ export default async function SubPage({ params: { pageSlug } }: PageProps) {
       ) : (
         <PageBuilder content={page.rootSubPageBuilder ?? []} />
       )}
-    </section>
+    </article>
   );
 }
 

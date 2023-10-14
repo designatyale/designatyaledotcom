@@ -75,10 +75,6 @@
       grid-template-columns: repeat(auto-fit, minmax(280px, max-content));
     }
 
-    & article {
-      max-width: 380px;
-    }
-
     & img {
       aspect-ratio: 1;
       width: 100%;
@@ -96,6 +92,36 @@
       line-height: 1.2;
     }
   }
+}
+
+@keyframes pulse {
+  0% {
+    transform: translateY(-3px);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+  100% {
+    transform: translateY(-3px);
+  }
+}
+
+.event {
+  position: relative;
+  max-width: 380px;
+}
+
+.upcoming {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  padding: 0.25em 1em;
+  border: 1px solid theme-color('border');
+  border-radius: 1em;
+  background-color: theme-color('background');
+  font-weight: 700;
+  text-align: center;
+  animation: pulse 3s ease-in-out infinite;
 }
 
 .field {

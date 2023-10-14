@@ -12,6 +12,8 @@ import { useMemo } from 'react';
 import { PortableText } from '@portabletext/react';
 import components from '@/components/PortableText';
 import { FiCalendar, FiMapPin, FiCheckSquare } from 'react-icons/fi';
+import unwrapReference from '@/util/unwrapReference';
+import TagPillHoverable from '@/components/TagPill/hoverable';
 
 type BaseHit = { [x: string]: unknown };
 
@@ -34,7 +36,7 @@ export default function GroupedHits<T = 'event'>({
           acc[year.toString()] = [...(acc[year.toString()] ?? []), curr];
           return acc;
         },
-        {} as { [k: number]: typeof data }
+        {} as { [k: string]: typeof data }
       )
     );
     vals.sort(([key1], [key2]) =>
@@ -46,6 +48,9 @@ export default function GroupedHits<T = 'event'>({
     );
     return vals;
   }, [data]);
+
+  const now = new Date();
+  now.setHours(0, 0, 0);
 
   return (
     <div role="list" className={s.container}>
@@ -59,18 +64,29 @@ export default function GroupedHits<T = 'event'>({
           </hgroup>
           <div className={s.group_items}>
             {hits.map((event) => (
-              <article key={event._id}>
+              <div key={event._id} className={s.event}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={event.pictureUrl as string}
                   alt={`Promo for event ${event.title}`}
                 />
                 <h3>{event.title}</h3>
+                {event.date && new Date(event.date) >= now && (
+                  <div className={s.upcoming}>UPCOMING!</div>
+                )}
                 <PortableText
                   components={components}
                   value={event.about ?? []}
                 />
                 <br />
+                {event.design_tags && event.design_tags.length && (
+                  <ul className={s.field}>
+                    {event.design_tags?.map((design_tag) => {
+                      const tag = unwrapReference(design_tag);
+                      return <TagPillHoverable key={tag._id} tag={tag} />;
+                    })}
+                  </ul>
+                )}
                 {event.location && (
                   <div className={s.field}>
                     <FiMapPin />
@@ -107,7 +123,7 @@ export default function GroupedHits<T = 'event'>({
                     </p>
                   </div>
                 )}
-              </article>
+              </div>
             ))}
           </div>
         </section>

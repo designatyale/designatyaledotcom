@@ -1,3 +1,13 @@
+/*
+ * route.ts
+ * Author: Evan Kirkiles
+ * Created On Fri Oct 13 2023
+ * 2023 Design at Yale
+ *
+ * BACKGROUND:
+ * https://github.com/evankirkiles/nextjs-broken-data-cache-demo
+ */
+
 import { NextRequest, NextResponse } from 'next/server';
 // cache types for intellisense
 import FetchCache from 'next/dist/server/lib/incremental-cache/fetch-cache';

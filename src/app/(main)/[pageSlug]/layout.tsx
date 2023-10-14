@@ -39,10 +39,10 @@ export default async function SubPageLayout({
   children,
 }: PropsWithChildren<PageProps>) {
   return (
-    <article className={s.container}>
+    <main className={s.container}>
       {sharedTop}
       {children}
-    </article>
+    </main>
   );
 }
 

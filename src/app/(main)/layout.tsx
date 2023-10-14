@@ -9,7 +9,6 @@
 
 import SkipLink from '@/components/SkipLink';
 import { PropsWithChildren } from 'react';
-import s from './Layout.module.scss';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import Providers from '@/app/(main)/providers';
@@ -34,7 +33,7 @@ export default function Layout({ children }: PropsWithChildren) {
       </Script>
       <SkipLink />
       <Nav>hi</Nav>
-      <main>{children}</main>
+      {children}
       <Footer />
     </Providers>
   );

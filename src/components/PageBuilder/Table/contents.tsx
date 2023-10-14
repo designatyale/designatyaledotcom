@@ -9,7 +9,7 @@
 import { FacetDropdown } from '@/components/PageBuilder/Table/FacetDropdown';
 import { PeTable } from '@/sanity/schema';
 import { searchClient } from '@/util/algolia';
-import { InstantSearch, useHitsPerPage } from 'react-instantsearch';
+import { Configure, InstantSearch, useHitsPerPage } from 'react-instantsearch';
 import s from './Table.module.scss';
 import Search from '@/components/PageBuilder/Table/Search';
 import TabledHits from '@/components/PageBuilder/Table/TabledHits';

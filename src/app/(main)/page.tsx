@@ -28,7 +28,7 @@ export default async function Page() {
   // );
 
   return (
-    <article className={s.container}>
+    <main className={s.container}>
       <Drawing className={s.canvas} />
       <section className={s.cta}>
         <div className={s.cta_logo}>
@@ -66,7 +66,7 @@ export default async function Page() {
       {/* <div className={s.under_construction} data-nosnippet>
         WEBSITE IS UNDER CONSTRUCTION!
       </div> */}
-    </article>
+    </main>
   );
 }
 

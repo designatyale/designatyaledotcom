@@ -62,7 +62,7 @@ export default async function SubSubPage({
   if (!page) notFound();
 
   return (
-    <section aria-labelledby="subpage-header" className={s.container}>
+    <article aria-labelledby="subpage-header" className={s.container}>
       {preview && preview.token ? (
         <PreviewProvider token={preview.token}>
           <PreviewPageBuilder
@@ -74,7 +74,7 @@ export default async function SubSubPage({
       ) : (
         <PageBuilder content={page.pageBuilder} />
       )}
-    </section>
+    </article>
   );
 }
 

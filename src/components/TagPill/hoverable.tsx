@@ -28,10 +28,10 @@ export default function TagPillHoverable({ tag }: TagPillProps) {
       <span
         className={classNames(s.color, s.color_smaller)}
         style={{ backgroundColor: tag.color?.hex }}
+        role="presentation"
       />
       <CSSTransition appear in={hovered} nodeRef={nodeRef} timeout={300}>
         <div
-          role="tooltip"
           className={classNames(s.container, s.container_appearing)}
           ref={nodeRef}
           aria-hidden={!hovered}
