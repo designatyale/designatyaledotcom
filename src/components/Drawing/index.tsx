@@ -29,10 +29,7 @@ export default function Drawing({ className }: { className?: string }) {
               className={classNames(s.backdrop, stage)}
               onClick={() => setUploading(false)}
             >
-              <DrawingSubmitForm
-                uploading={uploading}
-                setUploading={setUploading}
-              />
+              <DrawingSubmitForm setUploading={setUploading} />
             </div>
           )
         }
