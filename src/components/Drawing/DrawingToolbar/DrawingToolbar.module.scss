@@ -1,0 +1,93 @@
+/*
+ * DrawingToolbar.module.scss
+ * Author: Evan Kirkiles
+ * Created On Fri Nov 17 2023
+ * 2023 Design at Yale 
+ */
+@import '@/styles/utils';
+
+@keyframes fade-in {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+.toolbar_container {
+  display: flex;
+  z-index: zIndex('medium');
+  position: absolute;
+  flex-direction: column;
+  align-items: center;
+  inset: 0;
+  padding-top: var(--header-height);
+  pointer-events: none;
+
+  @include media('xs-down') {
+    font-size: 1.25em;
+  }
+}
+
+.toolbar {
+  display: flex;
+  z-index: zIndex('high');
+  position: absolute;
+  top: var(--header-height);
+  align-items: center;
+  padding: 0.5em 1em;
+  gap: 0.5em;
+  border: 1px solid theme-color('border2');
+  border-radius: 2em;
+  background-color: theme-color('background');
+  animation: fade-in 0.3s ease-in-out;
+  animation-delay: 0.15s;
+  animation-fill-mode: backwards;
+  pointer-events: all;
+
+  & button {
+    position: relative;
+
+    &::after {
+      position: absolute;
+      height: 0.25em;
+      inset: calc(100% + 0.25em) 0 auto 0;
+      border-top-right-radius: 0.1em;
+      border-top-left-radius: 0.1em;
+      content: '';
+      transition: background-color 0.1s ease-in-out;
+    }
+
+    &:not([aria-checked='true']):hover::after {
+      background-color: theme-color('background2');
+    }
+
+    &[aria-checked='true']::after {
+      // border: 1px solid theme-color('content');
+      background-color: theme-color('background3');
+    }
+  }
+}
+
+.handle {
+  margin-left: -0.5em;
+  cursor: grab;
+}
+
+.todays_prompt {
+  position: absolute;
+  top: calc(100% + 1px);
+  right: 0;
+  left: 0;
+  padding: 0.5em;
+  border-bottom-right-radius: 0.5em;
+  border-bottom-left-radius: 0.5em;
+  background-color: theme-color('background');
+  color: theme-color('content2');
+  font-size: 0.75em;
+  letter-spacing: 0.1em;
+  text-align: center;
+}

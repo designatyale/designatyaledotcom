@@ -8,6 +8,7 @@
     "postbuild": "next-sitemap --config next-sitemap.config.js",
     "codegen": "npx sanity-codegen",
     "start": "next start",
+    "seed": "dotenv -e .env.local -- ts-node \"./src/lib/seed.ts\"",
     "lint": "next lint"
   },
   "dependencies": {
@@ -21,6 +22,7 @@
     "@tanstack/react-query": "^4.33.0",
     "@tanstack/react-table": "^8.9.3",
     "@uidotdev/usehooks": "^2.2.0",
+    "@vercel/blob": "^0.15.1",
     "@vercel/postgres-kysely": "^0.6.0",
     "algoliasearch": "^4.19.1",
     "classnames": "^2.3.2",
@@ -38,7 +40,8 @@
     "sanity-algolia": "^1.1.0",
     "sanity-plugin-iframe-pane": "^2.3.1",
     "sanity-plugin-media": "^2.2.2",
-    "styled-components": "^5.2.0"
+    "styled-components": "^5.2.0",
+    "transition-hook": "^1.5.2"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.22.5",
@@ -50,6 +53,7 @@
     "@types/react-dom": "^18.2.0",
     "@types/styled-components": "^5.1.0",
     "code-tag": "^1.1.0",
+    "dotenv-cli": "^7.3.0",
     "eslint": "^8.48.0",
     "eslint-config-next": "13.4.12",
     "next-sitemap": "^4.1.8",
