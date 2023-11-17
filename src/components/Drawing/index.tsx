@@ -1,13 +1,16 @@
 /*
- * drawing.tsx
+ * index.tsx
  * Author: Evan Kirkiles
- * Created On Mon Sep 25 2023
+ * Created On Thu Nov 16 2023
  * 2023 Design at Yale
  */
 'use client';
 
+import classNames from 'classnames';
 import { useEffect, useReducer, useRef } from 'react';
 import { ReactSketchCanvas, ReactSketchCanvasRef } from 'react-sketch-canvas';
+import s from './Drawing.module.scss';
+import DrawingToolbar from '@/components/Drawing/Toolbar';
 
 export default function Drawing({ className }: { className?: string }) {
   const canvasRef = useRef<ReactSketchCanvasRef | null>(null);
@@ -21,6 +24,7 @@ export default function Drawing({ className }: { className?: string }) {
   });
 
   useEffect(() => {
+    // Keybindings
     const keyListener = (e: KeyboardEvent) => {
       if (!canvasRef.current) return;
       switch (e.key) {
@@ -71,16 +75,35 @@ export default function Drawing({ className }: { className?: string }) {
     };
   }, []);
 
+  // load paths from localStorage if they exist for this screen size.
+  const hasMountedRef = useRef(false);
+  useEffect(() => {
+    if (!canvasRef.current) return;
+    hasMountedRef.current = true;
+    const paths = localStorage.getItem('day-current-sketch');
+    if (!paths) return;
+    canvasRef.current.loadPaths(JSON.parse(paths));
+  }, []);
+
   return (
     <>
       <ReactSketchCanvas
-        className={className}
+        className={classNames(s.canvas, className)}
         style={{}}
         ref={canvasRef}
         canvasColor="transparent"
         strokeWidth={15}
-        // strokeColor={colorScheme.evalScheme === 'light' ? '#070707' : '#fff'}
+        eraserWidth={15}
+        onChange={(updatedPaths) => {
+          if (hasMountedRef.current) {
+            localStorage.setItem(
+              'day-current-sketch',
+              JSON.stringify(updatedPaths)
+            );
+          }
+        }}
       />
+      <DrawingToolbar canvasRef={canvasRef} />
     </>
   );
 }

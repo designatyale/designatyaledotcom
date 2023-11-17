@@ -10,7 +10,7 @@ import DAY from '@/assets/svg/DAY';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
-const Drawing = dynamic(() => import('@/app/(main)/drawing'), {
+const Drawing = dynamic(() => import('@/components/Drawing'), {
   ssr: false,
 });
 
@@ -29,7 +29,7 @@ export default async function Page() {
 
   return (
     <main className={s.container}>
-      <Drawing className={s.canvas} />
+      <Drawing />
       <section className={s.cta}>
         <div className={s.cta_logo}>
           <DAY />
@@ -63,9 +63,6 @@ export default async function Page() {
           Yale students, fill out the form and keep your eyes out for events!
         </p>
       </section>
-      {/* <div className={s.under_construction} data-nosnippet>
-        WEBSITE IS UNDER CONSTRUCTION!
-      </div> */}
     </main>
   );
 }
