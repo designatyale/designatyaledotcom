@@ -5,6 +5,7 @@
  * 2023 Design at Yale
  */
 
+import DoodleViewer from '@/sanity/desk/components/DoodleViewer';
 import Iframe from 'sanity-plugin-iframe-pane';
 import { DefaultDocumentNodeResolver } from 'sanity/desk';
 
@@ -37,6 +38,11 @@ const defaultDocumentNode: DefaultDocumentNodeResolver = (S, { schemaType }) => 
             );
           })
           .title('Web Preview'),
+      ]);
+    case `doodle`:
+      return S.document().views([
+        S.view.component(DoodleViewer).title('Doodle Viewer'),
+        S.view.form(),
       ]);
     default:
       return S.document().views([S.view.form()]);

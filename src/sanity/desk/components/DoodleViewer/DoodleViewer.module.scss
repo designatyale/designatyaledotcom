@@ -1,0 +1,53 @@
+/*
+ * DoodleViewer.module.scss
+ * Author: Evan Kirkiles
+ * Created On Fri Nov 17 2023
+ * 2023 Design at Yale 
+ */
+@import '@/styles/utils';
+
+.container {
+  width: 100%;
+  height: 100%;
+  padding: 1em;
+
+  & h1 {
+    font-weight: 700;
+  }
+}
+
+.doodle_grid {
+  display: flex;
+  // grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 1em;
+}
+
+.doodle {
+  display: grid;
+  grid-template:
+    'img' auto
+    'name' auto
+    'email' auto
+    '.' 1fr / 1fr;
+
+  & img {
+    width: auto;
+    height: 200px;
+    border: 1px solid theme-color('content');
+
+    background-color: theme-color('background');
+    filter: invert(1);
+  }
+
+  & h4 {
+    margin-top: 0.2em;
+    font-weight: 700;
+  }
+}
+
+.action_bar {
+  display: flex;
+  gap: 0.5em;
+}

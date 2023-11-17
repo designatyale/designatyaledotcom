@@ -13,6 +13,7 @@ import { useDrawingContext } from '@/components/Drawing/DrawingContext';
 import { experimental_useFormStatus } from 'react-dom';
 import { Transition } from 'transition-hook';
 import classNames from 'classnames';
+import useColorScheme from '@/hooks/useColorScheme';
 
 interface DrawingToolbarProps {
   setUploading: (a0: boolean) => void;
@@ -24,6 +25,9 @@ export default function DrawingSubmitForm({
   setUploading,
 }: DrawingToolbarProps) {
   const { canvasRef, dimensions, prompt } = useDrawingContext();
+  const {
+    colorScheme: { evalScheme },
+  } = useColorScheme();
   const [status, setStatus] = useState<LoadStatus | null>(null);
 
   // add the image from the canvas to the file input on mount
@@ -145,20 +149,27 @@ export default function DrawingSubmitForm({
         />
       </div>
       <div className={s.field_row}>
-        <div>Prompt</div>
+        <label>Prompt</label>
         <input
           type="text"
           name="display-prompt-name"
-          value={prompt.name}
+          value={`"${prompt.name}"`}
           readOnly
         />
       </div>
       <div className={s.field_row}>
-        <div>Size</div>
+        <label>Size</label>
         <input
           type="text"
           value={`${innerWidth}x${innerHeight}px`}
           name="display-prompt-dimensions"
+          readOnly
+        />
+        <label>Colors</label>
+        <input
+          type="text"
+          value={evalScheme === 'dark' ? 'Dark' : 'Light'}
+          name="display-color-scheme"
           readOnly
         />
       </div>
@@ -189,6 +200,13 @@ export default function DrawingSubmitForm({
         type="number"
         value={prompt.id}
         name="prompt-id"
+        readOnly
+        className={s.hidden_input}
+      />
+      <input
+        type="text"
+        value={'dark'}
+        name="color-scheme"
         readOnly
         className={s.hidden_input}
       />

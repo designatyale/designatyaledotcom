@@ -26,6 +26,9 @@ interface SketchesTable {
   width: number;
   height: number;
 
+  // was the sketch done in dark mode?
+  darkMode: boolean;
+
   // prompt id referring to the prompt this was generated under
   prompt_id: number;
 

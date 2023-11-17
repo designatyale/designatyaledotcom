@@ -125,13 +125,12 @@
   border: 1px solid theme-color('border2');
   text-align: bottom;
 
-  & > *:first-child {
+  & > label {
     width: 4em;
-    // height: 2em;
     font-weight: 700;
   }
 
-  & > *:last-child {
+  & > input {
     flex: 1;
     margin-right: 0.5em;
   }
