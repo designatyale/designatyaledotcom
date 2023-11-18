@@ -10,8 +10,14 @@
   width: 100%;
   padding: 1em;
 
-  & h1 {
+  & h1,
+  h2 {
     font-weight: 700;
+  }
+
+  & h2 {
+    margin-top: 1em;
+    font-size: 1.25em;
   }
 }
 
@@ -35,7 +41,7 @@
     width: auto;
     height: 200px;
     border: 1px solid theme-color('content');
-    background-color: theme-color('background');
+    background-color: white;
   }
 
   & h4 {
@@ -43,7 +49,7 @@
     font-weight: 700;
   }
 
-  :global(*[data-scheme='dark']) & img {
+  &[data-scheme='dark'] img {
     background-color: theme-color('content');
     filter: invert(1);
   }

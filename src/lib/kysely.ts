@@ -29,8 +29,11 @@ interface SketchesTable {
   // was the sketch done in dark mode?
   dark_mode: boolean;
 
-  // prompt id referring to the prompt this was generated under
-  prompt_id: number;
+  // prompt id referring to the Sanity prompt this was generated under
+  prompt_id: string;
+
+  // is the sketch favorited?
+  favorited: ColumnType<boolean, never, boolean | undefined>;
 
   // You can specify a different type for each operation (select, insert and
   // update) using the `ColumnType<SelectType, InsertType, UpdateType>`
