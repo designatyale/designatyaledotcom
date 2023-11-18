@@ -9,6 +9,11 @@ import { db } from '@/lib/kysely';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  const items = await db.selectFrom('sketches').selectAll().limit(20).execute();
+  const items = await db
+    .selectFrom('sketches')
+    .selectAll()
+    .orderBy('createdAt desc')
+    .limit(20)
+    .execute();
   return NextResponse.json(items, { status: 200 });
 }

@@ -9,6 +9,7 @@ import { Sketch, db } from '@/lib/kysely';
 import { useQuery } from '@tanstack/react-query';
 import { ComponentView, UserViewComponent } from 'sanity/desk';
 import s from './DoodleViewer.module.scss';
+import Doodle from '@/sanity/desk/components/DoodleViewer/DoodlePane';
 
 const DoodleViewer: UserViewComponent = ({ document, schemaType }) => {
   const { data, isLoading } = useQuery<Sketch[]>({
@@ -26,23 +27,7 @@ const DoodleViewer: UserViewComponent = ({ document, schemaType }) => {
         <hr />
         <div className={s.doodle_grid}>
           {data &&
-            data.map((sketch) => (
-              <article className={s.doodle} key={sketch.id}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={sketch.image_url} alt="A sketch." />
-                <h4>{sketch.name}</h4>
-                <div>{sketch.email}</div>
-                <div>
-                  {new Date(
-                    sketch.createdAt as any as string
-                  ).toLocaleDateString('en-us', { dateStyle: 'long' })}
-                </div>
-                <div className={s.action_bar}>
-                  <button>Favorite</button>
-                  <button>Delete</button>
-                </div>
-              </article>
-            ))}
+            data.map((sketch) => <Doodle key={sketch.id} sketch={sketch} />)}
         </div>
       </section>
     </div>

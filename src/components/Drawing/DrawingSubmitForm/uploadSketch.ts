@@ -17,7 +17,7 @@ const sketchSchema = z.object({
   prompt_id: z.coerce.number(),
   width: z.coerce.number(),
   height: z.coerce.number(),
-  darkMode: z.coerce.boolean(),
+  dark_mode: z.coerce.boolean(),
 });
 
 /**
@@ -31,7 +31,7 @@ export default async function uploadSketch(formData: FormData) {
     prompt_id: formData.get('prompt-id'),
     width: formData.get('width'),
     height: formData.get('height'),
-    darkMode: formData.get('dark-mode'),
+    dark_mode: formData.get('dark-mode'),
   });
   console.log(`Received sketch from: ${parsed.name}, <${parsed.email}>`);
 

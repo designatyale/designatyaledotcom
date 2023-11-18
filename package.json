@@ -7,8 +7,8 @@
     "build": "source ./get-sc-creds.sh; next build",
     "postbuild": "next-sitemap --config next-sitemap.config.js",
     "codegen": "npx sanity-codegen",
+    "migrate": "dotenv -e .env.local -- node -r esbuild-register scripts/migrate.ts",
     "start": "next start",
-    "seed": "dotenv -e .env.local -- ts-node \"./src/lib/seed.ts\"",
     "lint": "next lint"
   },
   "dependencies": {
@@ -56,6 +56,7 @@
     "dotenv-cli": "^7.3.0",
     "eslint": "^8.48.0",
     "eslint-config-next": "13.4.12",
+    "kysely-migration-cli": "^0.2.3",
     "next-sitemap": "^4.1.8",
     "postcss": "^8.4.27",
     "prettier": "^3.0.1",

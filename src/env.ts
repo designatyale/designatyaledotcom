@@ -33,3 +33,6 @@ export const ALGOLIA_APP_ID = process.env.NEXT_PUBLIC_ALGOLIA_APP_ID!;
 export const ALGOLIA_SEARCH_API_KEY =
   process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY!;
 export const ALGOLIA_ADMIN_API_KEY = process.env.ALGOLIA_ADMIN_API_KEY!;
+
+// Shitty auth for sketch endpoint
+export const API_BACKEND_SECRET = process.env.NEXT_PUBLIC_BACKEND_API_SECRET!;
