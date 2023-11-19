@@ -37,7 +37,13 @@
 
 .copy {
   grid-area: copy;
+  height: fit-content;
   margin-bottom: 1em;
+
+  @include media('xs') {
+    position: sticky;
+    top: var(--header-height);
+  }
 }
 
 @keyframes fade-up {
@@ -59,10 +65,10 @@
 
   & > * {
     animation: fade-up 0.3s ease-in-out;
-    animation-delay: 4 * 100ms;
+    animation-delay: 6 * 100ms;
     animation-fill-mode: backwards;
 
-    @for $i from 0 through 4 {
+    @for $i from 0 through 6 {
       &:nth-child(#{$i}) {
         animation-delay: $i * 100ms;
       }
