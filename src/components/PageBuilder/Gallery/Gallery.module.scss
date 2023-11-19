@@ -40,11 +40,34 @@
   margin-bottom: 1em;
 }
 
+@keyframes fade-up {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
 .assets {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));
   grid-area: contents;
   gap: 1em;
+
+  & > * {
+    animation: fade-up 0.3s ease-in-out;
+    animation-delay: 4 * 100ms;
+    animation-fill-mode: backwards;
+
+    @for $i from 0 through 4 {
+      &:nth-child(#{$i}) {
+        animation-delay: $i * 100ms;
+      }
+    }
+  }
 }
 
 /* ------------------------------- Components ------------------------------- */
