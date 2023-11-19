@@ -42,7 +42,7 @@
 
 .assets {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10em, max-content));
+  grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));
   grid-area: contents;
   gap: 1em;
 }

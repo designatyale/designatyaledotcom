@@ -20,7 +20,7 @@ function GalleryMember({ member }: { member: Member }) {
   );
   return (
     <div className={s.member}>
-      <SanityImage image={image} className={s.member_image} />
+      <SanityImage image={image} className={s.member_image} sizes={`20em`} />
       <div>{member.name}</div>
       <div>{member.position}</div>
       {website && (
