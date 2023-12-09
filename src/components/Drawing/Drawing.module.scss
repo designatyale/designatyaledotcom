@@ -1,0 +1,41 @@
+/*
+ * Drawing.module.scss
+ * Author: Evan Kirkiles
+ * Created On Thu Nov 16 2023
+ * 2023 Design at Yale 
+ */
+@import '@/styles/utils';
+
+.backdrop {
+  display: flex;
+  z-index: zIndex('medium') + 10;
+  position: absolute;
+  align-items: flex-end;
+  justify-content: center;
+  inset: 0;
+  cursor: pointer;
+  transition: opacity 0.3s ease-in-out;
+
+  &[class~='from'] {
+    opacity: 0;
+  }
+
+  &[class~='enter'] {
+    opacity: 1;
+  }
+
+  &[class~='leave'] {
+    opacity: 0;
+  }
+
+  &::before {
+    z-index: 1;
+    position: absolute;
+    inset: 0;
+    // backdrop-filter: blur(10px);
+    background-color: theme-color('background');
+    content: '';
+    // animation: fade-in-normal 0.3s ease-in-out;
+    opacity: 0.7;
+  }
+}

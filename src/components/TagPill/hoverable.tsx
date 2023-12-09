@@ -6,7 +6,7 @@
  */
 'use client';
 
-import { CSSTransition } from 'react-transition-group';
+import { Transition } from 'transition-hook';
 import classNames from 'classnames';
 import s from './TagPill.module.scss';
 import { DesignTag } from '@/sanity/schema';
@@ -30,19 +30,23 @@ export default function TagPillHoverable({ tag }: TagPillProps) {
         style={{ backgroundColor: tag.color?.hex }}
         role="presentation"
       />
-      <CSSTransition appear in={hovered} nodeRef={nodeRef} timeout={300}>
-        <div
-          className={classNames(s.container, s.container_appearing)}
-          ref={nodeRef}
-          aria-hidden={!hovered}
-        >
-          <span
-            className={s.color}
-            style={{ backgroundColor: tag.color?.hex }}
-          />
-          <span>{tag.title}</span>
-        </div>
-      </CSSTransition>
+      <Transition state={hovered} timeout={300}>
+        {(stage, shouldMount) =>
+          shouldMount && (
+            <div
+              className={classNames(s.container, s.container_appearing, stage)}
+              ref={nodeRef}
+              aria-hidden={!hovered}
+            >
+              <span
+                className={s.color}
+                style={{ backgroundColor: tag.color?.hex }}
+              />
+              <span>{tag.title}</span>
+            </div>
+          )
+        }
+      </Transition>
     </li>
   );
 }

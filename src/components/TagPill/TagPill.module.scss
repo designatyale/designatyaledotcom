@@ -51,30 +51,22 @@
     position: absolute;
     right: 5px;
     bottom: calc(100% + 0.5em);
+    white-space: nowrap;
     opacity: 0;
     pointer-events: none;
     transition: all 0.3s ease-in-out;
 
-    &[class~='enter'] {
+    &[class~='from'] {
       transform: translateY(10px);
       opacity: 0;
     }
 
-    &[class~='enter-active'] {
+    &[class~='enter'] {
       transform: translateY(0px);
       opacity: 1;
     }
 
-    &[class~='enter-done'] {
-      opacity: 1;
-    }
-
-    &[class~='exit'] {
-      transform: translateY(0px);
-      opacity: 1;
-    }
-
-    &[class~='exit-active'] {
+    &[class~='leave'] {
       transform: translateY(10px);
       opacity: 0;
     }
@@ -84,26 +76,17 @@
       left: 50%;
       transform: translateX(-50%);
 
-      &[class~='enter'] {
+      &[class~='from'] {
         transform: translateX(-50%) translateY(10px);
         opacity: 0;
       }
 
-      &[class~='enter-active'] {
+      &[class~='enter'] {
         transform: translateX(-50%) translateY(0px);
         opacity: 1;
       }
 
-      &[class~='enter-done'] {
-        opacity: 1;
-      }
-
-      &[class~='exit'] {
-        transform: translateX(-50%) translateY(0px);
-        opacity: 1;
-      }
-
-      &[class~='exit-active'] {
+      &[class~='leave'] {
         transform: translateX(-50%) translateY(10px);
         opacity: 0;
       }

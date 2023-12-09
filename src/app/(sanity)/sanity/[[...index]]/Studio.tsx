@@ -8,8 +8,15 @@
 
 import { NextStudio } from 'next-sanity/studio';
 import config from '../../../../../sanity.config';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { useState } from 'react';
 
 export function Studio() {
+  const [queryClient] = useState(() => new QueryClient());
   //  Supports the same props as `import {Studio} from 'sanity'`, `config` is required
-  return <NextStudio config={config} />;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <NextStudio config={config} />
+    </QueryClientProvider>
+  );
 }
