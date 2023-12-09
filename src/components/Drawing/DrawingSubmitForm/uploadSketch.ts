@@ -14,7 +14,7 @@ import { randomUUID } from 'crypto';
 const sketchSchema = z.object({
   name: z.string(),
   email: z.string(),
-  prompt_id: z.coerce.number(),
+  prompt_id: z.string(),
   width: z.coerce.number(),
   height: z.coerce.number(),
   dark_mode: z.coerce.boolean(),
@@ -53,5 +53,5 @@ export default async function uploadSketch(formData: FormData) {
     .execute();
 
   // return data
-  return { success: true };
+  return { success: true, sketch };
 }
