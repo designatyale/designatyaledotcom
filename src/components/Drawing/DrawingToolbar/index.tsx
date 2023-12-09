@@ -17,6 +17,7 @@ import s from './DrawingToolbar.module.scss';
 import { VscClose } from 'react-icons/vsc';
 import { RiDraggable } from 'react-icons/ri';
 import { useDrawingContext } from '@/components/Drawing/DrawingContext';
+import Link from 'next/link';
 
 interface DrawingToolbarProps {
   uploading: boolean;
@@ -123,9 +124,9 @@ export default function DrawingToolbar({
           >
             <HiOutlineCloudUpload />
           </button>
-          <button>
+          <Link href="/community/doodle">
             <HiOutlineQuestionMarkCircle />
-          </button>
+          </Link>
           {prompt && <p className={s.todays_prompt}>Doodle: {prompt.name}</p>}
         </div>
       </Draggable>

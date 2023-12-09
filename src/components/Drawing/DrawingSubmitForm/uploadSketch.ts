@@ -33,7 +33,7 @@ export default async function uploadSketch(formData: FormData) {
     height: formData.get('height'),
     dark_mode: formData.get('dark-mode'),
   });
-  console.log(`Received sketch from: ${parsed.name}, <${parsed.email}>`);
+  console.log(`Received sketch from: ${parsed.name} <${parsed.email}>`);
 
   // upload the blob SVG
   const blob = formData.get('image_svg') as File;
