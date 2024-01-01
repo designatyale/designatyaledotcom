@@ -5,19 +5,11 @@
  * 2023 Design at Yale
  */
 
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-});
-
 /** @type {import('next').NextConfig} */
-const nextConfig = withBundleAnalyzer({
-  experimental: {
-    scrollRestoration: false,
-    serverActions: true,
-  },
+const nextConfig = {
   images: {
     domains: ['cdn.sanity.io'],
   },
-});
+};
 
 module.exports = nextConfig;

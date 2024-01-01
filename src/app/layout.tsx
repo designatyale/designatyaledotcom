@@ -5,19 +5,21 @@
  * 2023 Design at Yale
  */
 
-import type { Metadata } from 'next';
-import { ABCDiatype } from '@/fonts';
-import { ColorSchemeScript, MuffleStrokeWarnScript } from '@/util/earlyScripts';
+import type { Metadata, Viewport } from 'next';
+import { ColorSchemeScript } from '@/util/earlyScripts';
 import { SITE_URL } from '@/env';
 import s from './Layout.module.scss';
 import './globals.scss';
 
 // Base metadata for the entire app
 export const metadata: Metadata = {
-  title: 'Design at Yale — A Studio and Community.',
-  description:
-    "Design at Yale is Yale's undergraduate design club. We run a small studio, host events exploring practice and industry across design disciplines, and have fun making things together.",
+  title: 'A DAY App',
+  description: 'Welcome to my new DAY app!',
   metadataBase: new URL(SITE_URL),
+};
+
+export const viewport: Viewport = {
+  themeColor: '#ffffff',
 };
 
 /**
@@ -29,11 +31,7 @@ export const metadata: Metadata = {
  */
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={`${ABCDiatype.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link
           rel="apple-touch-icon"
@@ -56,7 +54,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000" />
         <meta name="msapplication-TileColor" content="#ffc40d" />
         <ColorSchemeScript />
-        <MuffleStrokeWarnScript />
       </head>
       <body className={s.body}>{children}</body>
     </html>

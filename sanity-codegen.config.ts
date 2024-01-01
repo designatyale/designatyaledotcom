@@ -9,7 +9,7 @@ import { SanityCodegenConfig } from 'sanity-codegen';
 
 const config: SanityCodegenConfig = {
   schemaPath: './schemas',
-  outputPath: './src/sanity/schema.ts',
+  outputPath: './src/sanity/types.ts',
   /**
    * We need to parse the sanity imports inside node modules. This ignore
    * pattern only pulls the packages we need to build the schema file

@@ -10,25 +10,17 @@
 
 import { SchemaTypeDefinition } from '@sanity/types';
 import SitePage from './SitePage';
-import pageElements from './page';
-import Member from './entities/Member';
-import SiteSettings from './SiteSettings';
-import subTypes from './types';
-import DesignTag from './entities/DesignTag';
-import Project from './entities/Project';
-import Event from './entities/Event';
-import DoodlePrompt from './entities/DoodlePrompt';
+import PageElements from './objects/PageElements';
+import BlockElements from './objects/BlockElements';
+import Socials from './objects/Socials';
+import Singletons from './singletons';
 
 const schemas: SchemaTypeDefinition[] = [
-  DesignTag,
-  Event,
-  Member,
-  Project,
-  DoodlePrompt,
-  SiteSettings,
   SitePage,
-  ...pageElements,
-  ...subTypes,
+  ...Socials,
+  ...Singletons,
+  ...PageElements,
+  ...BlockElements,
 ];
 
 export default schemas;

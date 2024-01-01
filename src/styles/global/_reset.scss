@@ -7,7 +7,6 @@
  * Reset styles to nullify per-platform User-Agent stylings on HTML
  * elements. These make all elements function almost essentially as divs.
  */
-@import '@/styles/settings/type';
 
 html {
   -ms-text-size-adjust: 100%;
@@ -183,7 +182,7 @@ textarea {
   /* Browsers have different default form fonts */
   font-size: inherit;
   line-height: 1;
-  font-family: $body-font;
+  font-family: Arial;
   vertical-align: middle;
   white-space: normal;
 }

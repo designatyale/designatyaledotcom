@@ -1,78 +1,67 @@
 /*
  * route.ts
- * Author: evan kirkiles
- * Created On Sun Aug 27 2023
+ * Author: Evan Kirkiles
+ * Created On Sat Dec 09 2023
  * 2023 Design at Yale
  *
- * This file defines a route handler for performing on-demand revalidation
- * for our Sanity assets. For example, it tells Next to regenerate a SitePage
- * when it is updated or created by us in the Sanity desk.
+ * https://github.com/sanity-io/template-nextjs-personal-website/blob/main/app/api/revalidate/route.ts
  *
- * HOWEVER—Sanity isn't quick enough to update the asset, so Next.js gets the
- * _old version_ of the document when it re-requests it. To fix this, we don't
- * trigger the route handler whenevr the document changes, but rather whenever
- * the last_revalidated field changes. By patching this field a second after we
- * publish the rest of the site page, we can get the updated site page info
- * which has propagated through to Sanity's servers.
+ * This code is responsible for revalidating queries as the dataset is updated.
  *
- * You should have a corresponding webhook set up in Sanity with at least:
- *  - Filter: _type == "site_page" && delta::changedAny(last_revalidated)
- *  - Projection: {_type, _id, slug }
- * Also make sure to set up your secrets across Vercel + Sanity.
+ * It is set up to receive a validated GROQ-powered Webhook from Sanity.io:
+ * https://www.sanity.io/docs/webhooks
+ *
+ * 1. Go to the API section of your Sanity project on sanity.io/manage or run `npx sanity hook create`
+ * 2. Click "Create webhook"
+ * 3. Set the URL to https://YOUR_NEXTJS_SITE_URL/api/revalidate
+ * 4. Dataset: Choose desired dataset or leave at default "all datasets"
+ * 5. Trigger on: "Create", "Update", and "Delete"
+ * 6. Filter: Leave empty
+ * 7. Projection: {_type, "slug": slug.current}
+ * 8. Status: Enable webhook
+ * 9. HTTP method: POST
+ * 10. HTTP Headers: Leave empty
+ * 11. API version: v2021-03-25
+ * 12. Include drafts: No
+ * 13. Secret: Set to the same value as SANITY_REVALIDATE_SECRET (create a random secret if you haven't yet, for example by running `Math.random().toString(36).slice(2)` in your console)
+ * 14. Save the cofiguration
+ * 15. Add the secret to Vercel: `npx vercel env add SANITY_REVALIDATE_SECRET`
+ * 16. Redeploy with `npx vercel --prod` to apply the new environment variable
  */
 
-import { SANITY_WEBHOOK_SECRET } from '@/env';
-import { isValidSignature, SIGNATURE_HEADER_NAME } from '@sanity/webhook';
 import { revalidateTag } from 'next/cache';
-import { NextRequest, NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from 'next/server';
+import { parseBody } from 'next-sanity/webhook';
 
-type WebhookProjection = {
-  type: 'site_page' | string;
-  documentId: string;
-  revisionId: string;
-  slug: { current: string };
-  operation: 'create' | 'update' | 'delete';
-};
-
-// to add other revalidation entities, add their types in the signature here.
-function checkIsRevalidationEntity(body: any): body is WebhookProjection {
-  return !!body.type;
-}
+import { revalidateSecret } from '@/sanity/lib/api';
 
 export async function POST(req: NextRequest) {
-  const body: WebhookProjection = await req.json();
-
-  // first, validate the request signature
-  const signature = req.headers.get(SIGNATURE_HEADER_NAME);
-  if (!signature) return NextResponse.json({});
-  const isValid = isValidSignature(
-    JSON.stringify(body),
-    signature,
-    SANITY_WEBHOOK_SECRET
-  );
-  if (!isValid) {
-    return NextResponse.json({ success: false, message: 'Invalid signature.' });
-  }
-  if (!body || !checkIsRevalidationEntity(body)) {
-    return NextResponse.json({ success: false, message: 'Invalid body.' });
-  }
-
-  // if valid request, attempt to do the revalidation
   try {
-    let revalidated: string[] = [];
-    switch (body.type) {
-      case 'site_page':
-        revalidated.push(`page:${body.slug.current}`);
-        break;
-      default:
-        throw new Error('Invalid revalidation type.');
+    const { body, isValidSignature } = await parseBody<{
+      _type: string;
+      slug?: string | undefined;
+    }>(req, revalidateSecret);
+    if (!isValidSignature) {
+      const message = 'Invalid signature';
+      return new Response(message, { status: 401 });
     }
-    if (body.operation === 'create' || body.operation === 'delete') {
-      revalidated.push(`${body.type}:list`);
+
+    if (!body?._type) {
+      return new Response('Bad Request', { status: 400 });
     }
-    revalidated.forEach(revalidateTag);
-    return NextResponse.json({ success: true, revalidated });
-  } catch (e) {
-    return NextResponse.json({ success: false, error: e, body });
+
+    revalidateTag(body._type);
+    if (body.slug) {
+      revalidateTag(`${body._type}:${body.slug}`);
+    }
+    return NextResponse.json({
+      status: 200,
+      revalidated: true,
+      now: Date.now(),
+      body,
+    });
+  } catch (err: any) {
+    console.error(err);
+    return new Response(err.message, { status: 500 });
   }
 }

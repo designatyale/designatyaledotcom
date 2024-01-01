@@ -6,9 +6,8 @@
  *
  * Configuration passed to the Sanity CLI, works once you fill our your .env.local.
  */
-
 import { defineCliConfig } from 'sanity/cli';
-import { SANITY_PROJECT_ID, SANITY_DATASET } from '@/env';
+import { SANITY_DATASET, SANITY_PROJECT_ID } from '@/env';
 
 export default defineCliConfig({
   api: {
