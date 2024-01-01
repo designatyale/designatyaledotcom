@@ -15,5 +15,5 @@ module.exports = {
   changefreq: 'daily',
   priority: 0.7,
   generateRobotsTxt: true,
-  exclude: ['/sanity'],
+  exclude: ['/studio'],
 };

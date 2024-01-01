@@ -8,47 +8,24 @@
 import { useReducer } from 'react';
 
 const COLOR_SCHEMES = ['light', 'dark', 'auto'] as const;
-export type ColorScheme = (typeof COLOR_SCHEMES)[number];
-interface ColorSchemeState {
-  scheme: ColorScheme;
-  evalScheme: Omit<ColorScheme, 'auto'>;
-}
+type ColorScheme = (typeof COLOR_SCHEMES)[number];
 
 /**
  * A hook to manage the color scheme (e.g. dark or light mode) of the site.
  */
 export default function useColorScheme() {
   const [colorScheme, setColorScheme] = useReducer(
-    (_: ColorSchemeState, scheme: ColorScheme): ColorSchemeState => {
+    (scheme: ColorScheme) => {
       localStorage.setItem('daylight-color-scheme', scheme);
       COLOR_SCHEMES.forEach((oldScheme) =>
         document.documentElement.classList.remove(`${oldScheme}-mode`)
       );
-      let evalScheme = scheme;
-      if (scheme == 'auto' && typeof window !== 'undefined') {
-        const mql = window.matchMedia('(prefers-color-scheme: dark)');
-        evalScheme = mql.matches ? 'dark' : 'light';
-      }
-      document.documentElement.classList.add(`${evalScheme}-mode`);
-      return {
-        scheme,
-        evalScheme,
-      };
+      document.documentElement.classList.add(`${scheme}-mode`);
+      return scheme;
     },
     ((typeof window !== 'undefined' &&
       localStorage.getItem('daylight-color-scheme')) ||
-      'auto') as ColorScheme,
-    (scheme): ColorSchemeState => {
-      let evalScheme = scheme;
-      if (scheme == 'auto' && typeof window !== 'undefined') {
-        const mql = window.matchMedia('(prefers-color-scheme: dark)');
-        evalScheme = mql.matches ? 'dark' : 'light';
-      }
-      return {
-        scheme,
-        evalScheme,
-      };
-    }
+      'auto') as ColorScheme
   );
 
   return { colorScheme, setColorScheme };

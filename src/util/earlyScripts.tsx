@@ -16,11 +16,7 @@ import { any as javascript } from 'code-tag';
 
 const COLOR_SCHEME_INLINE = javascript`
 if (typeof window !== "undefined") { 
-  let colorScheme = localStorage.getItem("daylight-color-scheme") || "auto";
-  if (colorScheme == "auto") {
-    const mql = window.matchMedia("(prefers-color-scheme: dark)");
-    colorScheme = mql.matches ? "dark" : "light";
-  }
+  const colorScheme = localStorage.getItem("daylight-color-scheme") || "auto";
   document.documentElement.classList.add(\`\${colorScheme}-mode\`);
 }
 `;
@@ -31,24 +27,6 @@ export const ColorSchemeScript = () => (
     type="text/javascript"
     dangerouslySetInnerHTML={{
       __html: COLOR_SCHEME_INLINE,
-    }}
-  />
-);
-
-const MUFFLE_STROKE_WARN = javascript`
-const { warn } = console;
-console.warn = function(...args) {
-  if (args[0] == "No stroke found!") return;
-  warn(...args);
-}
-`;
-
-export const MuffleStrokeWarnScript = () => (
-  <script
-    id="muffle-stroke-warn-script"
-    type="text/javascript"
-    dangerouslySetInnerHTML={{
-      __html: MUFFLE_STROKE_WARN,
     }}
   />
 );

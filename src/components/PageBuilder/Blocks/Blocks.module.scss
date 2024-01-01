@@ -1,0 +1,57 @@
+/*
+ * PText.module.scss
+ * author: evan kirkiles
+ * created on Fri Aug 18 2023
+ * 2023 Design at Yale 
+ */
+@import '@/styles/utils';
+
+.p {
+  margin: 0.5rem 0;
+}
+
+.ol {
+  list-style-type: decimal;
+}
+
+.ul {
+  list-style-type: circle;
+}
+
+.li {
+  display: list-item;
+  margin-bottom: 0.5rem;
+  margin-left: 2rem;
+}
+
+.link {
+  color: theme-color('content2');
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+
+  &:hover {
+    color: theme-color('content3');
+  }
+}
+
+.block_image {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0.5em 0;
+}
+
+.block_link {
+  display: block;
+  width: 100%;
+  max-width: 20em;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border: 1px solid theme-color('border2');
+  text-align: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: theme-color('background2');
+  }
+}

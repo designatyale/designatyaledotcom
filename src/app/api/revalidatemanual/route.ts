@@ -25,7 +25,9 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    let { tags } = (await req.json()) as { tags: string[] };
+    let {
+      body: { tags },
+    } = (await req.json()) as { body: { tags: string[] } };
     tags.forEach(revalidateTag);
     return NextResponse.json({ success: true, tags });
   } catch (e) {
