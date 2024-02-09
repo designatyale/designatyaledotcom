@@ -141,7 +141,7 @@ export default function GroupedHits<T = 'event'>({
         ? -Infinity
         : key1 === 'Unknown'
         ? Infinity
-        : parseInt(key1) - parseInt(key2)
+        : parseInt(key2) - parseInt(key1)
     );
     return vals;
   }, [data]);
