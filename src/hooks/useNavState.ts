@@ -1,12 +1,10 @@
-!(
-  /*
-   * useNavState.ts
-   * Author: evan kirkiles
-   * Created On Mon Aug 28 2023
-   * 2023 Design at Yale
-   */
-  'use client'
-);
+/*
+ * useNavState.ts
+ * Author: evan kirkiles
+ * Created On Mon Aug 28 2023
+ * 2023 Design at Yale
+ */
+'use client';
 
 import { usePathname } from 'next/navigation';
 import {
@@ -14,7 +12,6 @@ import {
   RefObject,
   useCallback,
   useEffect,
-  useRef,
   useState,
 } from 'react';
 
@@ -52,25 +49,19 @@ export default function useNavState({ menuRef, buttonRef }: UseNavStateOptions) 
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const mqlRef = useRef<MediaQueryList | null>(null);
-  const prevPath = useRef<string>(pathname);
 
   // 1. Close the nav menu on path change
   useEffect(() => {
     setOpen(false);
-    // scroll to top of page on base pathname change for now
-    if (prevPath.current.split('/')[1] !== pathname.split('/')[1])
-      window.scrollTo({ top: 0 });
-    prevPath.current = pathname;
   }, [pathname]);
 
   // 2. Close the nav menu on large screens or on ESC-click
   useEffect(() => {
     // 2.1 close the menu on large screens
     const mql = window.matchMedia('(min-width: 768px)');
-    // function onLarge({ matches }: MediaQueryListEvent) {
-    //   setOpen((prev) => !matches && prev);
-    // }
+    function onLarge({ matches }: MediaQueryListEvent) {
+      setOpen((prev) => !matches && prev);
+    }
     // 2.2 set focus to button once menu is closed
     function onKeyDown(e: KeyboardEvent) {
       if (e.key === 'Escape') {
@@ -79,21 +70,19 @@ export default function useNavState({ menuRef, buttonRef }: UseNavStateOptions) 
       }
     }
     // 2.3 also track scroll state for when not at top of page
-    // function onScroll() {
-    //   setScrolled(window.scrollY > SCROLL_TRIGGER_DEPTH);
-    // }
+    function onScroll() {
+      setScrolled(window.scrollY > SCROLL_TRIGGER_DEPTH);
+    }
 
     // apply event listeners
-    // mql.addEventListener('change', onLarge, false);
+    mql.addEventListener('change', onLarge, false);
     window.addEventListener('keydown', onKeyDown, false);
-    // window.addEventListener('scroll', onScroll, false);
-    // save mql to ref
-    mqlRef.current = mql;
+    window.addEventListener('scroll', onScroll, false);
     return () => {
       // remove event listeners on unmount
-      // mql.removeEventListener('change', onLarge, false);
+      mql.removeEventListener('change', onLarge, false);
       window.removeEventListener('keydown', onKeyDown, false);
-      // window.removeEventListener('scroll', onScroll, false);
+      window.removeEventListener('scroll', onScroll, false);
     };
   }, [buttonRef]);
 
@@ -134,7 +123,7 @@ export default function useNavState({ menuRef, buttonRef }: UseNavStateOptions) 
     } else {
       document
         .querySelectorAll('header,main,footer')
-        ?.forEach((el) => el.removeAttribute('aria-hidden'));
+        ?.forEach((el) => el.setAttribute('aria-hidden', 'true'));
     }
   }, [open]);
 
