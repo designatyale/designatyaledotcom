@@ -119,9 +119,6 @@
 
   &_title {
     grid-area: title;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
   }
 
   &_website {
@@ -160,6 +157,7 @@
   & li {
     display: flex;
     flex-direction: row;
+    margin-block: 0.25em;
 
     & button {
       text-align: left;
@@ -168,14 +166,10 @@
 
   & li::before {
     margin-right: 0.5em;
-    content: '⟐';
+    content: '->';
   }
 
   & button {
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-
     &:hover {
       color: theme-color('content2');
     }
