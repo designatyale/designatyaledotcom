@@ -10,7 +10,6 @@ import { VscClose } from 'react-icons/vsc';
 import Pencil from '@/assets/svg/Pencil';
 import uploadSketch from '@/components/Drawing/DrawingSubmitForm/uploadSketch';
 import { useDrawingContext } from '@/components/Drawing/DrawingContext';
-import { experimental_useFormStatus } from 'react-dom';
 import { Transition } from 'transition-hook';
 import classNames from 'classnames';
 import useColorScheme from '@/hooks/useColorScheme';

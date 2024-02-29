@@ -129,25 +129,31 @@ export interface Event extends SanityDocument {
   more_info?: string;
 
   /**
-   * Slug — `slug`
+   * Featured Event Description — `array`
    *
-   * (Optional) A slug for the event's page on the site.
+   * A short event description to go on the homepage when this event is featured.
    */
-  slug?: { _type: "slug"; current: string };
+  featureDescription?: Array<SanityKeyed<SanityBlock>>;
 
   /**
-   * Page Builder — `array`
+   * Featured Event Images — `array`
    *
-   * The event's page on the DAY site.
+   * Images to cycle through on the homepage when this event is featured.
    */
-  pageBuilder?: Array<
-    | SanityKeyed<PeCopy>
-    | SanityKeyed<PeActionBar>
-    | SanityKeyed<PeActionButton>
-    | SanityKeyed<PeGallery>
-    | SanityKeyed<PeTable>
-    | SanityKeyed<PeShowcase>
-    | SanityKeyed<PeNlsignup>
+  featureImages?: Array<
+    SanityKeyed<{
+      _type: "image";
+      asset: SanityReference<SanityImageAsset>;
+      crop?: SanityImageCrop;
+      hotspot?: SanityImageHotspot;
+
+      /**
+       * Top Offset — `number`
+       *
+       * Percentage to offset the top by (0-100). Defaults to -1 (centers instead).
+       */
+      topOffset?: number;
+    }>
   >;
 
   /**
@@ -388,6 +394,29 @@ export interface Project extends SanityDocument {
 }
 
 /**
+ * Doodle Prompt
+ *
+ * Represents a prompt that people can draw on the website for!
+ */
+export interface Doodle extends SanityDocument {
+  _type: "doodle";
+
+  /**
+   * Prompt — `string`
+   *
+   * The prompt.
+   */
+  name: string;
+
+  /**
+   * Link — `url`
+   *
+   * An optional link for the prompt to provide more context.
+   */
+  link?: string;
+}
+
+/**
  * Site Settings
  *
  *
@@ -405,37 +434,16 @@ export interface SiteSettings extends SanityDocument {
   /**
    * Site Description — `string`
    *
-   *
+   * A short description of the site for SEO purposes. Should be under 160 characters.
    */
   description?: string;
 
   /**
-   * Instagram Link — `string`
+   * Featured Event — `reference`
    *
-   *
+   * An event to feature on the homepage—this should have all of the corresponding feature fields filled out (full bleed image, featured title, etc.)
    */
-  instagram?: string;
-
-  /**
-   * Twitter Link — `string`
-   *
-   *
-   */
-  twitter?: string;
-
-  /**
-   * Facebook Link — `string`
-   *
-   *
-   */
-  facebook?: string;
-
-  /**
-   * Contact Email — `string`
-   *
-   *
-   */
-  contact_email?: string;
+  featuredEvent?: SanityReference<Event>;
 }
 
 /**
@@ -778,6 +786,7 @@ export type Documents =
   | Event
   | Member
   | Project
+  | Doodle
   | SiteSettings
   | SitePage;
 

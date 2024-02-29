@@ -240,8 +240,13 @@
       content: '';
     }
 
-    &:hover {
+    &:not(:disabled):hover {
       color: theme-color('content');
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.3;
     }
 
     &:checked::after {
@@ -254,15 +259,19 @@
       mask-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDciIGhlaWdodD0iNDQiIHZpZXdCb3g9IjAgMCA0NyA0NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGxpbmUgeDE9IjQuMDYwNjYiIHkxPSIxLjkzOTM0IiB4Mj0iNDUuMDYwNyIgeTI9IjQyLjkzOTMiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMyIvPgo8bGluZSB4MT0iMS45MzkzNCIgeTE9IjQyLjkzOTMiIHgyPSI0Mi45MzkzIiB5Mj0iMS45MzkzNCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIzIi8+Cjwvc3ZnPgo=');
       mask-size: 100% 100%;
     }
+
+    &:not(:disabled) + label {
+      cursor: pointer;
+
+      &:hover {
+        color: theme-color('content');
+      }
+    }
   }
 
   & label {
     z-index: 1;
     position: relative;
-    cursor: pointer;
-
-    &:hover {
-      color: theme-color('content');
-    }
+    cursor: not-allowed;
   }
 }

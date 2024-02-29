@@ -16,12 +16,13 @@ import { any as javascript } from 'code-tag';
 
 const COLOR_SCHEME_INLINE = javascript`
 if (typeof window !== "undefined") { 
-  let colorScheme = localStorage.getItem("daylight-color-scheme") || "auto";
+  let colorScheme = localStorage.getItem("daylight-color-scheme") || "dark";
   if (colorScheme == "auto") {
     const mql = window.matchMedia("(prefers-color-scheme: dark)");
     colorScheme = mql.matches ? "dark" : "light";
   }
-  document.documentElement.classList.add(\`\${colorScheme}-mode\`);
+  // document.documentElement.classList.add(\`\${colorScheme}-mode\`);
+  document.documentElement.classList.add(\`dark-mode\`);
 }
 `;
 

@@ -6,7 +6,7 @@
  */
 'use client';
 
-import { PropsWithChildren, useRef } from 'react';
+import { PropsWithChildren, useRef, useState } from 'react';
 import useNavState from '@/hooks/useNavState';
 import classNames from 'classnames';
 import s from './Nav.module.scss';
@@ -49,10 +49,9 @@ export default function Nav({ children }: PropsWithChildren) {
         onClick={() => setOpen(false)}
       />
       <nav
-        className={classNames(s.container, {
-          [s.container__scrolled]: scrolled && !open,
-        })}
+        className={s.container}
         role="navigation"
+        data-scrolled={scrolled}
         aria-label="Primary navigation"
         id="nav-bar"
         ref={menuRef}
@@ -154,9 +153,9 @@ export default function Nav({ children }: PropsWithChildren) {
               </a>
             </li>
           </ul>
-          <form className={s.nl}>
+          {/* <form className={s.nl}>
             <p>Sign up for our newsletter</p>
-          </form>
+          </form> */}
         </section>
       </nav>
     </>

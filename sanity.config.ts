@@ -9,7 +9,7 @@ import { defineConfig, isDev } from 'sanity';
 import { media } from 'sanity-plugin-media';
 import { visionTool } from '@sanity/vision';
 import { colorInput } from '@sanity/color-input';
-import { deskTool } from 'sanity/desk';
+import { structureTool } from 'sanity/structure';
 import schemaTypes from './schemas';
 import { SANITY_PROJECT_ID, SANITY_DATASET } from '@/env';
 import defaultDocumentNode from '@/sanity/desk/defaultDocumentNode';
@@ -26,7 +26,7 @@ export default defineConfig({
   dataset: SANITY_DATASET,
   basePath: '/sanity',
   plugins: [
-    deskTool({
+    structureTool({
       structure,
       defaultDocumentNode,
     }),

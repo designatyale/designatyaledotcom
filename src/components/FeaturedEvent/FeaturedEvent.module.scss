@@ -1,0 +1,84 @@
+/*
+ * FeaturedEvent.module.scss
+ * Author: Evan Kirkiles
+ * Created On Wed Feb 28 2024
+ * 2024 Design at Yale 
+ */
+@import '@/styles/utils';
+
+@keyframes fade-down {
+  from {
+    transform: translateX(-50%) translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(-50%) translateY(0px);
+    opacity: 1;
+  }
+}
+
+.featuredevent {
+  display: flex;
+  z-index: 0;
+  position: absolute;
+  flex-direction: column;
+  inset: 0;
+
+  &::after {
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    height: 20%;
+    inset: auto 0 0 0;
+    background: linear-gradient(to top, theme-color('background'), transparent);
+    content: '';
+  }
+
+  & img {
+    z-index: 0;
+    width: 100%;
+    height: calc(100% + var(--header-height));
+    margin-block-start: calc(-1 * var(--header-height));
+    object-fit: cover;
+    filter: brightness(0.6);
+  }
+
+  &_header {
+    position: absolute;
+    top: var(--header-height);
+    left: 50%;
+    inline-size: 100%;
+    padding: 0.5rem;
+    transform: translateX(-50%);
+    text-align: center;
+    animation: fade-down 0.7s ease-in-out;
+    animation-delay: 0.3s;
+    animation-fill-mode: backwards;
+
+    & h2 {
+      font-size: 2em;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.feature_image {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+
+  &:not([data-x-loaded='true']) {
+    opacity: 0;
+  }
+
+  &_from {
+    opacity: 0;
+  }
+
+  &_enter {
+    opacity: 1;
+  }
+
+  &_leave {
+    opacity: 0;
+  }
+}

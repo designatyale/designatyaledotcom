@@ -19,16 +19,23 @@
   justify-content: stretch;
   height: var(--header-height);
   margin: 0 auto;
-  padding: 0 var(--page-padding);
-  border-bottom: 1px solid theme-color('background');
-  // backdrop-filter: blur(3px) grayscale(2);
-  background-color: theme-color('background');
-  background-color: color-mix(
-    in lch,
-    theme-color('background') 95%,
-    transparent
-  );
-  // transition: border 0.3s ease-in-out;
+  padding: 0 calc(0.5 * var(--page-padding));
+  background: linear-gradient(to bottom, theme-color('background'), transparent);
+
+  :global(body:not(.full-bleed)) &[data-scrolled='true'] {
+    // border-bottom: 1px solid theme-color('background');
+    background: linear-gradient(
+      to bottom,
+      theme-color('background'),
+      transparent
+    );
+    // background-color: theme-color('background');
+    // background-color: color-mix(
+    //   in lch,
+    //   theme-color('background') 95%,
+    //   transparent
+    // );
+  }
 
   &::before {
     flex-grow: 0;
@@ -252,7 +259,7 @@ $truecolors: rgb(0, 255, 255), rgb(255, 0, 255), rgb(255, 255, 0), rgb(255, 0, 0
   justify-content: space-between;
   width: calc(100% - 4em);
   inset: 0 2em;
-  padding: 0 var(--page-padding);
+  padding: 0 calc(0.5 * var(--page-padding));
   color: theme-color('border');
 
   & svg {

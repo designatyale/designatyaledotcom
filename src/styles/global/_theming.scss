@@ -27,7 +27,8 @@
   }
 }
 
-.dark-mode {
+.dark-mode,
+.full-bleed {
   color-scheme: dark;
   @each $color, $hexCode in $colors-dark {
     --daylight-color-#{$color}: #{$hexCode};

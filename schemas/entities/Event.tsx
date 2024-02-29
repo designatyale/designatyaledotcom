@@ -16,7 +16,7 @@ const Event = defineType({
   icon: FiCalendar,
   groups: [
     { name: 'information', title: 'Information', default: true },
-    { name: 'page', title: 'Page' },
+    { name: 'featured', title: 'Featured' },
   ],
   fields: [
     /* ------------------------------- Information ------------------------------ */
@@ -94,28 +94,46 @@ const Event = defineType({
       group: 'information',
     }),
 
-    /* ---------------------------------- Page ---------------------------------- */
+    /* -------------------------------- Featured -------------------------------- */
 
     defineField({
-      name: 'slug',
-      type: 'slug' as const,
-      title: 'Slug',
-      group: 'page',
-      description: "(Optional) A slug for the event's page on the site.",
+      name: 'featureDescription',
+      type: 'array' as const,
+      title: 'Featured Event Description',
+      description:
+        'A short event description to go on the homepage when this event is featured.',
+      of: [{ type: 'block' }],
+      group: 'featured',
     }),
     defineField({
-      name: 'pageBuilder',
+      name: 'featureImages',
       type: 'array' as const,
-      title: 'Page Builder',
-      group: 'page',
-      description: "The event's page on the DAY site.",
-      // map all of our page elements to pageBuilder sub-types
-      of: pageElements.map(({ title, name }) =>
+      title: 'Featured Event Images',
+      description:
+        'Images to cycle through on the homepage when this event is featured.',
+      of: [
         defineArrayMember({
-          title,
-          type: name,
-        })
-      ),
+          type: 'image' as const,
+          options: {
+            metadata: ['lqip'],
+            hotspot: true,
+          },
+          fields: [
+            {
+              type: 'number',
+              name: 'topOffset',
+              title: 'Top Offset',
+              description:
+                'Percentage to offset the top by (0-100). Defaults to -1 (centers instead).',
+              initialValue: -1,
+            },
+          ],
+        }),
+      ],
+      group: 'featured',
+      options: {
+        layout: 'grid',
+      },
     }),
 
     /* ------------------------------ Revalidation ------------------------------ */

@@ -10,6 +10,19 @@
 
 import { groq } from 'next-sanity';
 
+export const settingsQuery = groq`*[_type == "site_settings"][0] {
+  _id,
+  title,
+  description,
+  featuredEvent -> {
+    featureDescription,
+    featureImages[] {
+      ...,
+      asset ->
+    }
+  }
+}`;
+
 export const pagesQuery = groq`*[_type == "site_page" && slug.current != "/"] {
   _id, slug
 }`;

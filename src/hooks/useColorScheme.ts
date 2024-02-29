@@ -37,7 +37,7 @@ export default function useColorScheme() {
     },
     ((typeof window !== 'undefined' &&
       localStorage.getItem('daylight-color-scheme')) ||
-      'auto') as ColorScheme,
+      'dark') as ColorScheme,
     (scheme): ColorSchemeState => {
       let evalScheme = scheme;
       if (scheme == 'auto' && typeof window !== 'undefined') {

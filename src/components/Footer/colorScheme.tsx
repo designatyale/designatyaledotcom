@@ -13,10 +13,8 @@ import classNames from 'classnames';
 
 export default function ColorScheme() {
   const { colorScheme, setColorScheme } = useColorScheme();
-  const onChange: ChangeEventHandler<HTMLInputElement> = useCallback(
-    (e) => setColorScheme(e.target.value as ColorScheme),
-    [setColorScheme]
-  );
+  const onChange: ChangeEventHandler<HTMLInputElement> = (e) =>
+    setColorScheme(e.target.value as ColorScheme);
 
   return (
     <section
@@ -34,6 +32,7 @@ export default function ColorScheme() {
               value={scheme}
               checked={colorScheme.scheme === scheme}
               onChange={onChange}
+              disabled={scheme !== 'dark'}
             />
             <label htmlFor={`color_scheme_${scheme}`}>
               {(scheme === 'auto' ? 'system' : scheme).toUpperCase()}

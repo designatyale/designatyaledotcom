@@ -7,7 +7,7 @@
 
 import { FiSettings, FiCalendar } from 'react-icons/fi';
 import { DocumentsIcon, DocumentTextIcon, HomeIcon } from '@sanity/icons';
-import { StructureBuilder, StructureResolver } from 'sanity/desk';
+import { StructureBuilder, StructureResolver } from 'sanity/structure';
 import { ComponentType } from 'react';
 
 /* -------------------------------- Settings -------------------------------- */

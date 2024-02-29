@@ -12,8 +12,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 /** @type {import('next').NextConfig} */
 const nextConfig = withBundleAnalyzer({
   experimental: {
-    scrollRestoration: false,
-    serverActions: true,
+    scrollRestoration: false
   },
   images: {
     domains: ['cdn.sanity.io'],

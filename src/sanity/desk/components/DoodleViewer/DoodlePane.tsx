@@ -15,7 +15,7 @@ import { VscHeart, VscHeartFilled, VscTrash } from 'react-icons/vsc';
 export default function Doodle({ sketch }: { sketch: Sketch }) {
   const queryClient = useQueryClient();
   // OK. I KNOW THIS IS SUPER INSECURE. BUT IDC. AUTH IS HARD.
-  const { mutate: deleteDoodle, isLoading: deleteLoading } = useMutation<Sketch>(
+  const { mutate: deleteDoodle, isPending: deleteLoading } = useMutation<Sketch>(
     {
       mutationFn: async () =>
         await fetch(`/api/sketches/${sketch.id}?SECRET=${API_BACKEND_SECRET}`, {
@@ -35,7 +35,7 @@ export default function Doodle({ sketch }: { sketch: Sketch }) {
       },
     }
   );
-  const { mutate: favoriteDoodle, isLoading: favLoading } = useMutation<Sketch>({
+  const { mutate: favoriteDoodle, isPending: favLoading } = useMutation<Sketch>({
     mutationFn: async () =>
       await fetch(`/api/sketches/${sketch.id}?SECRET=${API_BACKEND_SECRET}`, {
         method: 'PUT',

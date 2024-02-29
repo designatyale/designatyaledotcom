@@ -9,6 +9,14 @@ import s from './Root.module.scss';
 import DAY from '@/assets/svg/DAY';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
+import { SiteSettings } from '@/sanity/schema';
+import getClient from '@/sanity/client';
+import getPreview from '@/util/getPreview';
+import { settingsQuery } from '@/sanity/groq';
+import FeaturedEvent from '@/components/FeaturedEvent';
+import unwrapReference from '@/util/unwrapReference';
+import PreviewProvider from '@/components/PreviewProvider';
+import PreviewFeaturedEvent from '@/components/FeaturedEvent/preview';
 
 const Drawing = dynamic(() => import('@/components/Drawing'), {
   ssr: false,
@@ -19,24 +27,31 @@ const Drawing = dynamic(() => import('@/components/Drawing'), {
 /* -------------------------------------------------------------------------- */
 
 export default async function Page() {
-  // const preview = getPreview();
-  // const params = { pageSlug: `/` };
-  // const page: SitePage | null = await getClient(preview).fetch(
-  //   pageQuery,
-  //   params,
-  //   { next: { tags: [`page:${params.pageSlug}`] } }
-  // );
+  const preview = getPreview();
+  const settings: SiteSettings | null = await getClient(preview).fetch(
+    settingsQuery,
+    undefined,
+    { cache: 'no-cache', next: { tags: [`settings`] } }
+  );
 
   return (
     <main className={s.container}>
-      <Drawing />
+      {settings?.featuredEvent ? (
+        preview && preview.token ? (
+          <PreviewProvider token={preview.token}>
+            <PreviewFeaturedEvent initialValue={settings} />
+          </PreviewProvider>
+        ) : (
+          <FeaturedEvent event={unwrapReference(settings.featuredEvent)} />
+        )
+      ) : (
+        <Drawing />
+      )}
       <section className={s.cta}>
         <div className={s.cta_logo}>
           <DAY />
         </div>
-        <h1 data-nosnippet>
-          Design at Yale is a<br /> Studio and Community.
-        </h1>
+        <h1 data-nosnippet>Design at Yale is&nbsp;a Studio and Community.</h1>
         <p>
           We are Yale&apos;s undergraduate design club. We run a small studio,
           host events exploring practice and industry across design disciplines,

@@ -79,21 +79,21 @@ export default function useNavState({ menuRef, buttonRef }: UseNavStateOptions) 
       }
     }
     // 2.3 also track scroll state for when not at top of page
-    // function onScroll() {
-    //   setScrolled(window.scrollY > SCROLL_TRIGGER_DEPTH);
-    // }
+    function onScroll() {
+      setScrolled(window.scrollY > SCROLL_TRIGGER_DEPTH);
+    }
 
     // apply event listeners
     // mql.addEventListener('change', onLarge, false);
     window.addEventListener('keydown', onKeyDown, false);
-    // window.addEventListener('scroll', onScroll, false);
+    window.addEventListener('scroll', onScroll, false);
     // save mql to ref
     mqlRef.current = mql;
     return () => {
       // remove event listeners on unmount
       // mql.removeEventListener('change', onLarge, false);
       window.removeEventListener('keydown', onKeyDown, false);
-      // window.removeEventListener('scroll', onScroll, false);
+      window.removeEventListener('scroll', onScroll, false);
     };
   }, [buttonRef]);
 

@@ -33,12 +33,15 @@
 
   & a {
     display: inline-block;
-    margin-bottom: 0.2em;
     text-decoration-thickness: 0.5px;
     text-underline-offset: 0.2em;
     &:hover {
       text-decoration: underline;
     }
+  }
+
+  :global(body.full-bleed) & {
+    text-shadow: 0 0px 4px rgba(0, 0, 0, 1);
   }
 
   & > section > * {
@@ -89,6 +92,10 @@
     height: auto;
     margin-top: max(10vh, 170px);
 
+    :global(body.full-bleed) & {
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+    }
+
     @include media('xxs') {
       width: 14em;
     }
@@ -135,6 +142,7 @@
   grid-area: t1;
 
   & h2 {
+    margin-bottom: 0.2em;
     font-size: 1.5em;
   }
 
@@ -149,6 +157,7 @@
   grid-area: t2;
 
   & h2 {
+    margin-bottom: 0.2em;
     font-size: 1.5em;
   }
 
