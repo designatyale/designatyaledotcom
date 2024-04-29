@@ -21,8 +21,7 @@ if (typeof window !== "undefined") {
     const mql = window.matchMedia("(prefers-color-scheme: dark)");
     colorScheme = mql.matches ? "dark" : "light";
   }
-  // document.documentElement.classList.add(\`\${colorScheme}-mode\`);
-  document.documentElement.classList.add(\`dark-mode\`);
+  document.documentElement.classList.add(\`\${colorScheme}-mode\`);
 }
 `;
 

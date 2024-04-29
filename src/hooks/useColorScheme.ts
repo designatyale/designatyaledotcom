@@ -5,7 +5,7 @@
  * 2023 Design at Yale
  */
 
-import { useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 
 const COLOR_SCHEMES = ['light', 'dark', 'auto'] as const;
 export type ColorScheme = (typeof COLOR_SCHEMES)[number];
@@ -35,9 +35,7 @@ export default function useColorScheme() {
         evalScheme,
       };
     },
-    ((typeof window !== 'undefined' &&
-      localStorage.getItem('daylight-color-scheme')) ||
-      'dark') as ColorScheme,
+    'auto' as ColorScheme,
     (scheme): ColorSchemeState => {
       let evalScheme = scheme;
       if (scheme == 'auto' && typeof window !== 'undefined') {
@@ -50,6 +48,9 @@ export default function useColorScheme() {
       };
     }
   );
+  useEffect(() => {
+    setColorScheme(localStorage.getItem('daylight-color-scheme') as ColorScheme);
+  }, []);
 
   return { colorScheme, setColorScheme };
 }

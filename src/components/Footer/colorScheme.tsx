@@ -6,7 +6,7 @@
  */
 'use client';
 
-import useColorScheme, { ColorScheme } from '@/hooks/useColorScheme';
+import useColorScheme, { type ColorScheme } from '@/hooks/useColorScheme';
 import React, { ChangeEventHandler, useCallback } from 'react';
 import s from './Footer.module.scss';
 import classNames from 'classnames';
@@ -32,7 +32,6 @@ export default function ColorScheme() {
               value={scheme}
               checked={colorScheme.scheme === scheme}
               onChange={onChange}
-              disabled={scheme !== 'dark'}
             />
             <label htmlFor={`color_scheme_${scheme}`}>
               {(scheme === 'auto' ? 'system' : scheme).toUpperCase()}
