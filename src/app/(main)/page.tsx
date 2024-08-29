@@ -60,22 +60,22 @@ export default async function Page() {
       </section>
       <section className={s.t1}>
         <h2>
-          <Link href="/studio">Work with the Studio&nbsp;→</Link>
+          <Link href="/studio">Work With Us&nbsp;→</Link>
         </h2>
-        <p>Available for Fall 2023—or work with our Alumni year-round.</p>
+        <p>Available for Fall 2024—or work with our Alumni year-round.</p>
       </section>
       <section className={s.t2}>
         <h2>
           <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLScn7wXT70fL68crb2IgtBYMJ-NObnrqlDpppMMCJkeVKQXIxQ/viewform"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSe827RJjsBiA_sfyYtNAxAWIaMk83y0wKt47jnD6cvMC7dl5g/viewform?usp=sf_link"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Join the Community&nbsp;→
+            Join the Studio&nbsp;→
           </a>
         </h2>
         <p>
-          Yale students, fill out the form and keep your eyes out for events!
+          Our studio applications are open until September 20th, 2024!
         </p>
       </section>
     </main>
