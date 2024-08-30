@@ -60,12 +60,6 @@ export default async function Page() {
       </section>
       <section className={s.t1}>
         <h2>
-          <Link href="/studio">Work With Us&nbsp;→</Link>
-        </h2>
-        <p>Available for Fall 2024—or work with our Alumni year-round.</p>
-      </section>
-      <section className={s.t2}>
-        <h2>
           <a
             href="https://docs.google.com/forms/d/e/1FAIpQLSe827RJjsBiA_sfyYtNAxAWIaMk83y0wKt47jnD6cvMC7dl5g/viewform?usp=sf_link"
             target="_blank"
@@ -77,6 +71,12 @@ export default async function Page() {
         <p>
           Our studio applications are open until September 20th, 2024!
         </p>
+      </section>
+      <section className={s.t2}>
+        <h2>
+          <Link href="/studio">Work With Us&nbsp;→</Link>
+        </h2>
+        <p>Available for Fall 2024—or work with our Alumni year-round.</p>
       </section>
     </main>
   );
