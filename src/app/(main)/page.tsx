@@ -61,22 +61,22 @@ export default async function Page() {
       <section className={s.t1}>
         <h2>
           <a
-            href="https://instagram.com/designatyale"
+            href="https://forms.gle/TNdQk4qNZ3yhYm7P8"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Join Our Studio
+            Join Our Studio ↗
           </a>
         </h2>
         <p>
-          Our studio applications will open in Fall 2025.
+          Our studio applications are open for 2025-2026!
         </p>
       </section>
       <section className={s.t2}>
         <h2>
           <Link href="/studio">Work With Us&nbsp;→</Link>
         </h2>
-        <p>Available for Spring 2025—or work with our Alumni year-round.</p>
+        <p>Available for Fall 2025—or work with our Alumni year-round.</p>
       </section>
     </main>
   );
