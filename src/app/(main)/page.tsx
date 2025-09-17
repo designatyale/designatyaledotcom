@@ -1,6 +1,6 @@
 /*
  * page.tsx
- * Author: evan kirkiles, aditya das
+ * Author: evan kirkiles, additional work by aditya das
  * Created On Mon Aug 28 2023
  * 2023 Design at Yale
  */
